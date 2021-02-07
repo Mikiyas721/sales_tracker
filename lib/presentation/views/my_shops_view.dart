@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../presentation/models/my_shops_view_model.dart';
+import '../../common/common.dart';
 
 class MyShopView extends StatelessWidget {
   final MyShopsViewModel myShopViewModel;
@@ -21,9 +22,15 @@ class MyShopView extends StatelessWidget {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       child: ListTile(
+        leading: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Icon(Icons.shopping_cart),
+        ),
         title: Text(myShopViewModel.name),
-        subtitle:
-            Text('${myShopViewModel.phoneNumber}\n${myShopViewModel.location}'),
+        subtitle: Text(
+          '${myShopViewModel.phoneNumber}\n${myShopViewModel.location}',
+          style: TextStyle(color: Colors.grey,fontSize: 12),
+        ),
         isThreeLine: true,
       ),
       actions: [
@@ -31,11 +38,15 @@ class MyShopView extends StatelessWidget {
           icon: Icons.receipt,
           caption: 'Sale',
           onTap: onSale,
+          color: context.secondaryHeaderColor,
+          foregroundColor: Colors.white,
         ),
         IconSlideAction(
           icon: Icons.attach_money,
           caption: 'Fund',
           onTap: onFund,
+          color: context.primaryColor,
+          foregroundColor: Colors.white,
         ),
       ],
       secondaryActions: [
@@ -43,6 +54,8 @@ class MyShopView extends StatelessWidget {
           icon: Icons.swap_horiz,
           caption: 'Transaction',
           onTap: onTransaction,
+          color: context.primaryColor,
+          foregroundColor: Colors.white,
         ),
       ],
     );

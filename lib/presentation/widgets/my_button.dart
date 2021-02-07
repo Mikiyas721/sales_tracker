@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../common/common.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
@@ -17,9 +18,14 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      height: 50,
+      color: context.primaryColor,
+      textColor: Colors.white,
       onPressed: onSubmit,
       child: isLoading ? CircularProgressIndicator() : Text(label),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(40))), minWidth:minWidth,);
+          borderRadius: BorderRadius.all(Radius.circular(40))),
+      minWidth: minWidth,
+    );
   }
 }

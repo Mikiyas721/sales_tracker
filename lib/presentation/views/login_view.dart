@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
             labelText: 'phone number',
             icon: Icons.phone,
             onChanged: onPhoneNumberChanged),
-        50.vSpace,
+        100.vSpace,
         MyButton(
           label: 'Submit',
           onSubmit: onSubmit,

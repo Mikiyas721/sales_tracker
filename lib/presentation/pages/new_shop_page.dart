@@ -10,18 +10,28 @@ class NewShopPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('New Shop'),
       ),
-      body: Column(
-        children: [
-          100.vSpace,
-          Text('Enter\nshop\ninformation'),
-          100.vSpace,
-          NewShopView(
-              newShopViewModel: NewShopViewModel(),
-              onAdd: () {},
-              onNameChanged: (String name) {},
-              onAddressChanged: (String address) {},
-              onPhoneNumberChanged: (String phoneNumber) {})
-        ],
+      body: Padding(
+        padding: 20.hPadding,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              100.vSpace,
+              Text(
+                'Enter\nshop\ninformation',
+                style: context.headline3,
+              ),
+              40.vSpace,
+              NewShopView(
+                  newShopViewModel: NewShopViewModel(),
+                  onAdd: () {},
+                  onNameChanged: (String name) {},
+                  onAddressChanged: (String address) {},
+                  onPhoneNumberChanged: (String phoneNumber) {}),
+              20.vSpace
+            ],
+          ),
+        ),
       ),
     );
   }

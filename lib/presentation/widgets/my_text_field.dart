@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../common/common.dart';
 
 class MyTextField extends StatelessWidget {
   final String errorText;
@@ -18,11 +19,14 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      onChanged: onChanged,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-          errorText: errorText, prefixIcon: Icon(icon), labelText: labelText),
+    return Padding(
+      padding: 5.vPadding,
+      child: TextField(
+        onChanged: onChanged,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+            errorText: errorText, prefixIcon: Icon(icon), labelText: labelText),
+      ),
     );
   }
 }

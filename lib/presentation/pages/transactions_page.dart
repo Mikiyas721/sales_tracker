@@ -20,6 +20,7 @@ class TransactionsPage extends StatelessWidget {
                     date: 'Thu, Feb 5,2021',
                     transactionType: 'Sale',
                     receivedAmount: '200',
+                    soldAmount: '200',
                     time: '11:02AM'),
               );
             }),

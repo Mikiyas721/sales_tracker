@@ -11,3 +11,14 @@ extension SpacingExtension on num {
 
   Widget get vSpace => SizedBox(height: this.toDouble());
 }
+extension BuildContextExtension on BuildContext{
+  Color get primaryColor=> Theme.of(this).primaryColor;
+  Color get secondaryHeaderColor=> Theme.of(this).secondaryHeaderColor;
+
+  TextStyle get headline2=> Theme.of(this).textTheme.headline2;
+  TextStyle get headline3=> Theme.of(this).textTheme.headline3;
+  TextStyle get headline4=> Theme.of(this).textTheme.headline4;
+  TextStyle get headline5=> Theme.of(this).textTheme.headline5;
+  TextStyle get headline6=> Theme.of(this).textTheme.headline6;
+
+}

@@ -9,11 +9,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Text('${homeViewModel.soldToday} ETB'),
-      Text('Sold today'),
+    return Column(mainAxisSize:MainAxisSize.min,children: [
+      Text('${homeViewModel.soldToday} ETB',style: context.headline2,),
+      Text('Sold today',style: context.headline4,),
       60.vSpace,
-      Text('${homeViewModel.remainingLoan} ETB loan remaining'),
+      Text('${homeViewModel.remainingLoan} ETB loan remaining',style: context.headline4,),
     ]);
   }
 }

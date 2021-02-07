@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
 import './presentation/pages/new_shop_page.dart';
@@ -16,7 +17,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sales Tracker',
-      theme: ThemeData(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primaryColor: Color(0xff5837B6),
+          secondaryHeaderColor: Color(0xff693DE5),
+          appBarTheme: AppBarTheme(
+              color: Colors.white,
+              actionsIconTheme: IconThemeData(color: Colors.black),
+              iconTheme: IconThemeData(color: Colors.black),
+              textTheme: TextTheme(
+                  headline6: GoogleFonts.poppins(
+                fontSize: 24,
+                color: Colors.black,
+              ))),
+          textTheme: TextTheme(
+            headline2:
+                GoogleFonts.montserrat(fontSize: 40, color: Colors.black),
+            headline3:
+                GoogleFonts.montserrat(fontSize: 30, color: Colors.black),
+            headline4:
+                GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+            headline5: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
+            headline6:
+                GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+          )),
       initialRoute: '/',
       routes: routes,
     );
@@ -24,12 +48,12 @@ class MyApp extends StatelessWidget {
 }
 
 final routes = {
-  '/': (BuildContext context) => HomePage(),
+  '/': (BuildContext context) => LoginPage(),
   '/loginPage': (BuildContext context) => LoginPage(),
-  '/homePage':(BuildContext context) => HomePage(),
-  '/newShopPage':(BuildContext context) => NewShopPage(),
-  '/myShopsPage':(BuildContext context) => MyShopsPage(),
-  '/salePage':(BuildContext context) => SalePage(),
-  '/fundPage':(BuildContext context) => FundingPage(),
-  '/transactionsPage':(BuildContext context) => TransactionsPage(),
+  '/homePage': (BuildContext context) => HomePage(),
+  '/newShopPage': (BuildContext context) => NewShopPage(),
+  '/myShopsPage': (BuildContext context) => MyShopsPage(),
+  '/salePage': (BuildContext context) => SalePage(),
+  '/fundPage': (BuildContext context) => FundingPage(),
+  '/transactionsPage': (BuildContext context) => TransactionsPage(),
 };

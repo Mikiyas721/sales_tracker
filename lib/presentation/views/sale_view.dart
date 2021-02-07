@@ -21,9 +21,10 @@ class SaleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Transaction with ${saleViewModel.phoneNumber}'),
-        40.vSpace,
+        Text('Transaction with ${saleViewModel.phoneNumber}',style: context.headline4,),
+        65.vSpace,
         MyTextField(
             icon: Icons.money,
             labelText: 'total amount',
@@ -34,8 +35,8 @@ class SaleView extends StatelessWidget {
             labelText: 'paid amount',
             errorText: saleViewModel.paidAmountError,
             onChanged: onPaidAmount),
-        Spacer(),
-        MyButton(label: 'Register', onSubmit: onRegister)
+        165.vSpace,
+        MyButton(label: 'Register', onSubmit: onRegister),
       ],
     );
   }

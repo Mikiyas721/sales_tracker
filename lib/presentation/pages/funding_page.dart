@@ -10,13 +10,26 @@ class FundingPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Fund'),
       ),
-      body: Column(
-        children: [
-          100.vSpace,
-          Text('Enter\namount'),
-          100.vSpace,
-          FundView(fundViewModel: FundViewModel(phoneNumber: '251 941135730'))
-        ],
+      body: Padding(
+        padding: 20.hPadding,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              100.vSpace,
+              Text(
+                'Enter\namount',
+                style: context.headline3,
+              ),
+              100.vSpace,
+              FundView(
+                fundViewModel: FundViewModel(phoneNumber: '251 941135730'),
+                onFund: () {},
+              ),
+              20.vSpace
+            ],
+          ),
+        ),
       ),
     );
   }

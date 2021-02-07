@@ -19,15 +19,19 @@ class FundView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Funding for ${fundViewModel.phoneNumber}'),
-        40.vSpace,
+        Text(
+          'Funding for ${fundViewModel.phoneNumber}',
+          style: context.headline4,
+        ),
+        100.vSpace,
         MyTextField(
             icon: Icons.attach_money,
             labelText: 'amount',
             errorText: fundViewModel.amountError,
             onChanged: onAmountChanged),
-        Spacer(),
+        200.vSpace,
         MyButton(label: 'Fund', onSubmit: onFund)
       ],
     );

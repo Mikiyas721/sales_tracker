@@ -9,15 +9,24 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: 20.hPadding,
-        child: Center(
+        child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Welcome'),
-              50.vSpace,
+              200.vSpace,
+              Text(
+                'Welcome',
+                style: context.headline3,
+              ),
+              200.vSpace,
               LoginView(
                   loginViewModel: LoginViewModel(),
                   onPhoneNumberChanged: (String onChanged) {},
-                  onSubmit: () {})
+                  onSubmit: () {
+                    Navigator.pushNamed(context, '/homePage');
+                  }),
+              20.vSpace
             ],
           ),
         ),
