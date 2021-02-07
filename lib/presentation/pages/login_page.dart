@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
                   loginViewModel: LoginViewModel(),
                   onPhoneNumberChanged: (String onChanged) {},
                   onSubmit: () {
-                    Navigator.pushNamed(context, '/homePage');
+                    Navigator.pushNamedAndRemoveUntil(context, '/homePage',(_)=>false);
                   }),
               20.vSpace
             ],
