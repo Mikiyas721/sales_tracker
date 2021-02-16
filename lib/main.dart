@@ -7,8 +7,10 @@ import './presentation/pages/sale_page.dart';
 import './presentation/pages/transactions_page.dart';
 import './presentation/pages/home_page.dart';
 import './presentation/pages/login_page.dart';
+import 'injection.dart';
 
 void main() {
+  configureDependencies();
   runApp(MyApp());
 }
 
@@ -31,15 +33,11 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
               ))),
           textTheme: TextTheme(
-            headline2:
-                GoogleFonts.montserrat(fontSize: 40, color: Colors.black),
-            headline3:
-                GoogleFonts.montserrat(fontSize: 30, color: Colors.black),
-            headline4:
-                GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+            headline2: GoogleFonts.montserrat(fontSize: 40, color: Colors.black),
+            headline3: GoogleFonts.montserrat(fontSize: 30, color: Colors.black),
+            headline4: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
             headline5: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
-            headline6:
-                GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+            headline6: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
           )),
       initialRoute: '/',
       routes: routes,
