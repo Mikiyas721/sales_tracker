@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sales_tracker/common/id_dto.dart';
 import 'package:sales_tracker/domain/entities/fund_transaction.dart';
-import 'package:sales_tracker/domain/value_objects/amount.dart';
+import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/infrastructure/dto/sales_person_dto.dart';
 import 'package:sales_tracker/infrastructure/dto/shop_dto.dart';
 
@@ -18,7 +18,7 @@ class FundTransactionDto extends IdDto implements TimeStampedDto {
   @JsonKey(nullable: true, includeIfNull: false) final ShopDto shop;
   @JsonKey(nullable: true, includeIfNull: false) final SalesPersonDto salesPerson;
 
-  final int amount;
+  final double amount; /// why not use cash amount?
   @JsonKey(nullable: true, includeIfNull: false) final DateTime createdAt;
   @JsonKey(nullable: true, includeIfNull: false) final DateTime updatedAt;
 
@@ -27,7 +27,7 @@ class FundTransactionDto extends IdDto implements TimeStampedDto {
     @required this.salesPersonId,
     @required this.shopId,
     @required this.amount,
-    @required this.createdAt,
+    @required this.createdAt,///why required if it can be null??
     @required this.updatedAt,
     this.shop,
     this.salesPerson,

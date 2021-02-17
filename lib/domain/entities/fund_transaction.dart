@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
-import 'package:sales_tracker/domain/value_objects/amount.dart';
+import 'package:sales_tracker/domain/value_objects/card_amount.dart';
+import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 
 import 'sales_person.dart';
 
@@ -9,8 +10,10 @@ class FundTransaction {
   final String salesPersonId;
   final String shopId;
   final Option<Shop> shop;
+
+  /// Why not use Option on other objects as well, like String
   final Option<SalesPerson> salesPerson;
-  final CardAmount amount;
+  final CashAmount amount;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -35,12 +38,21 @@ class FundTransaction {
     DateTime createdAt,
     DateTime updatedAt,
   }) {
-    if ([id, salesPersonId, shopId, shop, salesPerson, amount, createdAt, updatedAt].any((e) => e == null))
-      return none();
+    if ([
+      id,
+      salesPersonId,
+      shopId,
+      shop,
+      salesPerson,
+      amount,
+      createdAt,
+      updatedAt
+    ].any((e) => e == null)) return none();
 
-    final cardAmount = CardAmount.createFromNum(amount).getOrElse(() => null);
+    final cashAmount = CashAmount.createFromNum(amount).getOrElse(() => null);
 
-    if (cardAmount == null) return none();
+    /// Why not use either here? The different error types have been masked
+    if (cashAmount == null) return none();
 
     return some(
       FundTransaction._(
@@ -49,7 +61,7 @@ class FundTransaction {
         shopId: shopId,
         shop: shop,
         salesPerson: salesPerson,
-        amount: cardAmount,
+        amount: cashAmount,
         createdAt: createdAt,
         updatedAt: updatedAt,
       ),
@@ -57,6 +69,7 @@ class FundTransaction {
   }
 
   static Option<FundTransaction> createSimple({
+    /// was this created just to test the code??
     String salesPersonId,
     String shopId,
     num amount,
@@ -67,9 +80,9 @@ class FundTransaction {
       amount,
     ].any((e) => e == null)) return none();
 
-    final cardAmount = CardAmount.createFromNum(amount).getOrElse(() => null);
+    final cashAmount = CashAmount.createFromNum(amount).getOrElse(() => null);
 
-    if (cardAmount == null) return none();
+    if (cashAmount == null) return none();
 
     return some(
       FundTransaction._(
@@ -78,7 +91,7 @@ class FundTransaction {
         shopId: shopId,
         shop: none(),
         salesPerson: none(),
-        amount: cardAmount,
+        amount: cashAmount,
         createdAt: null,
         updatedAt: null,
       ),

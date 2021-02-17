@@ -11,7 +11,7 @@ FundTransactionDto _$FundTransactionDtoFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     salesPersonId: json['salesPersonId'] as String,
     shopId: json['shopId'] as String,
-    amount: json['amount'] as int,
+    amount: (json['amount'] as num).toDouble(),
     createdAt: json['createdAt'] == null
         ? null
         : DateTime.parse(json['createdAt'] as String),

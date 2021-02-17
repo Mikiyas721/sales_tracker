@@ -1,6 +1,22 @@
-//min length 2
-//max length 32
-//whitespace num alpha
+import 'package:dartz/dartz.dart';
+import 'package:sales_tracker/common/failure.dart';
+
+abstract class NameFailure implements Failure {}
+
+class ShortNameFailure extends NameFailure {
+  @override
+  String get message => "Name is too short";
+}
+
+class LongNameFailure extends NameFailure {
+  @override
+  String get message => "Name is too long";
+}
+
+class InvalidNameFailure extends NameFailure {
+  @override
+  String get message => "Invalid Name";
+}
 
 const regex = r'^[\w\s]+$';
 
@@ -9,11 +25,10 @@ class Name {
 
   Name._(this.value);
 
-  static create(String name){
-
-    if(!RegExp(regex).hasMatch(name)){
-      // return error
-    }
-
+  static Either<NameFailure, Name> create(String name) {
+    if (name.length < 2) return left(ShortNameFailure());
+    if (name.length > 32) return left(LongNameFailure());
+    if(!RegExp(regex).hasMatch(name)) return left(InvalidNameFailure());
+    return right(Name._(name));
   }
 }

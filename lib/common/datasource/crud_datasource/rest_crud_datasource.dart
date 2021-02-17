@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_datasource.dart';
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_request.dart';
