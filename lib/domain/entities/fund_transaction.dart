@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
-import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 
 import 'sales_person.dart';

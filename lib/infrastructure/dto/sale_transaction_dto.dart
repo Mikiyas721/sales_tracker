@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sales_tracker/common/id_dto.dart';
-import 'package:sales_tracker/domain/entities/sales_transaction.dart';
+import 'package:sales_tracker/domain/entities/sell_transaction.dart';
 import 'package:sales_tracker/infrastructure/dto/sales_person_dto.dart';
 import 'package:sales_tracker/infrastructure/dto/shop_dto.dart';
 
@@ -39,8 +39,8 @@ class SaleTransactionDto extends IdDto implements TimeStampedDto {
 
   Map<String, dynamic> toJson() => _$SaleTransactionDtoToJson(this);
 
-  Option<SalesTransaction> toDomain(){
-    return SalesTransaction.create(
+  Option<SaleTransaction> toDomain(){
+    return SaleTransaction.create(
         id:id,
         salesPersonId:salesPersonId,
         shopId:shopId,
@@ -52,7 +52,7 @@ class SaleTransactionDto extends IdDto implements TimeStampedDto {
         updatedAt:updatedAt,
     );
   }
-  static SaleTransactionDto fromDomain(SalesTransaction salesTransaction){
+  static SaleTransactionDto fromDomain(SaleTransaction salesTransaction){
     return SaleTransactionDto(
         id:salesTransaction.id,
         salesPersonId:salesTransaction.salesPersonId,

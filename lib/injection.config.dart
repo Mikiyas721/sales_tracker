@@ -7,7 +7,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
-import 'domain/use_cases/create_fund_transaction.dart';
+import 'domain/use_cases/add_fund_transaction.dart';
 import 'common/dio_rest_datasource.dart';
 import 'infrastructure/datasources/fund_transaction_datasource.dart';
 import 'infrastructure/repos/fund_transaction_repo_impl.dart';
@@ -28,7 +28,7 @@ GetIt $initGetIt(
       () => FundTransactionLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<IFundTransactionRepo>(
       () => FundTransactionRepoImpl(get<FundTransactionCrudDataSource>()));
-  gh.lazySingleton<CreateFundTransaction>(
-      () => CreateFundTransaction(get<IFundTransactionRepo>()));
+  gh.lazySingleton<AddFundTransaction>(
+      () => AddFundTransaction(get<IFundTransactionRepo>()));
   return get;
 }

@@ -4,7 +4,7 @@ import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 
-class SalesTransaction {
+class SaleTransaction {
   final String id;
   final String salesPersonId;
   final String shopId;
@@ -15,7 +15,7 @@ class SalesTransaction {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const SalesTransaction._({
+  const SaleTransaction._({
     this.id,
     this.salesPersonId,
     this.shopId,
@@ -27,7 +27,7 @@ class SalesTransaction {
     this.updatedAt,
   });
 
-  static Option<SalesTransaction> create({
+  static Option<SaleTransaction> create({
     String id,
     String salesPersonId,
     String shopId,
@@ -54,7 +54,7 @@ class SalesTransaction {
     if(card==null) return none();
     /// It is possible for Cash Amount to be null or zero
 
-    return some(SalesTransaction._(
+    return some(SaleTransaction._(
         id:id,
         salesPersonId:salesPersonId,
         shopId:shopId,

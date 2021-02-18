@@ -8,16 +8,26 @@ import 'package:sales_tracker/infrastructure/dto/fund_transaction_dto.dart';
 
 @LazySingleton(as: IFundTransactionRepo)
 class FundTransactionRepoImpl implements IFundTransactionRepo {
-  final FundTransactionCrudDataSource fundTransactionDataSource;
+  final FundTransactionCrudDataSource fundTransactionCrudDataSource;
 
-  FundTransactionRepoImpl(this.fundTransactionDataSource);
+  FundTransactionRepoImpl(this.fundTransactionCrudDataSource);
 
   @override
   Future<Either<Failure, FundTransaction>> create(FundTransaction fundTransaction) async {
-    final result = await fundTransactionDataSource.create(FundTransactionDto.fromDomain(fundTransaction));
+    final result = await fundTransactionCrudDataSource.create(FundTransactionDto.fromDomain(fundTransaction));
     return result.either.fold(
       (l) => left(l),
       (r) => r.toDomain().fold(() => left(SimpleFailure("Invalid Data")), (a) => right(a)),
     );
   }
+
+  @override
+  Future<Either<Failure, List<FundTransaction>>> fetchAll() async{
+    final result = await fundTransactionCrudDataSource
+        .find();
+    return result.either.fold(
+            (l) => left(l),
+            (r)=>null);
+  }
+
 }
