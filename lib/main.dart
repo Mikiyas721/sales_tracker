@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sales_tracker/presentation/pages/verfication_page.dart';
 import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
 import './presentation/pages/new_shop_page.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
             headline4: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
             headline5: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
             headline6: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+            caption: GoogleFonts.montserrat(fontSize: 12,color: Colors.grey)
           )),
       initialRoute: '/',
       routes: routes,
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
 final routes = {
   '/': (BuildContext context) => LoginPage(),
   '/loginPage': (BuildContext context) => LoginPage(),
+  '/verificationPage': (BuildContext context) => VerificationPage(),
   '/homePage': (BuildContext context) => HomePage(),
   '/newShopPage': (BuildContext context) => NewShopPage(),
   '/myShopsPage': (BuildContext context) => MyShopsPage(),

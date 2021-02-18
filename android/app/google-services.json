@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "926081061131",
+    "project_id": "sales-tracker-8b9cb",
+    "storage_bucket": "sales-tracker-8b9cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926081061131:android:fe1a5743d3d7d2d67dd20e",
+        "android_client_info": {
+          "package_name": "com.coolapps.sales_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926081061131-mk6dr97pi5smoqdn9bcij3vjbjbuec9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coolapps.sales_tracker",
+            "certificate_hash": "23c8ba193b343ec8e9608ab1b1efa59305be676f"
+          }
+        },
+        {
+          "client_id": "926081061131-udcfn3qgtscg22nd7kb2lf7g3ubrl77f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHmGN0QBL5yzkoBxSGiybWJzo09lVwd30"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926081061131-udcfn3qgtscg22nd7kb2lf7g3ubrl77f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

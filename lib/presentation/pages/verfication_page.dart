@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/presentation/models/verification_view_model.dart';
+import 'package:sales_tracker/presentation/views/verification_view.dart';
 import '../../presentation/models/login_view_model.dart';
 import '../../presentation/views/login_view.dart';
 import '../../common/common.dart';
 
-class LoginPage extends StatelessWidget {
+class VerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,15 +18,20 @@ class LoginPage extends StatelessWidget {
             children: [
               200.vSpace,
               Text(
-                'Welcome',
+                'Verify',
                 style: context.headline3,
               ),
+              20.vSpace,
+              Text(
+                'We have sent a 6 digit verification code. Please enter the code to continue',
+                style: context.caption,
+              ),
               200.vSpace,
-              LoginView(
-                  loginViewModel: LoginViewModel(),
-                  onPhoneNumberChanged: (String onChanged) {},
-                  onSubmit: () {
-                    Navigator.pushNamedAndRemoveUntil(context, '/verificationPage',(_)=>false);
+              VerificationView(
+                  verificationViewModel: VerificationViewModel(),
+                  onVerificationCodeChanged: (String onChanged) {},
+                  onLogin: () {
+                    Navigator.pushNamedAndRemoveUntil(context, '/homePage',(_)=>false);
                   }),
               20.vSpace
             ],

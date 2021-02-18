@@ -28,7 +28,7 @@ class LoginView extends StatelessWidget {
             onChanged: onPhoneNumberChanged),
         100.vSpace,
         MyButton(
-          label: 'Submit',
+          label: 'Verify',
           onSubmit: onSubmit,
           isLoading: loginViewModel.isSubmitting,
         )

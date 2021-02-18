@@ -20,5 +20,6 @@ extension BuildContextExtension on BuildContext{
   TextStyle get headline4=> Theme.of(this).textTheme.headline4;
   TextStyle get headline5=> Theme.of(this).textTheme.headline5;
   TextStyle get headline6=> Theme.of(this).textTheme.headline6;
+  TextStyle get caption=> Theme.of(this).textTheme.caption;
 
 }
