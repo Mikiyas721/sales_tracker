@@ -16,8 +16,17 @@ class PhoneNumber {
   PhoneNumber._(this.value);
 
   static Either<PhoneNumberFailure, PhoneNumber> create(String phoneNumber) {
-    if (!RegExp(regExp).hasMatch(regExp))
+    if (!RegExp(regExp).hasMatch(phoneNumber))
       return left(InvalidPhoneNumberFailure());
     return right(PhoneNumber._(phoneNumber));
+  }
+  static Either<PhoneNumberFailure, PhoneNumber> createWithCountryCode(String phoneNumber) {
+    if (!RegExp(regExp).hasMatch(phoneNumber))
+      return left(InvalidPhoneNumberFailure());
+    if(phoneNumber.startsWith('0')) {
+      phoneNumber = phoneNumber.substring(1);
+      return right(PhoneNumber._('+251$phoneNumber'));
+    }
+    return right(PhoneNumber._('+251$phoneNumber'));
   }
 }
