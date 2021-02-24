@@ -1,10 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/ports/firebase_repo.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
-import 'package:sales_tracker/infrastructure/datasources/firebase_datasource.dart';
 
+@LazySingleton(as: IFirebaseRepo)
 class FirebaseRepoImpl extends IFirebaseRepo {
   final authInstance = FirebaseAuth.instance;
   String verificationId;

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/presentation/models/verification_view_model.dart';
 import 'package:sales_tracker/presentation/views/verification_view.dart';
-import '../../presentation/models/login_view_model.dart';
-import '../../presentation/views/login_view.dart';
 import '../../common/common.dart';
 
 class VerificationPage extends StatelessWidget {

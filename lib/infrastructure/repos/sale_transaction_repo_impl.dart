@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/entities/sell_transaction.dart';
 import 'package:sales_tracker/domain/ports/sale_transaction_repo.dart';
 import 'package:sales_tracker/infrastructure/datasources/sale_transaction_datasource.dart';
 import 'package:sales_tracker/infrastructure/dto/sale_transaction_dto.dart';
 
+@LazySingleton(as: ISaleTransactionRepo)
 class SaleTransactionRepoImpl extends ISaleTransactionRepo {
   final SaleTransactionCrudDataSource saleTransactionCrudDataSource;
 
