@@ -4,9 +4,9 @@ import 'package:sales_tracker/domain/ports/firebase_repo.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
-part '../event/login_event.dart';
+part 'login_event.dart';
 
-part '../state/login_state.dart';
+part 'login_state.dart';
 
 part 'login_bloc.freezed.dart';
 

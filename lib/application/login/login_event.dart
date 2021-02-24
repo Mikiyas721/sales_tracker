@@ -1,4 +1,4 @@
-part of '../bloc/login_bloc.dart';
+part of '../login/login_bloc.dart';
 
 @freezed
 abstract class LoginEvent with _$LoginEvent{

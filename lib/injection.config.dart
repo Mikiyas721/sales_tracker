@@ -20,7 +20,8 @@ import 'domain/ports/fund_transaction_repo.dart';
 import 'domain/ports/sale_transaction_repo.dart';
 import 'domain/ports/sales_person_repo.dart';
 import 'domain/ports/shop_repo.dart';
-import 'application/bloc/login_bloc.dart';
+import 'application/login/login_bloc.dart';
+import 'application/new_shop/new_shop_bloc.dart';
 import 'common/datasource/rest_datasource/rest_datasource.dart';
 import 'infrastructure/datasources/sale_transaction_datasource.dart';
 import 'infrastructure/repos/sale_transaction_repo_impl.dart';
@@ -56,6 +57,7 @@ GetIt $initGetIt(
   gh.lazySingleton<ISalesPersonRepo>(
       () => SalesPersonRepoImpl(get<SalesPeopleCrudDataSource>()));
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));
+  gh.factory<NewShopBloc>(() => NewShopBloc(get<IShopRepo>()));
   gh.lazySingleton<AddFundTransaction>(
       () => AddFundTransaction(get<IFundTransactionRepo>()));
   gh.lazySingleton<AddSaleTransaction>(
