@@ -29,8 +29,4 @@ class PhoneNumber {
     }
     return right(PhoneNumber._('+251$phoneNumber'));
   }
-  bool isValid(){
-    if (!RegExp(regExp).hasMatch(value)) return false;
-    return true;
-  }
 }

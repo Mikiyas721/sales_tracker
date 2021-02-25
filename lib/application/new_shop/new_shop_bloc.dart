@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/ports/shop_repo.dart';
+import 'package:sales_tracker/domain/value_objects/address.dart';
 import 'package:sales_tracker/domain/value_objects/name.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
@@ -25,41 +26,31 @@ class NewShopBloc extends Bloc<NewShopEvent, NewShopState> {
 
   @override
   Stream<NewShopState> mapEventToState(NewShopEvent event) async* {
-    yield* event.map(
-        nameChanged: (NameChanged nameChanged) async* {
-          Name.create(nameChanged.name).fold((l) async* {
-            yield state.copyWith(showNameError: true);
-          }, (r) async* {
-            yield state.copyWith(name: r);
-          });
-        },
-        addressChanged: (AddressChanged addressChanged) async* {
-          yield state.copyWith(address: addressChanged.address);
-        },
-        phoneNumberChanged: (PhoneNumberChanged phoneNumberChanged) async* {
-          PhoneNumber.create(phoneNumberChanged.phoneNumber).fold((l) async* {
-            yield state.copyWith(showPhoneNumberError: true);
-          }, (r) async* {
-            yield state.copyWith(
-                phoneNumber: r);
-          });
-        },
-        addNewShop: (AddNewShop addNewShop) async* {
-          Shop.createFromInputs(name: state.name.value,
-              address: state.address,
-              phoneNumber: state.phoneNumber.value).fold(() async* {
-                yield state.copyWith(); /// ??
-          }, (
-              a) async* {
-                yield state.copyWith(isAdding: true);
-            Either<Failure, Shop> result  = await _iShopRepo.create(a);
-            result.fold((l) async* {
-              yield state.copyWith(); /// ??
-            }, (r) async* {
-              yield state.copyWith(hasAdded:true);
-            });
+    yield* event.map(nameChanged: (NameChanged nameChanged) async* {
+      yield Name.create(nameChanged.name);
+    }, addressChanged: (AddressChanged addressChanged) async* {
+      yield state.copyWith(address: Address.create(addressChanged.address));
+    }, phoneNumberChanged: (PhoneNumberChanged phoneNumberChanged) async* {
+      yield PhoneNumber.create(phoneNumberChanged.phoneNumber);
+    }, addNewShop: (AddNewShop addNewShop) async* {
+      yield state.copyWith(hasSubmitted: true);
 
-          });
+      Option<Shop> shop = Shop.createFromInputs(
+          name: state.name.fold((l) => null, (r) => r.value),
+          address: state.address.fold((l) => null, (r) => r.value),
+          phoneNumber: state.phoneNumber.fold((l) => null, (r) => r.value));
+
+      shop.fold(() async* {
+        yield state.copyWith(showErrorMessage: true);
+      }, (a) async* {
+        yield state.copyWith(isAdding: true);
+        final result = await _iShopRepo.create(a);
+        result.fold((l) async*{
+          /// ??
+        }, (r) async* {
+          yield state.copyWith(hasAdded: true);
         });
+      });
+    });
   }
 }

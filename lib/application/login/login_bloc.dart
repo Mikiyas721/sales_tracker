@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/domain/ports/firebase_repo.dart';
@@ -22,9 +23,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     yield* event.map(
         phoneNumberChanged: (PhoneNumberChanged phoneNumber) async* {
-      yield state.copyWith(
-          phoneNumber: PhoneNumber.create(phoneNumber.phoneNumber)
-              .getOrElse(() => null));
+      yield PhoneNumber.create(phoneNumber.phoneNumber);
     }, submitPhoneNumber: (SubmitPhoneNumber submitPhoneNumber) async* {
       yield* _performActionRequestCode(_iFirebaseRepo.requestCode);
     });
@@ -32,11 +31,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _performActionRequestCode(
       void Function(PhoneNumber phoneNumber) requestCall) async* {
-    if (state.phoneNumber.isValid()) {
-      yield state.copyWith(showErrorMessage: true, isSubmitting: true);
-      requestCall(state.phoneNumber);
-    } else {
-      yield state.copyWith(showErrorMessage: true, isSubmitting: false);
-    }
+    state.phoneNumber.fold((l) async* {
+      yield state.copyWith(showErrorMessage: true);
+    }, (r) async* {
+      yield state.copyWith(isRequesting:true);
+      requestCall(r);
+      yield state.copyWith(isRequesting:false, hasRequested:true);
+    });
   }
 }

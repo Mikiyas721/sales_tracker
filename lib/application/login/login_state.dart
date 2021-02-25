@@ -2,14 +2,15 @@ part of '../login/login_bloc.dart';
 
 @freezed
 abstract class LoginState with _$LoginState {
-  const factory LoginState({
-    @required PhoneNumber phoneNumber,
-    @required bool showErrorMessage,
-    @required bool isSubmitting,
-  }) = _LoginState;
+  const factory LoginState(
+      {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool isRequesting,
+      bool hasRequested}) = _LoginState;
 
   factory LoginState.initial() => LoginState(
-      phoneNumber: PhoneNumber.create('').getOrElse(() => null),
+      phoneNumber: PhoneNumber.create(''),
       showErrorMessage: false,
-      isSubmitting: false);
+      isRequesting: false,
+      hasRequested: false);
 }

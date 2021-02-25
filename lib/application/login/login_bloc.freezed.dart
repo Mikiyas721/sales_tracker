@@ -287,13 +287,15 @@ class _$LoginStateTearOff {
 
 // ignore: unused_element
   _LoginState call(
-      {@required PhoneNumber phoneNumber,
-      @required bool showErrorMessage,
-      @required bool isSubmitting}) {
+      {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool isRequesting,
+      bool hasRequested}) {
     return _LoginState(
       phoneNumber: phoneNumber,
       showErrorMessage: showErrorMessage,
-      isSubmitting: isSubmitting,
+      isRequesting: isRequesting,
+      hasRequested: hasRequested,
     );
   }
 }
@@ -304,9 +306,10 @@ const $LoginState = _$LoginStateTearOff();
 
 /// @nodoc
 mixin _$LoginState {
-  PhoneNumber get phoneNumber;
+  Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   bool get showErrorMessage;
-  bool get isSubmitting;
+  bool get isRequesting;
+  bool get hasRequested;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith;
@@ -318,7 +321,10 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
   $Res call(
-      {PhoneNumber phoneNumber, bool showErrorMessage, bool isSubmitting});
+      {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool isRequesting,
+      bool hasRequested});
 }
 
 /// @nodoc
@@ -333,17 +339,20 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   $Res call({
     Object phoneNumber = freezed,
     Object showErrorMessage = freezed,
-    Object isSubmitting = freezed,
+    Object isRequesting = freezed,
+    Object hasRequested = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
-          : phoneNumber as PhoneNumber,
+          : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       showErrorMessage: showErrorMessage == freezed
           ? _value.showErrorMessage
           : showErrorMessage as bool,
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      isRequesting:
+          isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
+      hasRequested:
+          hasRequested == freezed ? _value.hasRequested : hasRequested as bool,
     ));
   }
 }
@@ -355,7 +364,10 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
       __$LoginStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {PhoneNumber phoneNumber, bool showErrorMessage, bool isSubmitting});
+      {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool isRequesting,
+      bool hasRequested});
 }
 
 /// @nodoc
@@ -372,17 +384,20 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   $Res call({
     Object phoneNumber = freezed,
     Object showErrorMessage = freezed,
-    Object isSubmitting = freezed,
+    Object isRequesting = freezed,
+    Object hasRequested = freezed,
   }) {
     return _then(_LoginState(
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
-          : phoneNumber as PhoneNumber,
+          : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       showErrorMessage: showErrorMessage == freezed
           ? _value.showErrorMessage
           : showErrorMessage as bool,
-      isSubmitting:
-          isSubmitting == freezed ? _value.isSubmitting : isSubmitting as bool,
+      isRequesting:
+          isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
+      hasRequested:
+          hasRequested == freezed ? _value.hasRequested : hasRequested as bool,
     ));
   }
 }
@@ -390,23 +405,23 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
-      {@required this.phoneNumber,
-      @required this.showErrorMessage,
-      @required this.isSubmitting})
-      : assert(phoneNumber != null),
-        assert(showErrorMessage != null),
-        assert(isSubmitting != null);
+      {this.phoneNumber,
+      this.showErrorMessage,
+      this.isRequesting,
+      this.hasRequested});
 
   @override
-  final PhoneNumber phoneNumber;
+  final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
   final bool showErrorMessage;
   @override
-  final bool isSubmitting;
+  final bool isRequesting;
+  @override
+  final bool hasRequested;
 
   @override
   String toString() {
-    return 'LoginState(phoneNumber: $phoneNumber, showErrorMessage: $showErrorMessage, isSubmitting: $isSubmitting)';
+    return 'LoginState(phoneNumber: $phoneNumber, showErrorMessage: $showErrorMessage, isRequesting: $isRequesting, hasRequested: $hasRequested)';
   }
 
   @override
@@ -419,9 +434,12 @@ class _$_LoginState implements _LoginState {
             (identical(other.showErrorMessage, showErrorMessage) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessage, showErrorMessage)) &&
-            (identical(other.isSubmitting, isSubmitting) ||
+            (identical(other.isRequesting, isRequesting) ||
                 const DeepCollectionEquality()
-                    .equals(other.isSubmitting, isSubmitting)));
+                    .equals(other.isRequesting, isRequesting)) &&
+            (identical(other.hasRequested, hasRequested) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasRequested, hasRequested)));
   }
 
   @override
@@ -429,7 +447,8 @@ class _$_LoginState implements _LoginState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(showErrorMessage) ^
-      const DeepCollectionEquality().hash(isSubmitting);
+      const DeepCollectionEquality().hash(isRequesting) ^
+      const DeepCollectionEquality().hash(hasRequested);
 
   @JsonKey(ignore: true)
   @override
@@ -439,16 +458,19 @@ class _$_LoginState implements _LoginState {
 
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
-      {@required PhoneNumber phoneNumber,
-      @required bool showErrorMessage,
-      @required bool isSubmitting}) = _$_LoginState;
+      {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool isRequesting,
+      bool hasRequested}) = _$_LoginState;
 
   @override
-  PhoneNumber get phoneNumber;
+  Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
   bool get showErrorMessage;
   @override
-  bool get isSubmitting;
+  bool get isRequesting;
+  @override
+  bool get hasRequested;
   @override
   @JsonKey(ignore: true)
   _$LoginStateCopyWith<_LoginState> get copyWith;

@@ -588,21 +588,19 @@ class _$NewShopStateTearOff {
 
 // ignore: unused_element
   _NewShopState call(
-      {@required Name name,
-      @required String address,
-      @required PhoneNumber phoneNumber,
-      @required bool showNameError,
-      @required bool showAddressError,
-      @required bool showPhoneNumberError,
-      @required bool isAdding,
-      @required bool hasAdded}) {
+      {Either<NameFailure, Name> name,
+      Either<AddressFailure, Address> address,
+      Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool hasSubmitted,
+      bool isAdding,
+      bool hasAdded}) {
     return _NewShopState(
       name: name,
       address: address,
       phoneNumber: phoneNumber,
-      showNameError: showNameError,
-      showAddressError: showAddressError,
-      showPhoneNumberError: showPhoneNumberError,
+      showErrorMessage: showErrorMessage,
+      hasSubmitted: hasSubmitted,
       isAdding: isAdding,
       hasAdded: hasAdded,
     );
@@ -615,12 +613,11 @@ const $NewShopState = _$NewShopStateTearOff();
 
 /// @nodoc
 mixin _$NewShopState {
-  Name get name;
-  String get address;
-  PhoneNumber get phoneNumber;
-  bool get showNameError;
-  bool get showAddressError;
-  bool get showPhoneNumberError;
+  Either<NameFailure, Name> get name;
+  Either<AddressFailure, Address> get address;
+  Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
+  bool get showErrorMessage;
+  bool get hasSubmitted;
   bool get isAdding;
   bool get hasAdded;
 
@@ -634,12 +631,11 @@ abstract class $NewShopStateCopyWith<$Res> {
           NewShopState value, $Res Function(NewShopState) then) =
       _$NewShopStateCopyWithImpl<$Res>;
   $Res call(
-      {Name name,
-      String address,
-      PhoneNumber phoneNumber,
-      bool showNameError,
-      bool showAddressError,
-      bool showPhoneNumberError,
+      {Either<NameFailure, Name> name,
+      Either<AddressFailure, Address> address,
+      Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
 }
@@ -657,27 +653,24 @@ class _$NewShopStateCopyWithImpl<$Res> implements $NewShopStateCopyWith<$Res> {
     Object name = freezed,
     Object address = freezed,
     Object phoneNumber = freezed,
-    Object showNameError = freezed,
-    Object showAddressError = freezed,
-    Object showPhoneNumberError = freezed,
+    Object showErrorMessage = freezed,
+    Object hasSubmitted = freezed,
     Object isAdding = freezed,
     Object hasAdded = freezed,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed ? _value.name : name as Name,
-      address: address == freezed ? _value.address : address as String,
+      name: name == freezed ? _value.name : name as Either<NameFailure, Name>,
+      address: address == freezed
+          ? _value.address
+          : address as Either<AddressFailure, Address>,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
-          : phoneNumber as PhoneNumber,
-      showNameError: showNameError == freezed
-          ? _value.showNameError
-          : showNameError as bool,
-      showAddressError: showAddressError == freezed
-          ? _value.showAddressError
-          : showAddressError as bool,
-      showPhoneNumberError: showPhoneNumberError == freezed
-          ? _value.showPhoneNumberError
-          : showPhoneNumberError as bool,
+          : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
+      showErrorMessage: showErrorMessage == freezed
+          ? _value.showErrorMessage
+          : showErrorMessage as bool,
+      hasSubmitted:
+          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
       hasAdded: hasAdded == freezed ? _value.hasAdded : hasAdded as bool,
     ));
@@ -692,12 +685,11 @@ abstract class _$NewShopStateCopyWith<$Res>
       __$NewShopStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Name name,
-      String address,
-      PhoneNumber phoneNumber,
-      bool showNameError,
-      bool showAddressError,
-      bool showPhoneNumberError,
+      {Either<NameFailure, Name> name,
+      Either<AddressFailure, Address> address,
+      Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
 }
@@ -717,27 +709,24 @@ class __$NewShopStateCopyWithImpl<$Res> extends _$NewShopStateCopyWithImpl<$Res>
     Object name = freezed,
     Object address = freezed,
     Object phoneNumber = freezed,
-    Object showNameError = freezed,
-    Object showAddressError = freezed,
-    Object showPhoneNumberError = freezed,
+    Object showErrorMessage = freezed,
+    Object hasSubmitted = freezed,
     Object isAdding = freezed,
     Object hasAdded = freezed,
   }) {
     return _then(_NewShopState(
-      name: name == freezed ? _value.name : name as Name,
-      address: address == freezed ? _value.address : address as String,
+      name: name == freezed ? _value.name : name as Either<NameFailure, Name>,
+      address: address == freezed
+          ? _value.address
+          : address as Either<AddressFailure, Address>,
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
-          : phoneNumber as PhoneNumber,
-      showNameError: showNameError == freezed
-          ? _value.showNameError
-          : showNameError as bool,
-      showAddressError: showAddressError == freezed
-          ? _value.showAddressError
-          : showAddressError as bool,
-      showPhoneNumberError: showPhoneNumberError == freezed
-          ? _value.showPhoneNumberError
-          : showPhoneNumberError as bool,
+          : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
+      showErrorMessage: showErrorMessage == freezed
+          ? _value.showErrorMessage
+          : showErrorMessage as bool,
+      hasSubmitted:
+          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
       hasAdded: hasAdded == freezed ? _value.hasAdded : hasAdded as bool,
     ));
@@ -747,35 +736,24 @@ class __$NewShopStateCopyWithImpl<$Res> extends _$NewShopStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_NewShopState implements _NewShopState {
   const _$_NewShopState(
-      {@required this.name,
-      @required this.address,
-      @required this.phoneNumber,
-      @required this.showNameError,
-      @required this.showAddressError,
-      @required this.showPhoneNumberError,
-      @required this.isAdding,
-      @required this.hasAdded})
-      : assert(name != null),
-        assert(address != null),
-        assert(phoneNumber != null),
-        assert(showNameError != null),
-        assert(showAddressError != null),
-        assert(showPhoneNumberError != null),
-        assert(isAdding != null),
-        assert(hasAdded != null);
+      {this.name,
+      this.address,
+      this.phoneNumber,
+      this.showErrorMessage,
+      this.hasSubmitted,
+      this.isAdding,
+      this.hasAdded});
 
   @override
-  final Name name;
+  final Either<NameFailure, Name> name;
   @override
-  final String address;
+  final Either<AddressFailure, Address> address;
   @override
-  final PhoneNumber phoneNumber;
+  final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
-  final bool showNameError;
+  final bool showErrorMessage;
   @override
-  final bool showAddressError;
-  @override
-  final bool showPhoneNumberError;
+  final bool hasSubmitted;
   @override
   final bool isAdding;
   @override
@@ -783,7 +761,7 @@ class _$_NewShopState implements _NewShopState {
 
   @override
   String toString() {
-    return 'NewShopState(name: $name, address: $address, phoneNumber: $phoneNumber, showNameError: $showNameError, showAddressError: $showAddressError, showPhoneNumberError: $showPhoneNumberError, isAdding: $isAdding, hasAdded: $hasAdded)';
+    return 'NewShopState(name: $name, address: $address, phoneNumber: $phoneNumber, showErrorMessage: $showErrorMessage, hasSubmitted: $hasSubmitted, isAdding: $isAdding, hasAdded: $hasAdded)';
   }
 
   @override
@@ -798,15 +776,12 @@ class _$_NewShopState implements _NewShopState {
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
-            (identical(other.showNameError, showNameError) ||
+            (identical(other.showErrorMessage, showErrorMessage) ||
                 const DeepCollectionEquality()
-                    .equals(other.showNameError, showNameError)) &&
-            (identical(other.showAddressError, showAddressError) ||
+                    .equals(other.showErrorMessage, showErrorMessage)) &&
+            (identical(other.hasSubmitted, hasSubmitted) ||
                 const DeepCollectionEquality()
-                    .equals(other.showAddressError, showAddressError)) &&
-            (identical(other.showPhoneNumberError, showPhoneNumberError) ||
-                const DeepCollectionEquality().equals(
-                    other.showPhoneNumberError, showPhoneNumberError)) &&
+                    .equals(other.hasSubmitted, hasSubmitted)) &&
             (identical(other.isAdding, isAdding) ||
                 const DeepCollectionEquality()
                     .equals(other.isAdding, isAdding)) &&
@@ -821,9 +796,8 @@ class _$_NewShopState implements _NewShopState {
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(address) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
-      const DeepCollectionEquality().hash(showNameError) ^
-      const DeepCollectionEquality().hash(showAddressError) ^
-      const DeepCollectionEquality().hash(showPhoneNumberError) ^
+      const DeepCollectionEquality().hash(showErrorMessage) ^
+      const DeepCollectionEquality().hash(hasSubmitted) ^
       const DeepCollectionEquality().hash(isAdding) ^
       const DeepCollectionEquality().hash(hasAdded);
 
@@ -835,27 +809,24 @@ class _$_NewShopState implements _NewShopState {
 
 abstract class _NewShopState implements NewShopState {
   const factory _NewShopState(
-      {@required Name name,
-      @required String address,
-      @required PhoneNumber phoneNumber,
-      @required bool showNameError,
-      @required bool showAddressError,
-      @required bool showPhoneNumberError,
-      @required bool isAdding,
-      @required bool hasAdded}) = _$_NewShopState;
+      {Either<NameFailure, Name> name,
+      Either<AddressFailure, Address> address,
+      Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+      bool showErrorMessage,
+      bool hasSubmitted,
+      bool isAdding,
+      bool hasAdded}) = _$_NewShopState;
 
   @override
-  Name get name;
+  Either<NameFailure, Name> get name;
   @override
-  String get address;
+  Either<AddressFailure, Address> get address;
   @override
-  PhoneNumber get phoneNumber;
+  Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
-  bool get showNameError;
+  bool get showErrorMessage;
   @override
-  bool get showAddressError;
-  @override
-  bool get showPhoneNumberError;
+  bool get hasSubmitted;
   @override
   bool get isAdding;
   @override
