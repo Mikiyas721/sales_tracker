@@ -5,8 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:sales_tracker/common/bloc/bloc_helpers.dart';
 import 'package:sales_tracker/common/failure.dart';
-import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/ports/shop_repo.dart';
 import 'package:sales_tracker/domain/value_objects/address.dart';
 import 'package:sales_tracker/domain/value_objects/name.dart';
@@ -18,15 +18,18 @@ part 'new_shop_state.dart';
 
 part 'new_shop_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class NewShopBloc extends Bloc<NewShopEvent, NewShopState> {
   IShopRepo _iShopRepo;
+
+
 
   NewShopBloc(this._iShopRepo) : super(NewShopState.initial());
 
   @override
   Stream<NewShopState> mapEventToState(NewShopEvent event) async* {
-    yield* event.map(nameChanged: (NameChanged nameChanged) async* {
+    yield* event.handle(state);
+    /*yield* event.map(nameChanged: (NameChanged nameChanged) async* {
       yield Name.create(nameChanged.name);
     }, addressChanged: (AddressChanged addressChanged) async* {
       yield state.copyWith(address: Address.create(addressChanged.address));
@@ -51,6 +54,6 @@ class NewShopBloc extends Bloc<NewShopEvent, NewShopState> {
           yield state.copyWith(hasAdded: true);
         });
       });
-    });
+    });*/
   }
 }

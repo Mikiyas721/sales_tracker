@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/presentation/controllers/new_shop_controller.dart';
 import '../../presentation/models/new_shop_model.dart';
 import '../../presentation/views/new_shop_view.dart';
 import '../../common/common.dart';
@@ -22,12 +24,18 @@ class NewShopPage extends StatelessWidget {
                 style: context.headline3,
               ),
               40.vSpace,
-              NewShopView(
-                  newShopViewModel: NewShopViewModel(),
-                  onAdd: () {},
-                  onNameChanged: (String name) {},
-                  onAddressChanged: (String address) {},
-                  onPhoneNumberChanged: (String phoneNumber) {}),
+              ViewModelBuilder.withController<NewShopViewModel, NewShopController>(
+                create: () => NewShopController(context),
+                builder: (context, controller, model) {
+                  return NewShopView(
+                    newShopViewModel: model,
+                    onAdd: controller.onAddShop,
+                    onNameChanged: controller.onNameChanged,
+                    onAddressChanged: (String address) {}, //todo
+                    onPhoneNumberChanged: (String phoneNumber) {}, //todo
+                  );
+                },
+              ),
               20.vSpace
             ],
           ),

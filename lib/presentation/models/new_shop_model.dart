@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class NewShopViewModel extends Equatable {
+class NewShopViewModel extends ViewModel {
   final String name;
   final String nameError;
   final String address;

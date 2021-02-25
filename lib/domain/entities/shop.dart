@@ -47,8 +47,7 @@ class Shop {
     final addressObject = Address.create(address).getOrElse(() => null);
     if (addressObject == null) return none();
 
-    final phoneNumberObject =
-        PhoneNumber.create(phoneNumber).getOrElse(() => null);
+    final phoneNumberObject = PhoneNumber.create(phoneNumber).getOrElse(() => null);
     if (phoneNumberObject == null) return none();
 
     return some(Shop._(
@@ -63,9 +62,9 @@ class Shop {
   }
 
   static Option<Shop> createFromInputs({
-    String name,
-    String address,
-    String phoneNumber,
+    Name name,
+    Address address,
+    PhoneNumber phoneNumber,
   }) {
     if ([
       name,
@@ -73,19 +72,12 @@ class Shop {
       phoneNumber,
     ].any((element) => null)) return none();
 
-    final nameObject = Name.create(name).getOrElse(() => null);
-    if (nameObject == null) return none();
-
-    final addressObject = Address.create(address).getOrElse(() => null);
-    if (addressObject == null) return none();
-
-    final phoneNumberObject =
-        PhoneNumber.create(phoneNumber).getOrElse(() => null);
-    if (phoneNumberObject == null) return none();
-
-    return some(Shop._(
-        name: nameObject,
-        address: addressObject,
-        phoneNumber: phoneNumberObject));
+    return some(
+      Shop._(
+        name: name,
+        address: address,
+        phoneNumber: phoneNumber,
+      ),
+    );
   }
 }

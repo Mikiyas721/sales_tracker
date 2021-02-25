@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../common/common.dart';
 
+
 class MyTextField extends StatelessWidget {
   final String errorText;
   final String labelText;
@@ -19,10 +20,12 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: 5.vPadding,
-      child: TextField(
+      child: TextFormField(
         onChanged: onChanged,
+        controller: controller,
         keyboardType: keyboardType,
         decoration: InputDecoration(
             errorText: errorText, prefixIcon: Icon(icon), labelText: labelText),

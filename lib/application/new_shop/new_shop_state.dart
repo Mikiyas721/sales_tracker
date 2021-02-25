@@ -2,11 +2,12 @@ part of 'new_shop_bloc.dart';
 
 @immutable
 @freezed
-abstract class NewShopState with _$NewShopState {
+abstract class NewShopState extends BlocState with _$NewShopState {
   const factory NewShopState({
     Either<NameFailure, Name> name,
     Either<AddressFailure, Address> address,
     Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
+    Failure addShopFailure,
     bool showErrorMessage,
     bool hasSubmitted,
     bool isAdding,
