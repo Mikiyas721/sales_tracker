@@ -7,9 +7,8 @@ import 'package:sales_tracker/domain/use_cases/add_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
 
-class NewShopController
-    extends BlocViewModelController<NewShopBloc, NewShopEvent, NewShopState, NewShopViewModel>
-    with ToastMixin {
+class NewShopController extends BlocViewModelController<NewShopBloc,
+    NewShopEvent, NewShopState, NewShopViewModel> with ToastMixin {
   final BuildContext context;
   TextEditingController nameTextFieldController;
   TextEditingController addressTextFieldController;
@@ -26,11 +25,15 @@ class NewShopController
   NewShopViewModel mapStateToViewModel(NewShopState s) {
     return NewShopViewModel(
       name: s.name.fold((l) => null, (r) => r.value),
-      nameError: s.hasSubmitted ? (s.name.fold((l) => l.message, (r) => null)) : null,
+      nameError:
+          s.hasSubmitted ? (s.name.fold((l) => l.message, (r) => null)) : null,
       address: s.address.fold((l) => null, (r) => r.value),
-      addressError: s.hasSubmitted ? s.address.fold((l) => l.message, (r) => null) : null,
+      addressError:
+          s.hasSubmitted ? s.address.fold((l) => l.message, (r) => null) : null,
       phoneNumber: s.phoneNumber.fold((l) => null, (r) => r.value),
-      phoneNumberError: s.hasSubmitted ? s.phoneNumber.fold((l) => l.message, (r) => null) : null,
+      phoneNumberError: s.hasSubmitted
+          ? s.phoneNumber.fold((l) => l.message, (r) => null)
+          : null,
       isAdding: s.isAdding,
     );
   }
@@ -39,15 +42,17 @@ class NewShopController
   void onNameChanged(String name) {
     bloc.add(NewShopNameChangedEvent(name));
   }
-  void onAddressChanged(String address){
+
+  void onAddressChanged(String address) {
     bloc.add(NewShopAddressChangedEvent(address));
   }
-  void onPhoneNumberChanged(String phoneNumber){
+
+  void onPhoneNumberChanged(String phoneNumber) {
     bloc.add(NewShopPhoneNumberChangedEvent(phoneNumber));
   }
 
   onAddShop() {
-    this.bloc.add(NewShopAddRequestedEvent());
+    this.bloc.add(NewShopAddSubmittedEvent());
     final shop = Shop.createFromInputs(
       name: this.bloc.state.name.getOrElse(() => null),
       address: this.bloc.state.address.getOrElse(() => null),

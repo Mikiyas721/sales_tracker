@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/presentation/controllers/sale_transaction_controller.dart';
 import '../../presentation/models/sale_view_model.dart';
 import '../../presentation/views/sale_view.dart';
 import '../../common/common.dart';
@@ -22,10 +24,22 @@ class SalePage extends StatelessWidget {
                 style: context.headline3,
               ),
               100.vSpace,
-              SaleView(
-                saleViewModel: SaleViewModel(phoneNumber: '251 941135730'),
-                onRegister: () {},
+              Text(
+                'Transaction with 251 941135730',
+                style: context.headline4,
               ),
+              65.vSpace,
+              ViewModelBuilder.withController<SaleViewModel,
+                      SaleTransactionController>(
+                  create: () => SaleTransactionController(context),
+                  builder: (context, controller, model) {
+                    return SaleView(
+                      saleViewModel: model,
+                      onTotalAmount: controller.onTotalAmount,
+                      onPaidAmount: controller.onPaidAmount,
+                      onRegister: controller.onRegister,
+                    );
+                  }),
               20.vSpace
             ],
           ),

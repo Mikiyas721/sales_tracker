@@ -10,290 +10,20 @@ part of 'login_bloc.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$LoginEventTearOff {
-  const _$LoginEventTearOff();
-
-// ignore: unused_element
-  PhoneNumberChanged phoneNumberChanged(String phoneNumber) {
-    return PhoneNumberChanged(
-      phoneNumber,
-    );
-  }
-
-// ignore: unused_element
-  SubmitPhoneNumber submitPhoneNumber() {
-    return const SubmitPhoneNumber();
-  }
-}
-
-/// @nodoc
-// ignore: unused_element
-const $LoginEvent = _$LoginEventTearOff();
-
-/// @nodoc
-mixin _$LoginEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult phoneNumberChanged(String phoneNumber),
-    @required TResult submitPhoneNumber(),
-  });
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult phoneNumberChanged(String phoneNumber),
-    TResult submitPhoneNumber(),
-    @required TResult orElse(),
-  });
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult phoneNumberChanged(PhoneNumberChanged value),
-    @required TResult submitPhoneNumber(SubmitPhoneNumber value),
-  });
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult phoneNumberChanged(PhoneNumberChanged value),
-    TResult submitPhoneNumber(SubmitPhoneNumber value),
-    @required TResult orElse(),
-  });
-}
-
-/// @nodoc
-abstract class $LoginEventCopyWith<$Res> {
-  factory $LoginEventCopyWith(
-          LoginEvent value, $Res Function(LoginEvent) then) =
-      _$LoginEventCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
-  _$LoginEventCopyWithImpl(this._value, this._then);
-
-  final LoginEvent _value;
-  // ignore: unused_field
-  final $Res Function(LoginEvent) _then;
-}
-
-/// @nodoc
-abstract class $PhoneNumberChangedCopyWith<$Res> {
-  factory $PhoneNumberChangedCopyWith(
-          PhoneNumberChanged value, $Res Function(PhoneNumberChanged) then) =
-      _$PhoneNumberChangedCopyWithImpl<$Res>;
-  $Res call({String phoneNumber});
-}
-
-/// @nodoc
-class _$PhoneNumberChangedCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $PhoneNumberChangedCopyWith<$Res> {
-  _$PhoneNumberChangedCopyWithImpl(
-      PhoneNumberChanged _value, $Res Function(PhoneNumberChanged) _then)
-      : super(_value, (v) => _then(v as PhoneNumberChanged));
-
-  @override
-  PhoneNumberChanged get _value => super._value as PhoneNumberChanged;
-
-  @override
-  $Res call({
-    Object phoneNumber = freezed,
-  }) {
-    return _then(PhoneNumberChanged(
-      phoneNumber == freezed ? _value.phoneNumber : phoneNumber as String,
-    ));
-  }
-}
-
-/// @nodoc
-class _$PhoneNumberChanged implements PhoneNumberChanged {
-  const _$PhoneNumberChanged(this.phoneNumber) : assert(phoneNumber != null);
-
-  @override
-  final String phoneNumber;
-
-  @override
-  String toString() {
-    return 'LoginEvent.phoneNumberChanged(phoneNumber: $phoneNumber)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is PhoneNumberChanged &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                const DeepCollectionEquality()
-                    .equals(other.phoneNumber, phoneNumber)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(phoneNumber);
-
-  @JsonKey(ignore: true)
-  @override
-  $PhoneNumberChangedCopyWith<PhoneNumberChanged> get copyWith =>
-      _$PhoneNumberChangedCopyWithImpl<PhoneNumberChanged>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult phoneNumberChanged(String phoneNumber),
-    @required TResult submitPhoneNumber(),
-  }) {
-    assert(phoneNumberChanged != null);
-    assert(submitPhoneNumber != null);
-    return phoneNumberChanged(phoneNumber);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult phoneNumberChanged(String phoneNumber),
-    TResult submitPhoneNumber(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (phoneNumberChanged != null) {
-      return phoneNumberChanged(phoneNumber);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult phoneNumberChanged(PhoneNumberChanged value),
-    @required TResult submitPhoneNumber(SubmitPhoneNumber value),
-  }) {
-    assert(phoneNumberChanged != null);
-    assert(submitPhoneNumber != null);
-    return phoneNumberChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult phoneNumberChanged(PhoneNumberChanged value),
-    TResult submitPhoneNumber(SubmitPhoneNumber value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (phoneNumberChanged != null) {
-      return phoneNumberChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class PhoneNumberChanged implements LoginEvent {
-  const factory PhoneNumberChanged(String phoneNumber) = _$PhoneNumberChanged;
-
-  String get phoneNumber;
-  @JsonKey(ignore: true)
-  $PhoneNumberChangedCopyWith<PhoneNumberChanged> get copyWith;
-}
-
-/// @nodoc
-abstract class $SubmitPhoneNumberCopyWith<$Res> {
-  factory $SubmitPhoneNumberCopyWith(
-          SubmitPhoneNumber value, $Res Function(SubmitPhoneNumber) then) =
-      _$SubmitPhoneNumberCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$SubmitPhoneNumberCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res>
-    implements $SubmitPhoneNumberCopyWith<$Res> {
-  _$SubmitPhoneNumberCopyWithImpl(
-      SubmitPhoneNumber _value, $Res Function(SubmitPhoneNumber) _then)
-      : super(_value, (v) => _then(v as SubmitPhoneNumber));
-
-  @override
-  SubmitPhoneNumber get _value => super._value as SubmitPhoneNumber;
-}
-
-/// @nodoc
-class _$SubmitPhoneNumber implements SubmitPhoneNumber {
-  const _$SubmitPhoneNumber();
-
-  @override
-  String toString() {
-    return 'LoginEvent.submitPhoneNumber()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is SubmitPhoneNumber);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult phoneNumberChanged(String phoneNumber),
-    @required TResult submitPhoneNumber(),
-  }) {
-    assert(phoneNumberChanged != null);
-    assert(submitPhoneNumber != null);
-    return submitPhoneNumber();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult phoneNumberChanged(String phoneNumber),
-    TResult submitPhoneNumber(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (submitPhoneNumber != null) {
-      return submitPhoneNumber();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult phoneNumberChanged(PhoneNumberChanged value),
-    @required TResult submitPhoneNumber(SubmitPhoneNumber value),
-  }) {
-    assert(phoneNumberChanged != null);
-    assert(submitPhoneNumber != null);
-    return submitPhoneNumber(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult phoneNumberChanged(PhoneNumberChanged value),
-    TResult submitPhoneNumber(SubmitPhoneNumber value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (submitPhoneNumber != null) {
-      return submitPhoneNumber(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SubmitPhoneNumber implements LoginEvent {
-  const factory SubmitPhoneNumber() = _$SubmitPhoneNumber;
-}
-
-/// @nodoc
 class _$LoginStateTearOff {
   const _$LoginStateTearOff();
 
 // ignore: unused_element
   _LoginState call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      bool showErrorMessage,
+      Failure loginRequestFailure,
+      bool hasSubmitted,
       bool isRequesting,
       bool hasRequested}) {
     return _LoginState(
       phoneNumber: phoneNumber,
-      showErrorMessage: showErrorMessage,
+      loginRequestFailure: loginRequestFailure,
+      hasSubmitted: hasSubmitted,
       isRequesting: isRequesting,
       hasRequested: hasRequested,
     );
@@ -307,7 +37,8 @@ const $LoginState = _$LoginStateTearOff();
 /// @nodoc
 mixin _$LoginState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
-  bool get showErrorMessage;
+  Failure get loginRequestFailure;
+  bool get hasSubmitted;
   bool get isRequesting;
   bool get hasRequested;
 
@@ -322,7 +53,8 @@ abstract class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl<$Res>;
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      bool showErrorMessage,
+      Failure loginRequestFailure,
+      bool hasSubmitted,
       bool isRequesting,
       bool hasRequested});
 }
@@ -338,7 +70,8 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   @override
   $Res call({
     Object phoneNumber = freezed,
-    Object showErrorMessage = freezed,
+    Object loginRequestFailure = freezed,
+    Object hasSubmitted = freezed,
     Object isRequesting = freezed,
     Object hasRequested = freezed,
   }) {
@@ -346,9 +79,11 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
-      showErrorMessage: showErrorMessage == freezed
-          ? _value.showErrorMessage
-          : showErrorMessage as bool,
+      loginRequestFailure: loginRequestFailure == freezed
+          ? _value.loginRequestFailure
+          : loginRequestFailure as Failure,
+      hasSubmitted:
+          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isRequesting:
           isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
       hasRequested:
@@ -365,7 +100,8 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   @override
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      bool showErrorMessage,
+      Failure loginRequestFailure,
+      bool hasSubmitted,
       bool isRequesting,
       bool hasRequested});
 }
@@ -383,7 +119,8 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object phoneNumber = freezed,
-    Object showErrorMessage = freezed,
+    Object loginRequestFailure = freezed,
+    Object hasSubmitted = freezed,
     Object isRequesting = freezed,
     Object hasRequested = freezed,
   }) {
@@ -391,9 +128,11 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
-      showErrorMessage: showErrorMessage == freezed
-          ? _value.showErrorMessage
-          : showErrorMessage as bool,
+      loginRequestFailure: loginRequestFailure == freezed
+          ? _value.loginRequestFailure
+          : loginRequestFailure as Failure,
+      hasSubmitted:
+          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isRequesting:
           isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
       hasRequested:
@@ -406,14 +145,17 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
       {this.phoneNumber,
-      this.showErrorMessage,
+      this.loginRequestFailure,
+      this.hasSubmitted,
       this.isRequesting,
       this.hasRequested});
 
   @override
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
-  final bool showErrorMessage;
+  final Failure loginRequestFailure;
+  @override
+  final bool hasSubmitted;
   @override
   final bool isRequesting;
   @override
@@ -421,7 +163,7 @@ class _$_LoginState implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(phoneNumber: $phoneNumber, showErrorMessage: $showErrorMessage, isRequesting: $isRequesting, hasRequested: $hasRequested)';
+    return 'LoginState(phoneNumber: $phoneNumber, loginRequestFailure: $loginRequestFailure, hasSubmitted: $hasSubmitted, isRequesting: $isRequesting, hasRequested: $hasRequested)';
   }
 
   @override
@@ -431,9 +173,12 @@ class _$_LoginState implements _LoginState {
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
-            (identical(other.showErrorMessage, showErrorMessage) ||
+            (identical(other.loginRequestFailure, loginRequestFailure) ||
                 const DeepCollectionEquality()
-                    .equals(other.showErrorMessage, showErrorMessage)) &&
+                    .equals(other.loginRequestFailure, loginRequestFailure)) &&
+            (identical(other.hasSubmitted, hasSubmitted) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasSubmitted, hasSubmitted)) &&
             (identical(other.isRequesting, isRequesting) ||
                 const DeepCollectionEquality()
                     .equals(other.isRequesting, isRequesting)) &&
@@ -446,7 +191,8 @@ class _$_LoginState implements _LoginState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(phoneNumber) ^
-      const DeepCollectionEquality().hash(showErrorMessage) ^
+      const DeepCollectionEquality().hash(loginRequestFailure) ^
+      const DeepCollectionEquality().hash(hasSubmitted) ^
       const DeepCollectionEquality().hash(isRequesting) ^
       const DeepCollectionEquality().hash(hasRequested);
 
@@ -459,14 +205,17 @@ class _$_LoginState implements _LoginState {
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      bool showErrorMessage,
+      Failure loginRequestFailure,
+      bool hasSubmitted,
       bool isRequesting,
       bool hasRequested}) = _$_LoginState;
 
   @override
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
-  bool get showErrorMessage;
+  Failure get loginRequestFailure;
+  @override
+  bool get hasSubmitted;
   @override
   bool get isRequesting;
   @override

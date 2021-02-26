@@ -37,16 +37,16 @@ class NewShopPhoneNumberChangedEvent implements NewShopEvent {
   }
 }
 
-class NewShopAddRequestedEvent implements NewShopEvent {
+class NewShopAddSubmittedEvent implements NewShopEvent {
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
     yield currentState.copyWith(
-      showErrorMessage: true,
+      hasSubmitted: true,
     );
   }
 }
 
-class NewShopAddStartedEvent implements NewShopEvent {
+class NewShopAddRequestedEvent implements NewShopEvent {
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
     yield currentState.copyWith(
@@ -62,10 +62,10 @@ class NewShopAddSucceededEvent implements NewShopEvent {
       name: null,
       address: null,
       phoneNumber: null,
-      showErrorMessage: false,
+      addShopFailure: null,
       hasSubmitted: false,
       isAdding: false,
-      hasAdded: false,
+      hasAdded: true,
     );
   }
 }

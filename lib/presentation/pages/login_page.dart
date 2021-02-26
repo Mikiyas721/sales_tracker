@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/presentation/controllers/login_controller.dart';
 import '../../presentation/models/login_view_model.dart';
 import '../../presentation/views/login_view.dart';
 import '../../common/common.dart';
@@ -20,11 +22,13 @@ class LoginPage extends StatelessWidget {
                 style: context.headline3,
               ),
               200.vSpace,
-              LoginView(
-                  loginViewModel: LoginViewModel(),
-                  onPhoneNumberChanged: (String onChanged) {},
-                  onSubmit: () {
-                    Navigator.pushNamedAndRemoveUntil(context, '/verificationPage',(_)=>false);
+              ViewModelBuilder.withController<LoginViewModel, LoginController>(
+                  create: () => LoginController(context),
+                  builder: (context, controller, model) {
+                    return LoginView(
+                        loginViewModel: model,
+                        onPhoneNumberChanged: controller.onPhoneNumberChanged,
+                        onSubmit: controller.onSubmit);
                   }),
               20.vSpace
             ],

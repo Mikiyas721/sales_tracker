@@ -1,5 +1,3 @@
 import 'package:equatable/equatable.dart';
 
-abstract class ViewModel extends Equatable{
-
-}
+abstract class ViewModel extends Equatable{}

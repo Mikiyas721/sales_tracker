@@ -21,11 +21,6 @@ class FundView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Funding for ${fundViewModel.phoneNumber}',
-          style: context.headline4,
-        ),
-        100.vSpace,
         MyTextField(
             icon: Icons.attach_money,
             labelText: 'amount',

@@ -8,10 +8,10 @@ class FundTransaction {
   final String id;
   final String salesPersonId;
   final String shopId;
-  final Option<Shop> shop;
+  final Shop shop;
 
   /// Why not use Option on other objects as well, like String
-  final Option<SalesPerson> salesPerson;
+  final SalesPerson salesPerson;
   final CashAmount amount;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -49,17 +49,21 @@ class FundTransaction {
     ].any((e) => e == null)) return none();
 
     final cashAmount = CashAmount.createFromNum(amount).getOrElse(() => null);
-
-    /// Why not use either here? The different error types have been masked
     if (cashAmount == null) return none();
+
+    final shopObject = shop.fold(() => null, (a) => a);
+    if(shopObject==null) return none();
+
+    final salePersonObject = salesPerson.fold(() => null, (a) => a);
+    if(salePersonObject==null) return none();
 
     return some(
       FundTransaction._(
         id: id,
         salesPersonId: salesPersonId,
         shopId: shopId,
-        shop: shop,
-        salesPerson: salesPerson,
+        shop: shopObject,
+        salesPerson: salePersonObject,
         amount: cashAmount,
         createdAt: createdAt,
         updatedAt: updatedAt,
@@ -67,33 +71,21 @@ class FundTransaction {
     );
   }
 
-  static Option<FundTransaction> createSimple({
-    /// was this created just to test the code??
+  static Option<FundTransaction> createFromInputs({
     String salesPersonId,
     String shopId,
-    num amount,
+    CashAmount cashAmount,
   }) {
     if ([
       salesPersonId,
       shopId,
-      amount,
-    ].any((e) => e == null)) return none();
+      cashAmount,
+    ].any((element) => null)) return none();
 
-    final cashAmount = CashAmount.createFromNum(amount).getOrElse(() => null);
-
-    if (cashAmount == null) return none();
-
-    return some(
-      FundTransaction._(
-        id: null,
-        salesPersonId: salesPersonId,
-        shopId: shopId,
-        shop: none(),
-        salesPerson: none(),
-        amount: cashAmount,
-        createdAt: null,
-        updatedAt: null,
-      ),
-    );
+    return Some(FundTransaction._(
+      salesPersonId: salesPersonId,
+      shopId: shopId,
+      amount: cashAmount,
+    ));
   }
 }

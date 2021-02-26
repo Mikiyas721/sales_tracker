@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class MyShopsViewModel extends Equatable {
+class MyShopsViewModel extends ViewModel {
   final String name;
   final String phoneNumber;
   final String location;

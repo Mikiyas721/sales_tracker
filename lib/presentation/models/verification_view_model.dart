@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class VerificationViewModel extends Equatable {
+class VerificationViewModel extends ViewModel {
   final String verificationCode;
   final String verificationCodeError;
   final bool isVerifying;

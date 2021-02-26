@@ -1,8 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class SaleViewModel extends Equatable {
-  final String phoneNumber;
+class SaleViewModel extends ViewModel {
   final String totalAmount;
   final String totalAmountError;
   final String paidAmount;
@@ -10,7 +9,6 @@ class SaleViewModel extends Equatable {
   final bool isRegistering;
 
   SaleViewModel({
-    @required this.phoneNumber,
     this.totalAmount,
     this.totalAmountError,
     this.paidAmount,
@@ -20,7 +18,6 @@ class SaleViewModel extends Equatable {
 
   @override
   List<Object> get props => [
-    phoneNumber,
     totalAmount,
     totalAmountError,
     paidAmount,

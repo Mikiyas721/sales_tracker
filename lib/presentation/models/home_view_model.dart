@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class HomeViewModel extends Equatable {
+class HomeViewModel extends ViewModel {
   final String soldToday;
   final String remainingLoan;
 

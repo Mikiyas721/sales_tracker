@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/view_model.dart';
 
-class TransactionViewModel extends Equatable {
+class TransactionViewModel extends ViewModel {
   final String date;
   final String transactionType;
   final String soldAmount;

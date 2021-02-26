@@ -19,7 +19,6 @@ class _$NewShopStateTearOff {
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Failure addShopFailure,
-      bool showErrorMessage,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded}) {
@@ -28,7 +27,6 @@ class _$NewShopStateTearOff {
       address: address,
       phoneNumber: phoneNumber,
       addShopFailure: addShopFailure,
-      showErrorMessage: showErrorMessage,
       hasSubmitted: hasSubmitted,
       isAdding: isAdding,
       hasAdded: hasAdded,
@@ -46,7 +44,6 @@ mixin _$NewShopState {
   Either<AddressFailure, Address> get address;
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   Failure get addShopFailure;
-  bool get showErrorMessage;
   bool get hasSubmitted;
   bool get isAdding;
   bool get hasAdded;
@@ -65,7 +62,6 @@ abstract class $NewShopStateCopyWith<$Res> {
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Failure addShopFailure,
-      bool showErrorMessage,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
@@ -85,7 +81,6 @@ class _$NewShopStateCopyWithImpl<$Res> implements $NewShopStateCopyWith<$Res> {
     Object address = freezed,
     Object phoneNumber = freezed,
     Object addShopFailure = freezed,
-    Object showErrorMessage = freezed,
     Object hasSubmitted = freezed,
     Object isAdding = freezed,
     Object hasAdded = freezed,
@@ -101,9 +96,6 @@ class _$NewShopStateCopyWithImpl<$Res> implements $NewShopStateCopyWith<$Res> {
       addShopFailure: addShopFailure == freezed
           ? _value.addShopFailure
           : addShopFailure as Failure,
-      showErrorMessage: showErrorMessage == freezed
-          ? _value.showErrorMessage
-          : showErrorMessage as bool,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
@@ -124,7 +116,6 @@ abstract class _$NewShopStateCopyWith<$Res>
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Failure addShopFailure,
-      bool showErrorMessage,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
@@ -146,7 +137,6 @@ class __$NewShopStateCopyWithImpl<$Res> extends _$NewShopStateCopyWithImpl<$Res>
     Object address = freezed,
     Object phoneNumber = freezed,
     Object addShopFailure = freezed,
-    Object showErrorMessage = freezed,
     Object hasSubmitted = freezed,
     Object isAdding = freezed,
     Object hasAdded = freezed,
@@ -162,9 +152,6 @@ class __$NewShopStateCopyWithImpl<$Res> extends _$NewShopStateCopyWithImpl<$Res>
       addShopFailure: addShopFailure == freezed
           ? _value.addShopFailure
           : addShopFailure as Failure,
-      showErrorMessage: showErrorMessage == freezed
-          ? _value.showErrorMessage
-          : showErrorMessage as bool,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
@@ -180,7 +167,6 @@ class _$_NewShopState implements _NewShopState {
       this.address,
       this.phoneNumber,
       this.addShopFailure,
-      this.showErrorMessage,
       this.hasSubmitted,
       this.isAdding,
       this.hasAdded});
@@ -194,8 +180,6 @@ class _$_NewShopState implements _NewShopState {
   @override
   final Failure addShopFailure;
   @override
-  final bool showErrorMessage;
-  @override
   final bool hasSubmitted;
   @override
   final bool isAdding;
@@ -204,7 +188,7 @@ class _$_NewShopState implements _NewShopState {
 
   @override
   String toString() {
-    return 'NewShopState(name: $name, address: $address, phoneNumber: $phoneNumber, addShopFailure: $addShopFailure, showErrorMessage: $showErrorMessage, hasSubmitted: $hasSubmitted, isAdding: $isAdding, hasAdded: $hasAdded)';
+    return 'NewShopState(name: $name, address: $address, phoneNumber: $phoneNumber, addShopFailure: $addShopFailure, hasSubmitted: $hasSubmitted, isAdding: $isAdding, hasAdded: $hasAdded)';
   }
 
   @override
@@ -222,9 +206,6 @@ class _$_NewShopState implements _NewShopState {
             (identical(other.addShopFailure, addShopFailure) ||
                 const DeepCollectionEquality()
                     .equals(other.addShopFailure, addShopFailure)) &&
-            (identical(other.showErrorMessage, showErrorMessage) ||
-                const DeepCollectionEquality()
-                    .equals(other.showErrorMessage, showErrorMessage)) &&
             (identical(other.hasSubmitted, hasSubmitted) ||
                 const DeepCollectionEquality()
                     .equals(other.hasSubmitted, hasSubmitted)) &&
@@ -243,7 +224,6 @@ class _$_NewShopState implements _NewShopState {
       const DeepCollectionEquality().hash(address) ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(addShopFailure) ^
-      const DeepCollectionEquality().hash(showErrorMessage) ^
       const DeepCollectionEquality().hash(hasSubmitted) ^
       const DeepCollectionEquality().hash(isAdding) ^
       const DeepCollectionEquality().hash(hasAdded);
@@ -260,7 +240,6 @@ abstract class _NewShopState implements NewShopState {
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Failure addShopFailure,
-      bool showErrorMessage,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded}) = _$_NewShopState;
@@ -273,8 +252,6 @@ abstract class _NewShopState implements NewShopState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
   Failure get addShopFailure;
-  @override
-  bool get showErrorMessage;
   @override
   bool get hasSubmitted;
   @override
