@@ -31,8 +31,8 @@ class NewShopPage extends StatelessWidget {
                     newShopViewModel: model,
                     onAdd: controller.onAddShop,
                     onNameChanged: controller.onNameChanged,
-                    onAddressChanged: (String address) {}, //todo
-                    onPhoneNumberChanged: (String phoneNumber) {}, //todo
+                    onAddressChanged: controller.onAddressChanged,
+                    onPhoneNumberChanged: controller.onPhoneNumberChanged,
                   );
                 },
               ),

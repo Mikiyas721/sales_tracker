@@ -4,7 +4,6 @@ import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/controller/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/use_cases/add_shop.dart';
-import 'package:sales_tracker/domain/value_objects/name.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
 
@@ -12,12 +11,15 @@ class NewShopController
     extends BlocViewModelController<NewShopBloc, NewShopEvent, NewShopState, NewShopViewModel>
     with ToastMixin {
   final BuildContext context;
+  TextEditingController nameTextFieldController;
+  TextEditingController addressTextFieldController;
   TextEditingController phoneTextFieldController;
 
-  NewShopController(this.context) : super(getIt.get<NewShopBloc>(), false) {
-    phoneTextFieldController = TextEditingController(text: this.viewModelStream.value.name);
+  NewShopController(this.context) : super(getIt.get<NewShopBloc>(), true) {
+    nameTextFieldController = TextEditingController();
+    addressTextFieldController = TextEditingController();
+    phoneTextFieldController = TextEditingController();
   }
-
 
   //presenter
   @override
@@ -34,9 +36,14 @@ class NewShopController
   }
 
   //actions
-  onNameChanged(String name) {
-    final nameObj = Name.create(name);
-    this.bloc.add(NewShopNameChangedEvent(name));
+  void onNameChanged(String name) {
+    bloc.add(NewShopNameChangedEvent(name));
+  }
+  void onAddressChanged(String address){
+    bloc.add(NewShopAddressChangedEvent(address));
+  }
+  void onPhoneNumberChanged(String phoneNumber){
+    bloc.add(NewShopPhoneNumberChangedEvent(phoneNumber));
   }
 
   onAddShop() {
@@ -57,6 +64,8 @@ class NewShopController
           },
           (r) {
             bloc.add(NewShopAddSucceededEvent());
+            nameTextFieldController.text = "";
+            addressTextFieldController.text = "";
             phoneTextFieldController.text = "";
             toastSuccess("Shop Added Successfully!");
           },

@@ -6,9 +6,7 @@ import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/ports/firebase_repo.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
-abstract class PhoneAuthResult {
-
-}
+abstract class PhoneAuthResult {}
 
 class PhoneAuthSuccessResult implements PhoneAuthResult {
   String token;
@@ -31,7 +29,8 @@ class FirebaseRepoImpl extends IFirebaseRepo {
       timeout: Duration(seconds: 30),
       verificationCompleted: (AuthCredential authCredential) async {
         completer.complete(PhoneAuthSuccessResult());
-        AuthResult result = await authInstance.signInWithCredential(authCredential);
+        AuthResult result =
+            await authInstance.signInWithCredential(authCredential);
         final idToken = await result.user.getIdToken();
         if (result.user != null) return true;
         return false;
@@ -41,18 +40,17 @@ class FirebaseRepoImpl extends IFirebaseRepo {
         verificationId = verification;
       },
       codeAutoRetrievalTimeout: (verificationId) {
-        //
-      completer.complete(PhoneAuthCodeSentResult()));
-
-    },
+        completer.complete(PhoneAuthCodeSentResult());
+      },
     );
     return completer.future;
   }
 
   @override
-  Future<Either<Failure, FirebaseUser>> verifyCode(String verificationCode) async {
-    AuthCredential credential =
-        PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: verificationCode);
+  Future<Either<Failure, FirebaseUser>> verifyCode(
+      String verificationCode) async {
+    AuthCredential credential = PhoneAuthProvider.getCredential(
+        verificationId: verificationId, smsCode: verificationCode);
     AuthResult result = await authInstance.signInWithCredential(credential);
     if (result.user != null) return left(SimpleFailure('Invalid Data'));
     return right(result.user);

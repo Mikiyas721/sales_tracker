@@ -1,6 +1,5 @@
 part of 'new_shop_bloc.dart';
 
-@immutable
 @freezed
 abstract class NewShopState extends BlocState with _$NewShopState {
   const factory NewShopState({

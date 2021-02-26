@@ -1,14 +1,5 @@
 part of 'new_shop_bloc.dart';
 
-/*@immutable
-@freezed
-abstract class NewShopEvent with _$NewShopEvent {
-  const factory NewShopEvent.nameChanged(String name) = NameChanged;
-  const factory NewShopEvent.addressChanged(String address) = AddressChanged;
-  const factory NewShopEvent.phoneNumberChanged(String phoneNumber) = PhoneNumberChanged;
-  const factory NewShopEvent.addNewShop() = AddNewShop;
-}*/
-
 abstract class NewShopEvent extends BlocEvent<NewShopState> {}
 
 class NewShopNameChangedEvent implements NewShopEvent {
@@ -23,6 +14,29 @@ class NewShopNameChangedEvent implements NewShopEvent {
     );
   }
 }
+
+class NewShopAddressChangedEvent implements NewShopEvent {
+  final String address;
+
+  const NewShopAddressChangedEvent(this.address);
+
+  @override
+  Stream<NewShopState> handle(NewShopState currentState) async* {
+    yield currentState.copyWith(address: Address.create(address));
+  }
+}
+
+class NewShopPhoneNumberChangedEvent implements NewShopEvent {
+  final String phoneNumber;
+
+  const NewShopPhoneNumberChangedEvent(this.phoneNumber);
+
+  @override
+  Stream<NewShopState> handle(NewShopState currentState) async* {
+    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
+  }
+}
+
 class NewShopAddRequestedEvent implements NewShopEvent {
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
@@ -45,9 +59,13 @@ class NewShopAddSucceededEvent implements NewShopEvent {
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
     yield currentState.copyWith(
+      name: null,
+      address: null,
+      phoneNumber: null,
+      showErrorMessage: false,
+      hasSubmitted: false,
       isAdding: false,
-      hasAdded: true,
-      name:
+      hasAdded: false,
     );
   }
 }
