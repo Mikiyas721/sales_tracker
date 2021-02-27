@@ -9,20 +9,20 @@ import 'package:sales_tracker/common/bloc/bloc_helpers.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 
-part 'fund_transaction_event.dart';
+part 'add_fund_event.dart';
 
-part 'fund_transaction_state.dart';
+part 'add_fund_state.dart';
 
-part 'fund_transaction_bloc.freezed.dart';
+part 'add_fund_bloc.freezed.dart';
 
 @injectable
-class FundTransactionBloc
-    extends Bloc<FundTransactionEvent, FundTransactionState> {
-  FundTransactionBloc() : super(FundTransactionState.initial());
+class AddFundBloc
+    extends Bloc<AddFundEvent, AddFundState> {
+  AddFundBloc() : super(AddFundState.initial());
 
   @override
-  Stream<FundTransactionState> mapEventToState(
-    FundTransactionEvent event,
+  Stream<AddFundState> mapEventToState(
+    AddFundEvent event,
   ) async* {
     yield* event.handle(state);
   }

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sales_tracker/common/datasource/rest_datasource/rest_response.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/ports/shop_repo.dart';
@@ -21,12 +22,10 @@ class ShopRepoImpl extends IShopRepo {
             .toDomain()
             .fold(() => left(SimpleFailure('Invalid Data')), (a) => right(a)));
   }
+
   @override
-  Future<Either<Failure, List<Shop>>> fetchAll() async{
-    final result = await shopCrudDataSource
-        .find();
-    return result.either.fold(
-            (l) => left(l),
-            (r)=>null);
+  Future<Either<RestResponseFailure, List<Shop>>> fetchAll() async {
+    final result = await shopCrudDataSource.find();
+    return result.either.fold((l) => left(l), (r) => right(ShopDto.toDomainList(r)));
   }
 }

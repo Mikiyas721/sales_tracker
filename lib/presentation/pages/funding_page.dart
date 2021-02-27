@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/fund_transaction_controller.dart';
+import 'package:sales_tracker/presentation/controllers/add_fund_controller.dart';
 import '../../presentation/models/fund_view_model.dart';
 import '../../presentation/views/fund_view.dart';
 import '../../common/common.dart';
@@ -30,8 +30,8 @@ class FundingPage extends StatelessWidget {
               ),
               100.vSpace,
               ViewModelBuilder.withController<FundViewModel,
-                      FundTransactionController>(
-                  create: () => FundTransactionController(context),
+                      AddFundController>(
+                  create: () => AddFundController(context),
                   //TODO Pass ShopId as parameter
                   builder: (context, controller, model) {
                     return FundView(

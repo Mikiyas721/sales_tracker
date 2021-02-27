@@ -45,6 +45,13 @@ class ShopDto extends IdDto implements TimeStampedDto {
     );
   }
 
+  static List<Shop> toDomainList(List<ShopDto> dto) {
+    return dto.map((e) {
+      var result = e.toDomain().getOrElse(() => null);
+      if(result!=null) return result;
+    }).toList();
+  }
+
   static ShopDto fromDomain(Shop fundTransaction) {
     /// Dont we need to check if the passed object is null
     return ShopDto(

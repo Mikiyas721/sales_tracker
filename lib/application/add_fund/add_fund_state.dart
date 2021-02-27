@@ -1,17 +1,17 @@
-part of 'fund_transaction_bloc.dart';
+part of 'add_fund_bloc.dart';
 
 @immutable
 @freezed
-abstract class FundTransactionState extends BlocState with _$FundTransactionState{
-  const factory FundTransactionState({
+abstract class AddFundState extends BlocState with _$AddFundState{
+  const factory AddFundState({
     Either<CashAmountFailure, CashAmount> paidAmount,
     Failure fundTransactionFailure,
     bool hasSubmitted,
     bool hasRequested,
     bool requestCompleted,
-}) = _FundTransactionState;
+}) = _AddFundState;
 
-  factory FundTransactionState.initial() => FundTransactionState(
+  factory AddFundState.initial() => AddFundState(
     paidAmount: null,
     fundTransactionFailure: null,
     hasRequested: false,

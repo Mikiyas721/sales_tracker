@@ -6,11 +6,11 @@ import 'package:sales_tracker/domain/ports/sales_person_repo.dart';
 
 @lazySingleton
 class FetchSalesPerson {
-  final ISalesPersonRepo iSalesPersonRepo;
+  final ISalesPersonRepo _iSalesPersonRepo;
 
-  const FetchSalesPerson(this.iSalesPersonRepo);
+  const FetchSalesPerson(this._iSalesPersonRepo);
 
   Future<Either<Failure, SalesPerson>> execute(String id){
-    return iSalesPersonRepo.fetchPerson(id);
+    return _iSalesPersonRepo.fetchPerson(id);
   }
 }

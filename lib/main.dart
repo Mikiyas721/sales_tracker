@@ -5,7 +5,7 @@ import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
 import './presentation/pages/new_shop_page.dart';
 import './presentation/pages/sale_page.dart';
-import './presentation/pages/transactions_page.dart';
+import './presentation/pages/fund_transactions_page.dart';
 import './presentation/pages/home_page.dart';
 import './presentation/pages/login_page.dart';
 import 'injection.dart';

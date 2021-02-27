@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sales_tracker/application/fund_transaction/fund_transaction_bloc.dart';
+import 'package:sales_tracker/application/add_fund/add_fund_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/controller/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/fund_transaction.dart';
@@ -7,21 +7,21 @@ import 'package:sales_tracker/domain/use_cases/add_fund_transaction.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/fund_view_model.dart';
 
-class FundTransactionController extends BlocViewModelController<
-    FundTransactionBloc,
-    FundTransactionEvent,
-    FundTransactionState,
+class AddFundController extends BlocViewModelController<
+    AddFundBloc,
+    AddFundEvent,
+    AddFundState,
     FundViewModel> with ToastMixin {
   final BuildContext context;
   TextEditingController paidAmountTextFieldController;
 
-  FundTransactionController(this.context)
-      : super(getIt.get<FundTransactionBloc>(), true) {
+  AddFundController(this.context)
+      : super(getIt.get<AddFundBloc>(), true) {
     paidAmountTextFieldController = TextEditingController();
   }
 
   @override
-  FundViewModel mapStateToViewModel(FundTransactionState s) {
+  FundViewModel mapStateToViewModel(AddFundState s) {
     return FundViewModel(
         amount: s.paidAmount.getOrElse(() => null)?.value.toString(),
         amountError: s.hasSubmitted
@@ -30,11 +30,11 @@ class FundTransactionController extends BlocViewModelController<
         isFunding: s.hasRequested);
   }
   void onPaidAmount(String paidAmount) {
-    bloc.add(FundTransactionPaidAmountChangedEvent(paidAmount));
+    bloc.add(AddFundPaidAmountChangedEvent(paidAmount));
   }
 
   void onRegister() {
-    bloc.add(FundTransactionSubmittedEvent());
+    bloc.add(AddFundSubmittedEvent());
     final saleTransaction = FundTransaction.createFromInputs(
       salesPersonId: null, // TODO ??
       shopId: null,
@@ -45,10 +45,10 @@ class FundTransactionController extends BlocViewModelController<
     }, (a) async* {
       final result = await getIt.get<AddFundTransaction>().execute(a);
       result.fold((l) {
-        bloc.add(FundTransactionFailedEvent(l));
+        bloc.add(AddFundFailedEvent(l));
         toastError(l.message);
       }, (r) {
-        bloc.add(FundTransactionSucceededEvent());
+        bloc.add(AddFundSucceededEvent());
         paidAmountTextFieldController.text = "";
         /// not used anywhere?
         toastSuccess('Transaction Added Successfully');

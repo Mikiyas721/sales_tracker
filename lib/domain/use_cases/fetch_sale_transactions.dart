@@ -6,11 +6,11 @@ import 'package:sales_tracker/domain/ports/sale_transaction_repo.dart';
 
 @lazySingleton
 class FetchSaleTransactions {
-  final ISaleTransactionRepo iSellTransactionRepo;
+  final ISaleTransactionRepo _iSellTransactionRepo;
 
-  const FetchSaleTransactions(this.iSellTransactionRepo);
+  const FetchSaleTransactions(this._iSellTransactionRepo);
 
   Future<Either<Failure, List<SaleTransaction>>> execute(){
-    return iSellTransactionRepo.fetchAll();
+    return _iSellTransactionRepo.fetchAll();
   }
 }

@@ -7,11 +7,11 @@ import 'package:sales_tracker/domain/ports/shop_repo.dart';
 
 @lazySingleton
 class AddShop {
-  final IShopRepo iShopRepo;
+  final IShopRepo _iShopRepo;
 
-  const AddShop(this.iShopRepo);
+  const AddShop(this._iShopRepo);
 
   Future<Either<Failure, Shop>> execute(Shop shop){
-    return iShopRepo.create(shop);
+    return _iShopRepo.create(shop);
   }
 }

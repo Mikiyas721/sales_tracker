@@ -6,11 +6,11 @@ import 'package:sales_tracker/domain/ports/fund_transaction_repo.dart';
 
 @lazySingleton
 class AddFundTransaction {
-  final IFundTransactionRepo fundTransactionRepo;
+  final IFundTransactionRepo _fundTransactionRepo;
 
-  const AddFundTransaction(this.fundTransactionRepo);
+  const AddFundTransaction(this._fundTransactionRepo);
 
   Future<Either<Failure, FundTransaction>> execute(FundTransaction fundTransaction) {
-    return fundTransactionRepo.create(fundTransaction);
+    return _fundTransactionRepo.create(fundTransaction);
   }
 }

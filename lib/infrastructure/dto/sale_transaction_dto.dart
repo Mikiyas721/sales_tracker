@@ -52,6 +52,12 @@ class SaleTransactionDto extends IdDto implements TimeStampedDto {
         updatedAt:updatedAt,
     );
   }
+  static List<SaleTransaction> toDomainList(List<SaleTransactionDto> dto) {
+    return dto.map((e) {
+      var result = e.toDomain().getOrElse(() => null);
+      if(result!=null) return result;
+    }).toList();
+  }
   static SaleTransactionDto fromDomain(SaleTransaction salesTransaction){
     return SaleTransactionDto(
         id:salesTransaction.id,

@@ -5,12 +5,12 @@ import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/ports/shop_repo.dart';
 
 @lazySingleton
-class AddShop {
-  final IShopRepo iShopRepo;
+class FetchShops {
+  final IShopRepo _iShopRepo;
 
-  const AddShop(this.iShopRepo);
+  const FetchShops(this._iShopRepo);
 
   Future<Either<Failure, List<Shop>>> execute(){
-    return iShopRepo.fetchAll();
+    return _iShopRepo.fetchAll();
   }
 }

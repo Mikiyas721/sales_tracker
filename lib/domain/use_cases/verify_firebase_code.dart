@@ -6,11 +6,11 @@ import 'package:sales_tracker/domain/ports/firebase_repo.dart';
 
 @lazySingleton
 class VerifyFirebaseCode {
-  final IFirebaseRepo iFirebaseRepo;
+  final IFirebaseRepo _iFirebaseRepo;
 
-  const VerifyFirebaseCode(this.iFirebaseRepo);
+  const VerifyFirebaseCode(this._iFirebaseRepo);
 
   Future<Either<Failure, FirebaseUser>> execute(String verificationCode) async {
-    return await iFirebaseRepo.verifyCode(verificationCode);
+    return await _iFirebaseRepo.verifyCode(verificationCode);
   }
 }

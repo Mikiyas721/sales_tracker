@@ -49,7 +49,12 @@ class FundTransactionDto extends IdDto implements TimeStampedDto {
       updatedAt: updatedAt,
     );
   }
-
+  static List<FundTransaction> toDomainList(List<FundTransactionDto> dto) {
+    return dto.map((e) {
+      var result = e.toDomain().getOrElse(() => null);
+      if(result!=null) return result;
+    }).toList();
+  }
   static FundTransactionDto fromDomain(FundTransaction fundTransaction) {
     return FundTransactionDto(
       id: fundTransaction.id,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/sale_transaction_controller.dart';
+import 'package:sales_tracker/presentation/controllers/add_sale_controller.dart';
 import '../../presentation/widgets/my_button.dart';
 import '../../presentation/widgets/my_text_field.dart';
 import '../../presentation/models/sale_view_model.dart';
@@ -22,7 +22,7 @@ class SaleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<SaleTransactionController>(context);
+    final controller = Provider.of<AddSaleController>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

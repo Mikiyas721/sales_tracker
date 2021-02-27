@@ -9,20 +9,20 @@ import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 
-part 'sale_transaction_event.dart';
+part 'add_sale_event.dart';
 
-part 'sale_transaction_state.dart';
+part 'add_sale_state.dart';
 
-part 'sale_transaction_bloc.freezed.dart';
+part 'add_sale_bloc.freezed.dart';
 
 @lazySingleton
-class SaleTransactionBloc
-    extends Bloc<SaleTransactionEvent, SaleTransactionState> {
-  SaleTransactionBloc() : super(SaleTransactionState.initial());
+class AddSaleBloc
+    extends Bloc<AddSaleEvent, AddSaleState> {
+  AddSaleBloc() : super(AddSaleState.initial());
 
   @override
-  Stream<SaleTransactionState> mapEventToState(
-    SaleTransactionEvent event,
+  Stream<AddSaleState> mapEventToState(
+    AddSaleEvent event,
   ) async* {
     yield* event.handle(state);
   }

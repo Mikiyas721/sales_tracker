@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/sale_transaction_controller.dart';
+import 'package:sales_tracker/presentation/controllers/add_sale_controller.dart';
 import '../../presentation/models/sale_view_model.dart';
 import '../../presentation/views/sale_view.dart';
 import '../../common/common.dart';
@@ -30,8 +30,8 @@ class SalePage extends StatelessWidget {
               ),
               65.vSpace,
               ViewModelBuilder.withController<SaleViewModel,
-                      SaleTransactionController>(
-                  create: () => SaleTransactionController(context),
+                      AddSaleController>(
+                  create: () => AddSaleController(context),
                   builder: (context, controller, model) {
                     return SaleView(
                       saleViewModel: model,

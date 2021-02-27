@@ -1,18 +1,18 @@
-part of 'sale_transaction_bloc.dart';
+part of 'add_sale_bloc.dart';
 
 @freezed
-abstract class SaleTransactionState extends BlocState
-    with _$SaleTransactionState {
-  const factory SaleTransactionState({
+abstract class AddSaleState extends BlocState
+    with _$AddSaleState {
+  const factory AddSaleState({
     Either<CardAmountFailure, CardAmount> totalAmount,
     Either<CashAmountFailure, CashAmount> paidAmount,
     Failure saleTransactionFailure,
     bool hasSubmitted,
     bool hasRequested,
     bool requestCompleted,
-  }) = _SaleTransactionState;
+  }) = _AddSaleState;
 
-  factory SaleTransactionState.initial() => SaleTransactionState(
+  factory AddSaleState.initial() => AddSaleState(
         totalAmount: null,
         paidAmount: null,
         saleTransactionFailure: null,
