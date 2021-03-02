@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/add_fund_controller.dart';
-import '../../presentation/models/fund_view_model.dart';
-import '../../presentation/views/funding_view.dart';
+import 'package:sales_tracker/presentation/controllers/add_sale_controller.dart';
+import '../../presentation/models/sale_view_model.dart';
+import '../../presentation/views/selling_view.dart';
 import '../../common/common.dart';
 
-class FundingPage extends StatelessWidget {
+class SellingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fund'),
+        title: Text('Sale'),
       ),
       body: Padding(
         padding: 20.hPadding,
@@ -20,23 +20,24 @@ class FundingPage extends StatelessWidget {
             children: [
               100.vSpace,
               Text(
-                'Enter\namount',
+                'Enter\ndetails',
                 style: context.headline3,
               ),
               100.vSpace,
               Text(
-                'Funding for 251 941135730',
+                'Transaction with 251 941135730',
                 style: context.headline4,
               ),
-              100.vSpace,
-              ViewModelBuilder.withController<FundViewModel,
-                      AddFundController>(
-                  create: () => AddFundController(context),
-                  //TODO Pass ShopId as parameter
+              65.vSpace,
+              ViewModelBuilder.withController<SaleViewModel,
+                      AddSaleController>(
+                  create: () => AddSaleController(context),
                   builder: (context, controller, model) {
-                    return FundingView(
-                      fundViewModel: model,
-                      onFund: controller.onRegister,
+                    return SellingView(
+                      saleViewModel: model,
+                      onTotalAmount: controller.onTotalAmount,
+                      onPaidAmount: controller.onPaidAmount,
+                      onRegister: controller.onRegister,
                     );
                   }),
               20.vSpace

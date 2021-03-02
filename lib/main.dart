@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sales_tracker/presentation/pages/sales_transactions_page.dart';
+import 'package:sales_tracker/presentation/pages/card_transactions_page.dart';
 import 'package:sales_tracker/presentation/pages/splash_page.dart';
 import 'package:sales_tracker/presentation/pages/verfication_page.dart';
 import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
 import './presentation/pages/new_shop_page.dart';
-import './presentation/pages/sale_page.dart';
-import './presentation/pages/fund_transactions_page.dart';
+import './presentation/pages/selling_page.dart';
+import './presentation/pages/cash_transactions_page.dart';
 import './presentation/pages/home_page.dart';
 import './presentation/pages/login_page.dart';
 import 'injection.dart';
@@ -56,8 +56,8 @@ final routes = {
   '/homePage': (BuildContext context) => HomePage(),
   '/newShopPage': (BuildContext context) => NewShopPage(),
   '/myShopsPage': (BuildContext context) => MyShopsPage(),
-  '/salePage': (BuildContext context) => SalePage(),
-  '/fundPage': (BuildContext context) => FundingPage(),
-  '/fundTransactionsPage': (BuildContext context) => FundTransactionsPage(),
-  '/saleTransactionsPage': (BuildContext context) => SaleTransactionsPage(),
+  '/sellingPage': (BuildContext context) => SellingPage(),
+  '/fundingPage': (BuildContext context) => FundingPage(),
+  '/cashTransactionsPage': (BuildContext context) => CashTransactionsPage(),
+  '/cardTransactionsPage': (BuildContext context) => CardTransactionsPage(),
 };
