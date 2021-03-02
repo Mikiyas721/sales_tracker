@@ -15,7 +15,7 @@ class FetchingSalesSucceededEvent extends FetchSalesEvent {
 
   @override
   Stream<FetchSalesState> handle(FetchSalesState currentState) async* {
-    yield currentState.copyWith(isLoading:false,hasLoaded: true, sales: sales);
+    yield currentState.copyWith(isLoading:false, sales: sales);
   }
 }
 

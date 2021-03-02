@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/widgets/empty_error_view.dart';
+import 'package:sales_tracker/common/widgets/my_loading_view.dart';
+import 'package:sales_tracker/common/widgets/simple_list_view.dart';
 import '../models/fund_transaction_view_model.dart';
 import '../../common/common.dart';
 
@@ -6,26 +9,25 @@ class FundTransactionsView extends StatelessWidget {
   final FundTransactionsViewModel funds;
   final VoidCallback onReload;
 
-  const FundTransactionsView({Key key, this.funds, this.onReload}) : super(key: key);
+  const FundTransactionsView({Key key, this.funds, this.onReload})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (funds.isLoading) return Center(child: CircularProgressIndicator());
-    if (funds.hasLoaded && funds.list.isEmpty)
-      return Center(child: Text('You have no fund transactions'));
-    if (funds.loadingError != null)
-      return Center(
-          child: Column(
-            children: [
-              Text(funds.loadingError),
-              IconButton(icon: Icon(Icons.refresh), onPressed: onReload)
-            ],
-          ));
-    return ListView.builder(
-        itemCount: funds.list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return FundTransactionView._(fundTransactionViewModel: funds.list[index]);
-        });
+    return SimpleListView<FundTransactionViewModel>(
+      model: funds,
+      itemBuilder: (BuildContext context, FundTransactionViewModel model) {
+        return FundTransactionView._(fundTransactionViewModel: model);
+      },
+      errorView: Center(
+          child: EmptyErrorView.defaultError(
+        onAction: onReload,
+      )),
+      loadingView: Center(child: MyLoadingView()),
+      emptyView: Center(
+        child: EmptyErrorView.defaultEmpty(),
+      ),
+    );
   }
 }
 
@@ -74,9 +76,7 @@ class FundTransactionView extends StatelessWidget {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('${fundTransactionViewModel.amount} ETB')
-                    ],
+                    children: [Text('${fundTransactionViewModel.amount} ETB')],
                   ),
                 ],
               ),

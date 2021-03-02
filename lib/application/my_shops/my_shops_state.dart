@@ -4,7 +4,6 @@ part of 'my_shops_bloc.dart';
 abstract class MyShopsState extends BlocState with _$MyShopsState {
   const factory MyShopsState({
     bool isLoading,
-    bool hasLoaded,
     Failure myShopsLoadingFailure,
     List<Shop> shops,
   }) = _MyShopsState;
@@ -13,6 +12,5 @@ abstract class MyShopsState extends BlocState with _$MyShopsState {
         shops: null,
         myShopsLoadingFailure: null,
         isLoading: false,
-        hasLoaded: false,
       );
 }

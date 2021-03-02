@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/view_model.dart';
 
-class MyShopsViewModel<ShopViewModel> extends ListViewModel {
+class MyShopsViewModel extends SimpleListViewModel<ShopViewModel> {
   MyShopsViewModel({
     List<ShopViewModel> list,
     bool hasLoaded,
     String loadingError,
     bool isLoading,
-  }) : super(
-            list: list,
-            hasLoaded: hasLoaded,
-            loadingError: loadingError,
-            isLoading: isLoading);
+  }) : super(isLoading: isLoading,data: list,error: loadingError);
 }
 
 class ShopViewModel extends ViewModel {

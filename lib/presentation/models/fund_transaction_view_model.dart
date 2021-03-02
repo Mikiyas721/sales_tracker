@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/view_model.dart';
 
-class FundTransactionsViewModel<FundTransactionViewModel> extends ListViewModel {
+class FundTransactionsViewModel extends SimpleListViewModel<FundTransactionViewModel> {
   FundTransactionsViewModel({
     List<FundTransactionViewModel> list,
-    bool hasLoaded,
     String loadingError,
     bool isLoading,
-  }) : super(
-      list: list,
-      hasLoaded: hasLoaded,
-      loadingError: loadingError,
-      isLoading: isLoading);
+  }) : super(isLoading: isLoading,data: list,error: loadingError);
 }
 class FundTransactionViewModel extends ViewModel {
   final String date;

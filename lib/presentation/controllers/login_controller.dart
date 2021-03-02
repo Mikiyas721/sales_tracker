@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/application/login/login_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
-import 'package:sales_tracker/common/controller/toast_mixin.dart';
 import 'package:sales_tracker/common/failure.dart';
+import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/use_cases/request_firebase_verification_code.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/login_view_model.dart';

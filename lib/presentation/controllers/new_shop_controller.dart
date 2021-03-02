@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/new_shop/new_shop_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
-import 'package:sales_tracker/common/controller/toast_mixin.dart';
+import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/use_cases/add_shop.dart';
 import 'package:sales_tracker/injection.dart';

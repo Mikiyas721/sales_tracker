@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/application/add_sale/add_sale_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
-import 'package:sales_tracker/common/controller/toast_mixin.dart';
+import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/sell_transaction.dart';
 import 'package:sales_tracker/domain/use_cases/add_sale_transaction.dart';
 import 'package:sales_tracker/injection.dart';

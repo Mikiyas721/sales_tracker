@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:sales_tracker/common/entity.dart';
 import 'package:sales_tracker/domain/entities/sales_person.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
-class SaleTransaction {
+class SaleTransaction extends Entity {
   final String id;
   final String salesPersonId;
   final String shopId;

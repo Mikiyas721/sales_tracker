@@ -16,7 +16,7 @@ class MyShopsLoadingSucceededEvent extends MyShopsEvent {
 
   @override
   Stream<MyShopsState> handle(MyShopsState currentState) async* {
-    yield currentState.copyWith(isLoading:false,hasLoaded: true, shops: shops);
+    yield currentState.copyWith(isLoading:false, shops: shops);
   }
 }
 

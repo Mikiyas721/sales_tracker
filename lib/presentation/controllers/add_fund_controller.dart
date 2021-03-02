@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/add_fund/add_fund_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
-import 'package:sales_tracker/common/controller/toast_mixin.dart';
+import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/fund_transaction.dart';
 import 'package:sales_tracker/domain/use_cases/add_fund_transaction.dart';
 import 'package:sales_tracker/injection.dart';
@@ -31,15 +31,6 @@ class AddFundController extends BlocViewModelController<
   }
   void onPaidAmount(String paidAmount) {
     bloc.add(AddFundPaidAmountChangedEvent(paidAmount));
-  }
-
-  load(){
-    Option<User> authenticatedUser; // = loading code
-
-
-
-    Navigator.of(context).pushReplacementNamed('/Login');
-    Navigator.of(context).pushReplacementNamed('/Home');
   }
 
   void onRegister() {

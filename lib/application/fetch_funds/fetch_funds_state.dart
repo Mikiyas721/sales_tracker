@@ -4,7 +4,6 @@ part of 'fetch_funds_bloc.dart';
 abstract class FetchFundsState extends BlocState with _$FetchFundsState {
   const factory FetchFundsState({
     bool isLoading,
-    bool hasLoaded,
     Failure fetchingFundsFailure,
     List<FundTransaction> funds,
   }) = _FetchFundsState;
@@ -13,6 +12,5 @@ abstract class FetchFundsState extends BlocState with _$FetchFundsState {
         funds: null,
         fetchingFundsFailure: null,
         isLoading: false,
-        hasLoaded: false,
       );
 }

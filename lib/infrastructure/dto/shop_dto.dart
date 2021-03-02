@@ -7,7 +7,7 @@ import 'package:sales_tracker/domain/entities/shop.dart';
 part 'shop_dto.g.dart';
 
 @JsonSerializable(nullable: false)
-class ShopDto extends IdDto implements TimeStampedDto {
+class ShopDto extends IdDto<Shop> implements TimeStampedDto {
   final String id;
   final String name;
   final String address;
@@ -43,13 +43,6 @@ class ShopDto extends IdDto implements TimeStampedDto {
       updatedAt: updatedAt,
       balance: balance,
     );
-  }
-
-  static List<Shop> toDomainList(List<ShopDto> dto) {
-    return dto.map((e) {
-      var result = e.toDomain().getOrElse(() => null);
-      if(result!=null) return result;
-    }).toList();
   }
 
   static ShopDto fromDomain(Shop fundTransaction) {

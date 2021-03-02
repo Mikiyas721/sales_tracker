@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:sales_tracker/common/id_dto.dart';
 import 'package:sales_tracker/domain/entities/fund_transaction.dart';
-import 'package:sales_tracker/domain/value_objects/card_amount.dart';
 import 'package:sales_tracker/infrastructure/dto/sales_person_dto.dart';
 import 'package:sales_tracker/infrastructure/dto/shop_dto.dart';
 
 part 'fund_transaction_dto.g.dart';
 
 @JsonSerializable(nullable: false)
-class FundTransactionDto extends IdDto implements TimeStampedDto {
+class FundTransactionDto extends IdDto<FundTransaction> implements TimeStampedDto {
   final String id;
   final String salesPersonId;
   final String shopId;
@@ -49,12 +48,7 @@ class FundTransactionDto extends IdDto implements TimeStampedDto {
       updatedAt: updatedAt,
     );
   }
-  static List<FundTransaction> toDomainList(List<FundTransactionDto> dto) {
-    return dto.map((e) {
-      var result = e.toDomain().getOrElse(() => null);
-      if(result!=null) return result;
-    }).toList();
-  }
+
   static FundTransactionDto fromDomain(FundTransaction fundTransaction) {
     return FundTransactionDto(
       id: fundTransaction.id,

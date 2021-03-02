@@ -16,7 +16,7 @@ class EmptyErrorLoadingViewModel<T> extends ViewModel {
 }
 
 class SimpleListViewModel<T> extends EmptyErrorLoadingViewModel<List<T>> {
-  SimpleListViewModel(String error, List<T> data, bool isLoading)
+  SimpleListViewModel({String error, List<T> data, bool isLoading})
       : super(
     error,
     data,

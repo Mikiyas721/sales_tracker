@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/application/fetch_sales/fetch_sales_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
-import 'package:sales_tracker/common/controller/toast_mixin.dart';
+import 'package:sales_tracker/common/mixins/date_time_mixin.dart';
+import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_sale_transactions.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sale_transaction_view_model.dart';
@@ -10,7 +11,7 @@ class SaleTransactionController extends BlocViewModelController<
     FetchSalesBloc,
     FetchSalesEvent,
     FetchSalesState,
-    SaleTransactionsViewModel> with ToastMixin {
+    SaleTransactionsViewModel> with ToastMixin, DateTimeMixin {
   final BuildContext context;
 
   SaleTransactionController(this.context)
@@ -20,14 +21,13 @@ class SaleTransactionController extends BlocViewModelController<
   SaleTransactionsViewModel mapStateToViewModel(FetchSalesState s) {
     return SaleTransactionsViewModel(
         list: s.sales
-            .map((e) => //TODO use a datetime mixin
+            .map((e) =>
                 SaleTransactionViewModel(
                     soldAmount: e.soldAmount.value.toString(),
                     receivedAmount: e.receivedAmount.value.toString(),
-                    date: e.createdAt.toString(),
-                    time: e.createdAt.toString()))
+                    date: getDateString(e.createdAt),
+                    time: getTimeString(e.createdAt)))
             .toList(),
-        hasLoaded: s.hasLoaded,
         isLoading: s.isLoading,
         loadingError: s.fetchingSalesFailure != null
             ? s.fetchingSalesFailure.message

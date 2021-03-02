@@ -7,7 +7,7 @@ import 'package:sales_tracker/domain/entities/sales_person.dart';
 part 'sales_person_dto.g.dart';
 
 @JsonSerializable(nullable: false)
-class SalesPersonDto extends IdDto implements TimeStampedDto {
+class SalesPersonDto extends IdDto<SalesPerson> implements TimeStampedDto {
   final String id;
   final String name;
   final String phoneNumber;

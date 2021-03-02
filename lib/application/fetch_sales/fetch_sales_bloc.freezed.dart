@@ -16,12 +16,10 @@ class _$FetchSalesStateTearOff {
 // ignore: unused_element
   _FetchSalesState call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingSalesFailure,
       List<SaleTransaction> sales}) {
     return _FetchSalesState(
       isLoading: isLoading,
-      hasLoaded: hasLoaded,
       fetchingSalesFailure: fetchingSalesFailure,
       sales: sales,
     );
@@ -35,7 +33,6 @@ const $FetchSalesState = _$FetchSalesStateTearOff();
 /// @nodoc
 mixin _$FetchSalesState {
   bool get isLoading;
-  bool get hasLoaded;
   Failure get fetchingSalesFailure;
   List<SaleTransaction> get sales;
 
@@ -50,7 +47,6 @@ abstract class $FetchSalesStateCopyWith<$Res> {
       _$FetchSalesStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingSalesFailure,
       List<SaleTransaction> sales});
 }
@@ -67,13 +63,11 @@ class _$FetchSalesStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object hasLoaded = freezed,
     Object fetchingSalesFailure = freezed,
     Object sales = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      hasLoaded: hasLoaded == freezed ? _value.hasLoaded : hasLoaded as bool,
       fetchingSalesFailure: fetchingSalesFailure == freezed
           ? _value.fetchingSalesFailure
           : fetchingSalesFailure as Failure,
@@ -91,7 +85,6 @@ abstract class _$FetchSalesStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingSalesFailure,
       List<SaleTransaction> sales});
 }
@@ -110,13 +103,11 @@ class __$FetchSalesStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object hasLoaded = freezed,
     Object fetchingSalesFailure = freezed,
     Object sales = freezed,
   }) {
     return _then(_FetchSalesState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      hasLoaded: hasLoaded == freezed ? _value.hasLoaded : hasLoaded as bool,
       fetchingSalesFailure: fetchingSalesFailure == freezed
           ? _value.fetchingSalesFailure
           : fetchingSalesFailure as Failure,
@@ -128,12 +119,10 @@ class __$FetchSalesStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_FetchSalesState implements _FetchSalesState {
   const _$_FetchSalesState(
-      {this.isLoading, this.hasLoaded, this.fetchingSalesFailure, this.sales});
+      {this.isLoading, this.fetchingSalesFailure, this.sales});
 
   @override
   final bool isLoading;
-  @override
-  final bool hasLoaded;
   @override
   final Failure fetchingSalesFailure;
   @override
@@ -141,7 +130,7 @@ class _$_FetchSalesState implements _FetchSalesState {
 
   @override
   String toString() {
-    return 'FetchSalesState(isLoading: $isLoading, hasLoaded: $hasLoaded, fetchingSalesFailure: $fetchingSalesFailure, sales: $sales)';
+    return 'FetchSalesState(isLoading: $isLoading, fetchingSalesFailure: $fetchingSalesFailure, sales: $sales)';
   }
 
   @override
@@ -151,9 +140,6 @@ class _$_FetchSalesState implements _FetchSalesState {
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
-            (identical(other.hasLoaded, hasLoaded) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasLoaded, hasLoaded)) &&
             (identical(other.fetchingSalesFailure, fetchingSalesFailure) ||
                 const DeepCollectionEquality().equals(
                     other.fetchingSalesFailure, fetchingSalesFailure)) &&
@@ -165,7 +151,6 @@ class _$_FetchSalesState implements _FetchSalesState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(hasLoaded) ^
       const DeepCollectionEquality().hash(fetchingSalesFailure) ^
       const DeepCollectionEquality().hash(sales);
 
@@ -178,14 +163,11 @@ class _$_FetchSalesState implements _FetchSalesState {
 abstract class _FetchSalesState implements FetchSalesState {
   const factory _FetchSalesState(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingSalesFailure,
       List<SaleTransaction> sales}) = _$_FetchSalesState;
 
   @override
   bool get isLoading;
-  @override
-  bool get hasLoaded;
   @override
   Failure get fetchingSalesFailure;
   @override

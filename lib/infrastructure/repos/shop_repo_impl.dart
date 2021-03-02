@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_response.dart';
 import 'package:sales_tracker/common/failure.dart';
+import 'package:sales_tracker/common/id_dto.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/ports/shop_repo.dart';
 import 'package:sales_tracker/infrastructure/datasources/shop_datasource.dart';
@@ -26,6 +27,6 @@ class ShopRepoImpl extends IShopRepo {
   @override
   Future<Either<RestResponseFailure, List<Shop>>> fetchAll() async {
     final result = await shopCrudDataSource.find();
-    return result.either.fold((l) => left(l), (r) => right(ShopDto.toDomainList(r)));
+    return result.either.fold((l) => left(l), (r) => right(IdDto.toDomainList<Shop, ShopDto>(r)));
   }
 }

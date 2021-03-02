@@ -16,12 +16,10 @@ class _$FetchFundsStateTearOff {
 // ignore: unused_element
   _FetchFundsState call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingFundsFailure,
       List<FundTransaction> funds}) {
     return _FetchFundsState(
       isLoading: isLoading,
-      hasLoaded: hasLoaded,
       fetchingFundsFailure: fetchingFundsFailure,
       funds: funds,
     );
@@ -35,7 +33,6 @@ const $FetchFundsState = _$FetchFundsStateTearOff();
 /// @nodoc
 mixin _$FetchFundsState {
   bool get isLoading;
-  bool get hasLoaded;
   Failure get fetchingFundsFailure;
   List<FundTransaction> get funds;
 
@@ -50,7 +47,6 @@ abstract class $FetchFundsStateCopyWith<$Res> {
       _$FetchFundsStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingFundsFailure,
       List<FundTransaction> funds});
 }
@@ -67,13 +63,11 @@ class _$FetchFundsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object hasLoaded = freezed,
     Object fetchingFundsFailure = freezed,
     Object funds = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      hasLoaded: hasLoaded == freezed ? _value.hasLoaded : hasLoaded as bool,
       fetchingFundsFailure: fetchingFundsFailure == freezed
           ? _value.fetchingFundsFailure
           : fetchingFundsFailure as Failure,
@@ -91,7 +85,6 @@ abstract class _$FetchFundsStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingFundsFailure,
       List<FundTransaction> funds});
 }
@@ -110,13 +103,11 @@ class __$FetchFundsStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object isLoading = freezed,
-    Object hasLoaded = freezed,
     Object fetchingFundsFailure = freezed,
     Object funds = freezed,
   }) {
     return _then(_FetchFundsState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      hasLoaded: hasLoaded == freezed ? _value.hasLoaded : hasLoaded as bool,
       fetchingFundsFailure: fetchingFundsFailure == freezed
           ? _value.fetchingFundsFailure
           : fetchingFundsFailure as Failure,
@@ -128,12 +119,10 @@ class __$FetchFundsStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_FetchFundsState implements _FetchFundsState {
   const _$_FetchFundsState(
-      {this.isLoading, this.hasLoaded, this.fetchingFundsFailure, this.funds});
+      {this.isLoading, this.fetchingFundsFailure, this.funds});
 
   @override
   final bool isLoading;
-  @override
-  final bool hasLoaded;
   @override
   final Failure fetchingFundsFailure;
   @override
@@ -141,7 +130,7 @@ class _$_FetchFundsState implements _FetchFundsState {
 
   @override
   String toString() {
-    return 'FetchFundsState(isLoading: $isLoading, hasLoaded: $hasLoaded, fetchingFundsFailure: $fetchingFundsFailure, funds: $funds)';
+    return 'FetchFundsState(isLoading: $isLoading, fetchingFundsFailure: $fetchingFundsFailure, funds: $funds)';
   }
 
   @override
@@ -151,9 +140,6 @@ class _$_FetchFundsState implements _FetchFundsState {
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
-            (identical(other.hasLoaded, hasLoaded) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasLoaded, hasLoaded)) &&
             (identical(other.fetchingFundsFailure, fetchingFundsFailure) ||
                 const DeepCollectionEquality().equals(
                     other.fetchingFundsFailure, fetchingFundsFailure)) &&
@@ -165,7 +151,6 @@ class _$_FetchFundsState implements _FetchFundsState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
-      const DeepCollectionEquality().hash(hasLoaded) ^
       const DeepCollectionEquality().hash(fetchingFundsFailure) ^
       const DeepCollectionEquality().hash(funds);
 
@@ -178,14 +163,11 @@ class _$_FetchFundsState implements _FetchFundsState {
 abstract class _FetchFundsState implements FetchFundsState {
   const factory _FetchFundsState(
       {bool isLoading,
-      bool hasLoaded,
       Failure fetchingFundsFailure,
       List<FundTransaction> funds}) = _$_FetchFundsState;
 
   @override
   bool get isLoading;
-  @override
-  bool get hasLoaded;
   @override
   Failure get fetchingFundsFailure;
   @override

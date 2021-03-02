@@ -1,8 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:sales_tracker/common/view_model.dart';
-import 'package:sales_tracker/common/widgets/empty_error_view.dart';
-import 'package:sales_tracker/common/widgets/my_loading_view.dart';
-import 'package:sales_tracker/domain/entities/sales_person.dart';
 
 class EmptyErrorLoadingView<T> extends StatelessWidget {
   final EmptyErrorLoadingViewModel<T> model;
@@ -13,11 +10,11 @@ class EmptyErrorLoadingView<T> extends StatelessWidget {
 
   const EmptyErrorLoadingView({
     Key key,
-    this.model,
-    this.builder,
-    this.errorView,
-    this.loadingView,
-    this.emptyView,
+    @required this.model,
+    @required this.builder,
+    @required this.errorView,
+    @required this.loadingView,
+    @required this.emptyView,
   }) : super(key: key);
 
   Widget _buildBody(BuildContext context) {

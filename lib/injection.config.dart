@@ -6,12 +6,14 @@
 
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application/add_fund/add_fund_bloc.dart';
 import 'domain/use_cases/add_fund_transaction.dart';
 import 'application/add_sale/add_sale_bloc.dart';
 import 'domain/use_cases/add_sale_transaction.dart';
 import 'domain/use_cases/add_shop.dart';
+import 'common/datasource/cache_datasource/cache_datasource.dart';
 import 'common/datasource/dio_rest_datasource.dart';
 import 'domain/use_cases/fetch_fund_transactions.dart';
 import 'application/fetch_funds/fetch_funds_bloc.dart';
@@ -22,6 +24,7 @@ import 'domain/use_cases/fetch_shop.dart';
 import 'infrastructure/repos/firebase_repo_impl.dart';
 import 'infrastructure/datasources/fund_transaction_datasource.dart';
 import 'infrastructure/repos/fund_transaction_repo_impl.dart';
+import 'domain/use_cases/get_current_autheticated_user.dart';
 import 'domain/ports/firebase_repo.dart';
 import 'domain/ports/fund_transaction_repo.dart';
 import 'domain/ports/sale_transaction_repo.dart';
@@ -36,6 +39,7 @@ import 'infrastructure/datasources/sale_transaction_datasource.dart';
 import 'infrastructure/repos/sale_transaction_repo_impl.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
 import 'infrastructure/repos/sales_person_repo_impl.dart';
+import 'common/datasource/shared_preferences_cache_datasource.dart';
 import 'infrastructure/datasources/shop_datasource.dart';
 import 'infrastructure/repos/shop_repo_impl.dart';
 import 'application/today_stats/today_stats_bloc.dart';
@@ -52,8 +56,12 @@ GetIt $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<AddFundBloc>(() => AddFundBloc());
   gh.lazySingleton<AddSaleBloc>(() => AddSaleBloc());
+  gh.lazySingleton<CacheDataSource>(
+      () => SharedPreferencesCacheDataSource(get<SharedPreferences>()));
   gh.factory<FetchFundsBloc>(() => FetchFundsBloc());
   gh.factory<FetchSalesBloc>(() => FetchSalesBloc());
+  gh.lazySingleton<GetCurrentAuthenticatedUser>(
+      () => GetCurrentAuthenticatedUser());
   gh.lazySingleton<IFirebaseRepo>(() => FirebaseRepoImpl());
   gh.factory<LoginBloc>(() => LoginBloc());
   gh.factory<MyShopsBloc>(() => MyShopsBloc());

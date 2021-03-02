@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:sales_tracker/common/entity.dart';
 import 'package:sales_tracker/domain/value_objects/address.dart';
 import 'package:sales_tracker/domain/value_objects/name.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
-class Shop {
+class Shop extends Entity{
   final String id;
   final Name name;
   final Address address;

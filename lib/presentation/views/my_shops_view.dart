@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:sales_tracker/common/widgets/empty_error_view.dart';
+import 'package:sales_tracker/common/widgets/my_loading_view.dart';
+import 'package:sales_tracker/common/widgets/simple_list_view.dart';
 import '../../presentation/models/my_shops_view_model.dart';
 import '../../common/common.dart';
 
@@ -11,22 +14,21 @@ class MyShopsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (myShops.isLoading) return Center(child: CircularProgressIndicator());
-    if (myShops.hasLoaded && myShops.list.isEmpty)
-      return Center(child: Text('You have no shops'));
-    if (myShops.loadingError != null)
-      return Center(
-          child: Column(
-        children: [
-          Text(myShops.loadingError),
-          IconButton(icon: Icon(Icons.refresh), onPressed: onReload)
-        ],
-      ));
-    return ListView.builder(
-        itemCount: myShops.list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ShopView._(myShopViewModel: myShops.list[index]);
-        });
+    return SimpleListView<ShopViewModel>(
+        model: myShops,
+        itemBuilder: (BuildContext context, ShopViewModel model) {
+          return ShopView._(myShopViewModel: model);
+        },
+        errorView: Center(
+            child: EmptyErrorView.defaultError(
+              onAction: onReload,
+            )),
+        loadingView: Center(
+            child: MyLoadingView()),
+        emptyView: Center(
+            child: EmptyErrorView.defaultEmpty(
+              onAction: onReload,
+            )));
   }
 }
 

@@ -15,7 +15,7 @@ class FetchingFundsSucceededEvent extends FetchFundsEvent {
 
   @override
   Stream<FetchFundsState> handle(FetchFundsState currentState) async* {
-    yield currentState.copyWith(isLoading:false,hasLoaded: true, funds: funds);
+    yield currentState.copyWith(isLoading:false, funds: funds);
   }
 }
 
