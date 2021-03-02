@@ -30,6 +30,8 @@ import 'domain/ports/fund_transaction_repo.dart';
 import 'domain/ports/sale_transaction_repo.dart';
 import 'domain/ports/sales_person_repo.dart';
 import 'domain/ports/shop_repo.dart';
+import 'domain/ports/user_repo.dart';
+import 'domain/use_cases/load_logged_in_user.dart';
 import 'application/login/login_bloc.dart';
 import 'application/my_shops/my_shops_bloc.dart';
 import 'application/new_shop/new_shop_bloc.dart';
@@ -39,6 +41,7 @@ import 'infrastructure/datasources/sale_transaction_datasource.dart';
 import 'infrastructure/repos/sale_transaction_repo_impl.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
 import 'infrastructure/repos/sales_person_repo_impl.dart';
+import 'domain/use_cases/save_user.dart';
 import 'common/datasource/shared_preferences_cache_datasource.dart';
 import 'infrastructure/datasources/shop_datasource.dart';
 import 'infrastructure/repos/shop_repo_impl.dart';
@@ -63,6 +66,7 @@ GetIt $initGetIt(
   gh.lazySingleton<GetCurrentAuthenticatedUser>(
       () => GetCurrentAuthenticatedUser());
   gh.lazySingleton<IFirebaseRepo>(() => FirebaseRepoImpl());
+  gh.lazySingleton<LoadLoggedInUser>(() => LoadLoggedInUser(get<IUserRepo>()));
   gh.factory<LoginBloc>(() => LoginBloc());
   gh.factory<MyShopsBloc>(() => MyShopsBloc());
   gh.lazySingleton<NewShopBloc>(() => NewShopBloc());
@@ -73,6 +77,7 @@ GetIt $initGetIt(
       () => SaleTransactionLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<SalesPeopleCrudDataSource>(
       () => SalesPeopleLoopbackDataSource(get<RestDataSource>()));
+  gh.lazySingleton<SaveUser>(() => SaveUser(get<IUserRepo>()));
   gh.lazySingleton<ShopCrudDataSource>(
       () => ShopLoopbackDataSource(get<RestDataSource>()));
   gh.factory<TodayStatsBloc>(() => TodayStatsBloc());

@@ -5,7 +5,7 @@ import 'package:sales_tracker/presentation/models/sale_transaction_view_model.da
 import 'package:sales_tracker/presentation/views/sale_transaction_view.dart';
 import '../../common/common.dart';
 
-class TransactionsPage extends StatelessWidget {
+class SaleTransactionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
