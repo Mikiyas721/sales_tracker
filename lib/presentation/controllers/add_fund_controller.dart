@@ -33,6 +33,15 @@ class AddFundController extends BlocViewModelController<
     bloc.add(AddFundPaidAmountChangedEvent(paidAmount));
   }
 
+  load(){
+    Option<User> authenticatedUser; // = loading code
+
+
+
+    Navigator.of(context).pushReplacementNamed('/Login');
+    Navigator.of(context).pushReplacementNamed('/Home');
+  }
+
   void onRegister() {
     bloc.add(AddFundSubmittedEvent());
     final saleTransaction = FundTransaction.createFromInputs(

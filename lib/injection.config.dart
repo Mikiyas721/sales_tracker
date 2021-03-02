@@ -12,7 +12,7 @@ import 'domain/use_cases/add_fund_transaction.dart';
 import 'application/add_sale/add_sale_bloc.dart';
 import 'domain/use_cases/add_sale_transaction.dart';
 import 'domain/use_cases/add_shop.dart';
-import 'common/dio_rest_datasource.dart';
+import 'common/datasource/dio_rest_datasource.dart';
 import 'domain/use_cases/fetch_fund_transactions.dart';
 import 'application/fetch_funds/fetch_funds_bloc.dart';
 import 'domain/use_cases/fetch_sale_transactions.dart';

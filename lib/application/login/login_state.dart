@@ -11,9 +11,10 @@ abstract class LoginState extends BlocState with _$LoginState {
   }) = _LoginState;
 
   factory LoginState.initial() => LoginState(
-      phoneNumber: null,
-      loginRequestFailure: null,
-      hasSubmitted: false,
-      isRequesting: false,
-      hasRequested: false);
+        phoneNumber: PhoneNumber.create(""),
+        loginRequestFailure: null,
+        hasSubmitted: false,
+        isRequesting: false,
+        hasRequested: false,
+      );
 }

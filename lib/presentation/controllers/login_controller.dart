@@ -7,8 +7,8 @@ import 'package:sales_tracker/domain/use_cases/request_firebase_verification_cod
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/login_view_model.dart';
 
-class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
-    LoginState, LoginViewModel> with ToastMixin {
+class LoginController extends BlocViewModelController<LoginBloc, LoginEvent, LoginState, LoginViewModel>
+    with ToastMixin {
   final BuildContext context;
 
   LoginController(this.context) : super(getIt.get<LoginBloc>(), false);
@@ -16,11 +16,10 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
   @override
   LoginViewModel mapStateToViewModel(LoginState s) {
     return LoginViewModel(
-        phoneNumber: s.phoneNumber.getOrElse(() => null)?.value,
-        phoneNumberError: s.hasSubmitted
-            ? s.phoneNumber.fold((l) => l.message, (r) => null)
-            : null,
-        isSubmitting: s.isRequesting);
+      phoneNumber: s.phoneNumber.getOrElse(() => null)?.value,
+      phoneNumberError: s.hasSubmitted ? s.phoneNumber.fold((l) => l.message, (r) => null) : null,
+      isSubmitting: s.isRequesting,
+    );
   }
 
   void onPhoneNumberChanged(String phoneNumber) {
@@ -31,10 +30,10 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     bloc.add(LoginSubmittedEvent());
     bloc.state.phoneNumber.fold((l) {
       toastSuccess(l.message);
-    }, (r) async{
+    }, (r) async {
       final useCase = getIt.get<RequestFirebaseVerificationCode>();
       final result = await useCase.execute(r.value);
-      result.fold((){
+      result.fold(() {
         bloc.add(LoginRequestFailedEvent(SimpleFailure('Unable to send SMS')));
         toastSuccess("Unable to send SMS");
       }, (a) {

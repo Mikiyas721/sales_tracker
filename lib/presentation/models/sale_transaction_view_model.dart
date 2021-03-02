@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/view_model.dart';
 
-class SaleTransactionsViewModel<SaleTransactionViewModel> extends ListViewModel {
+class SaleTransactionsViewModel<SaleTransactionViewModel> extends SimpleListViewModel<SaleTransactionViewModel> {
   SaleTransactionsViewModel({
     List<SaleTransactionViewModel> list,
     bool hasLoaded,

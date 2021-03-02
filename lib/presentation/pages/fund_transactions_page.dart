@@ -15,14 +15,15 @@ class TransactionsPage extends StatelessWidget {
       body: Padding(
         padding: 20.hPadding,
         child: ViewModelBuilder.withController<FundTransactionsViewModel, FundTransactionController>(
-            create: () => FundTransactionController(context),
-            builder: (context, controller, model) {
-              controller.loadShops();
-              return FundTransactionsView(
-                funds: model,
-                onReload: controller.loadShops,
-              );
-            }),
+          create: () => FundTransactionController(context),
+          onInit: (controller)=> controller.loadShops(),
+          builder: (context, controller, model) {
+            return FundTransactionsView(
+              funds: model,
+              onReload: controller.loadShops,
+            );
+          },
+        ),
       ),
     );
   }

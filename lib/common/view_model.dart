@@ -1,21 +1,26 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 abstract class ViewModel extends Equatable {}
 
-abstract class ListViewModel<T> extends ViewModel {
-  final bool isLoading;
-  final bool hasLoaded;
-  final String loadingError;
-  final List<T> list;
 
-  ListViewModel({
-    @required this.list,
-    @required this.hasLoaded,
-    @required this.loadingError,
-    @required this.isLoading,
-  });
+class EmptyErrorLoadingViewModel<T> extends ViewModel {
+  final String error;
+  final T data;
+  final bool isLoading;
+  final bool isEmpty;
+
+  EmptyErrorLoadingViewModel(this.error, this.data, this.isLoading, this.isEmpty);
 
   @override
-  List<Object> get props => [isLoading, hasLoaded, list];
+  List<Object> get props => [error, data, isLoading, isEmpty];
+}
+
+class SimpleListViewModel<T> extends EmptyErrorLoadingViewModel<List<T>> {
+  SimpleListViewModel(String error, List<T> data, bool isLoading)
+      : super(
+    error,
+    data,
+    isLoading,
+    data == null || data.isEmpty,
+  );
 }
