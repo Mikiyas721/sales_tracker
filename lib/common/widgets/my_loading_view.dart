@@ -8,7 +8,7 @@ class MyLoadingView extends StatelessWidget {
   const MyLoadingView({
     Key key,
     this.color,
-    this.size = 24,
+    this.size = 40,
   }) : super(key: key);
 
   @override

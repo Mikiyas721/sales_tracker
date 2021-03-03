@@ -13,9 +13,9 @@ abstract class NewShopState extends BlocState with _$NewShopState {
   }) = _NewShopState;
 
   factory NewShopState.initial() => NewShopState(
-      name: null,
-      address: null,
-      phoneNumber: null,
+      name: Name.create(''),
+      address: Address.create(''),
+      phoneNumber: PhoneNumber.create(''),
       addShopFailure: null,
       hasSubmitted: false,
       isAdding: false,

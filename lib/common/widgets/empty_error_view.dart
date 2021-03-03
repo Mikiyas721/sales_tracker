@@ -27,9 +27,9 @@ class EmptyErrorView extends StatelessWidget {
   }) {
     return EmptyErrorView(
       image: image ?? 'assets/images/empty.png',
-      title: title ?? 'common.emptyView.title',
-      description: description ?? 'common.emptyView.description',
-      actionLabel: actionLabel ?? 'common.emptyView.actionLabel',
+      title: title ?? 'No Data',
+      description: description ?? 'You have no data in this section',
+      actionLabel: actionLabel ?? 'Reload',
       onAction: onAction,
     );
   }
@@ -43,9 +43,9 @@ class EmptyErrorView extends StatelessWidget {
   }) {
     return EmptyErrorView(
       image: image ??'assets/images/error.png',
-      title: title ?? 'common.errorView.title',
-      description: description ?? 'common.errorView.description',
-      actionLabel: actionLabel ?? 'common.errorView.actionLabel',
+      title: title ?? 'Error',
+      description: description ?? 'An error occurred while loading',
+      actionLabel: actionLabel ?? 'Retry',
       onAction: onAction,
     );
   }

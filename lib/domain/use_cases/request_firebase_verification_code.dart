@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/ports/firebase_repo.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 import 'package:sales_tracker/infrastructure/repos/firebase_repo_impl.dart';
@@ -10,9 +11,9 @@ class RequestFirebaseVerificationCode{
 
   const RequestFirebaseVerificationCode(this._iFirebaseRepo);
 
-  Future<Option<PhoneAuthResult>> execute(String phoneNumber)async{
-    final phoneNumberObject = PhoneNumber.createWithCountryCode(phoneNumber).getOrElse(() => null);
-    if(phoneNumberObject==null) return none();
-    return some(await _iFirebaseRepo.requestCode(phoneNumberObject));
+  Future<Either<Failure, PhoneAuthResult>> execute(PhoneNumber phoneNumber)async{
+    if(phoneNumber==null) return left(SimpleFailure("Phone Number is Required"));
+    final result = await _iFirebaseRepo.requestCode(phoneNumber);
+    return result.fold((l) => left(l), (r) => right(r));
   }
 }

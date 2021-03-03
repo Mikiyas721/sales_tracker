@@ -16,8 +16,8 @@ class CardTransactionsPage extends StatelessWidget {
         padding: 20.hPadding,
         child: ViewModelBuilder.withController<CardTransactionsViewModel, CardTransactionsController>(
             create: () => CardTransactionsController(context),
+            onInit:  (controller)=>controller.loadShops(),
             builder: (context, controller, model) {
-              controller.loadShops();
               return CardTransactionsView(
                 sales: model,
                 onReload: controller.loadShops,

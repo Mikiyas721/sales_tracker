@@ -12,15 +12,15 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: ViewModelBuilder.withController<ViewModel, SplashController>(
           create: () => SplashController(context),
-          onInit: (controller)=>controller.loadUser(),
-          builder: (context,controller, model) {
-            return Expanded(
-                child: Container(
+          onInit: (controller) => controller.loadUser(),
+          builder: (context, controller, model) {
+            return Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  context.secondaryHeaderColor,
-                  context.primaryColor
-                ]),
+                gradient: LinearGradient(
+                  colors: [context.secondaryHeaderColor, context.primaryColor],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
               child: Center(
                 child: Column(
@@ -29,16 +29,16 @@ class SplashPage extends StatelessWidget {
                     Text(
                       'Sales Tracker',
                       style: GoogleFonts.poppins(
-                          fontSize: 20, color: Colors.white),
+                          fontSize: 30, color: Colors.white),
                     ),
-                    15.vSpace,
+                    30.vSpace,
                     SpinKitWave(
                       color: Colors.white,
                     )
                   ],
                 ),
               ),
-            ));
+            );
           }),
     );
   }

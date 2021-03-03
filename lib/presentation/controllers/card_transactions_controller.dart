@@ -21,12 +21,12 @@ class CardTransactionsController extends BlocViewModelController<
   CardTransactionsViewModel mapStateToViewModel(CardTransactionsState s) {
     return CardTransactionsViewModel(
         list: s.sales
-            .map((e) =>
+            ?.map<CardTransactionViewModel>((e) =>
                 CardTransactionViewModel(
                     amount: e.amount.value.toString(),
                     date: getDateString(e.createdAt),
                     time: getTimeString(e.createdAt)))
-            .toList(),
+            ?.toList(),
         isLoading: s.isLoading,
         loadingError: s.fetchingSalesFailure != null
             ? s.fetchingSalesFailure.message

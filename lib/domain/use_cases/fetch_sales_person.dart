@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/entities/sales_person.dart';
 import 'package:sales_tracker/domain/ports/sales_person_repo.dart';
+import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
 @lazySingleton
 class FetchSalesPerson {
@@ -10,7 +11,7 @@ class FetchSalesPerson {
 
   const FetchSalesPerson(this._iSalesPersonRepo);
 
-  Future<Either<Failure, SalesPerson>> execute(String id){
-    return _iSalesPersonRepo.fetchPerson(id);
+  Future<Either<Failure, SalesPerson>> execute(PhoneNumber phoneNumber){
+    return _iSalesPersonRepo.fetchSalesperson(phoneNumber);
   }
 }

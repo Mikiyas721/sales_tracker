@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/view_model.dart';
@@ -19,6 +21,7 @@ class SplashController extends BlocViewModelController<SplashBloc, SplashEvent,
     getIt.registerSingleton<SharedPreferences>(
         await SharedPreferences.getInstance());
     final result = await getIt.get<LoadLoggedInUser>().execute();
+    await Future.delayed(Duration(seconds: 1));
     result.fold(() {
       Navigator.pushReplacementNamed(context, '/loginPage');
     }, (a) {

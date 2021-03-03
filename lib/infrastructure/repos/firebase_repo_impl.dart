@@ -22,28 +22,33 @@ class FirebaseRepoImpl extends IFirebaseRepo {
   String verificationId;
 
   @override
-  Future<PhoneAuthResult> requestCode(PhoneNumber phoneNumber) {
+  Future<Either<Failure, PhoneAuthResult>> requestCode(
+      PhoneNumber phoneNumber) async {
     Completer<PhoneAuthResult> completer = Completer();
-    authInstance.verifyPhoneNumber(
-      phoneNumber: phoneNumber.value,
-      timeout: Duration(seconds: 30),
-      verificationCompleted: (AuthCredential authCredential) async {
-        completer.complete(PhoneAuthSuccessResult());
-        AuthResult result =
-            await authInstance.signInWithCredential(authCredential);
-        final idToken = await result.user.getIdToken();
-        if (result.user != null) return true;
-        return false;
-      },
-      verificationFailed: (AuthException exception) {},
-      codeSent: (String verification, [int forceResend]) {
-        verificationId = verification;
-      },
-      codeAutoRetrievalTimeout: (verificationId) {
-        completer.complete(PhoneAuthCodeSentResult());
-      },
-    );
-    return completer.future;
+    try {
+      authInstance.verifyPhoneNumber(
+        phoneNumber: phoneNumber.value,
+        timeout: Duration(seconds: 30),
+        verificationCompleted: (AuthCredential authCredential) async {
+          completer.complete(PhoneAuthSuccessResult());
+          AuthResult result =
+              await authInstance.signInWithCredential(authCredential);
+          final idToken = await result.user.getIdToken();
+          if (result.user != null) return true;
+          return false;
+        },
+        verificationFailed: (AuthException exception) {},
+        codeSent: (String verification, [int forceResend]) {
+          verificationId = verification;
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          completer.complete(PhoneAuthCodeSentResult());
+        },
+      );
+    } catch (Exception, StackTrace) {
+      return left(SimpleFailure("Firebase Error.Error requesting for code."));
+    }
+    return right(await completer.future);
   }
 
   @override

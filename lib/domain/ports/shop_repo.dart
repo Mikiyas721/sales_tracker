@@ -4,5 +4,5 @@ import 'package:sales_tracker/domain/entities/shop.dart';
 
 abstract class IShopRepo{
   Future<Either<Failure,Shop>> create(Shop shop);
-  Future<Either<Failure,List<Shop>>> fetchAll();
+  Future<Either<Failure,List<Shop>>> fetchAll(String salesPersonId);
 }

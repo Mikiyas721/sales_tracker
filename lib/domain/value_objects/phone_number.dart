@@ -8,7 +8,7 @@ class InvalidPhoneNumberFailure extends PhoneNumberFailure {
   String get message => "Invalid Phone Number";
 }
 
-const regExp = r'^(?:[0]9)?[0-9]{8}$';
+const regExp = r'^(?:[0])?[9]{1}?[0-9]{8}$';
 
 class PhoneNumber {
   String value;
@@ -16,8 +16,9 @@ class PhoneNumber {
   PhoneNumber._(this.value);
 
   static Either<PhoneNumberFailure, PhoneNumber> create(String phoneNumber) {
+    if(phoneNumber.startsWith('+251')) return right(PhoneNumber._(phoneNumber));
     if (!RegExp(regExp).hasMatch(phoneNumber))
-      return left(InvalidPhoneNumberFailure());
+      return left(InvalidPhoneNumberFailure()); //TODO use a regexp with optional 251
     return right(PhoneNumber._(phoneNumber));
   }
   static Either<PhoneNumberFailure, PhoneNumber> createWithCountryCode(String phoneNumber) {

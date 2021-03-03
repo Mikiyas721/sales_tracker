@@ -21,12 +21,12 @@ class CashTransactionsController extends BlocViewModelController<
   CashTransactionsViewModel mapStateToViewModel(CashTransactionsState s) {
     return CashTransactionsViewModel(
         list: s.funds
-            .map((e) =>
+            ?.map<CashTransactionViewModel>((e) =>
                 CashTransactionViewModel(
                     amount: e.amount.value.toString(),
                     time: getTimeString(e.createdAt),
                     date: getShortDateString(e.createdAt)))
-            .toList(),
+            ?.toList(),
         isLoading: s.isLoading,
         loadingError: s.fetchingFundsFailure != null
             ? s.fetchingFundsFailure.message

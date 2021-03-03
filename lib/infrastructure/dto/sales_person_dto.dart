@@ -11,9 +11,7 @@ class SalesPersonDto extends IdDto<SalesPerson> implements TimeStampedDto {
   final String id;
   final String name;
   final String phoneNumber;
-  final List<String> shops;
-
-  /// Should it also include list of ShopDtos
+  @JsonKey(nullable: true, includeIfNull: false) final List<String> shops;
   @JsonKey(nullable: true, includeIfNull: false) final DateTime createdAt;
   @JsonKey(nullable: true, includeIfNull: false) final DateTime updatedAt;
 

@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
           100.vSpace,
           ViewModelBuilder.withController<HomeViewModel, TodayStatsController>(
               create: () => TodayStatsController(context),
+              onInit: (controller){},
               builder: (context, controller, model) {
                 return HomeView(homeViewModel: model);
               }),

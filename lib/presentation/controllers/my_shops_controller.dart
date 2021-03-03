@@ -5,6 +5,7 @@ import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/my_shops_view_model.dart';
+import '../../application/splash/splash_bloc.dart';
 
 class MyShopsController extends BlocViewModelController<MyShopsBloc,
     MyShopsEvent, MyShopsState, MyShopsViewModel> with ToastMixin {
@@ -16,12 +17,12 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
   MyShopsViewModel mapStateToViewModel(MyShopsState s) {
     return MyShopsViewModel(
         list: s.shops
-            .map((e) => ShopViewModel(
+            ?.map((e) => ShopViewModel(
                   name: e.name.value,
                   phoneNumber: e.phoneNumber.value,
                   location: e.address.value,
                 ))
-            .toList(),
+            ?.toList(),
         isLoading: s.isLoading,
         loadingError: s.myShopsLoadingFailure != null
             ? s.myShopsLoadingFailure.message
@@ -30,7 +31,9 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
 
   void loadShops() async {
     bloc.add(MyShopsLoadingEvent());
-    final fetchShopsResult = await getIt.get<FetchShops>().execute();
+    final fetchShopsResult = await getIt
+        .get<FetchShops>()
+        .execute(getIt.get<SplashBloc>().state.user.getOrElse(() => null)?.id);
     fetchShopsResult.fold((l) {
       bloc.add(MyShopsLoadingFailedEvent(l));
       toastError(l.message);

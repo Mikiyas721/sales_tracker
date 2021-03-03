@@ -32,7 +32,6 @@ class SalesPerson extends Entity {
       id,
       name,
       phoneNumber,
-      shops,
       createdAt,
       updatedAt,
     ].any((element) => element == null)) return none();

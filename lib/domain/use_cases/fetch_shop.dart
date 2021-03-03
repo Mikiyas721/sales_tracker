@@ -10,7 +10,7 @@ class FetchShops {
 
   const FetchShops(this._iShopRepo);
 
-  Future<Either<Failure, List<Shop>>> execute(){
-    return _iShopRepo.fetchAll();
+  Future<Either<Failure, List<Shop>>> execute(String salesPersonId){
+    return _iShopRepo.fetchAll(salesPersonId);
   }
 }
