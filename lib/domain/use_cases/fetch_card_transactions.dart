@@ -10,7 +10,7 @@ class FetchCardTransactions {
 
   const FetchCardTransactions(this._iCardTransactionRepo);
 
-  Future<Either<Failure, List<CardTransaction>>> execute(){
-    return _iCardTransactionRepo.fetchAll();
+  Future<Either<Failure, List<CardTransaction>>> execute(String salespersonId, String shopId){
+    return _iCardTransactionRepo.fetchAll(salespersonId, shopId);
   }
 }

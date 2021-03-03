@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sales_tracker/application/today_stats/today_stats_bloc.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/today_stats_controller.dart';
-import '../../presentation/models/home_view_model.dart';
-import '../../presentation/views/home_view.dart';
+import 'package:sales_tracker/presentation/controllers/stats_controller.dart';
+import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
+import 'package:sales_tracker/presentation/views/sales_status_view.dart';
 import '../../presentation/widgets/my_button.dart';
 import '../../common/common.dart';
 
@@ -20,12 +19,18 @@ class HomePage extends StatelessWidget {
       body: Padding(
         padding: 20.hPadding,
         child: Column(children: [
-          100.vSpace,
-          ViewModelBuilder.withController<HomeViewModel, TodayStatsController>(
-              create: () => TodayStatsController(context),
-              onInit: (controller){},
+          50.vSpace,
+          ViewModelBuilder.withController<SalesStatusViewModel,
+                  StatsController>(
+              create: () => StatsController(context),
+              onInit: (controller) => controller,
               builder: (context, controller, model) {
-                return HomeView(homeViewModel: model);
+                return SalesStatusView(
+                  salesStatusViewModel: model,
+                  onToday: controller.onToday,
+                  onThisWeek: controller.onThisWeek,
+                  onThisMonth: controller.onThisMonth,
+                );
               }),
           Spacer(),
           Row(

@@ -61,7 +61,7 @@ class ShopView extends StatelessWidget {
           icon: Icons.receipt,
           caption: 'Sale',
           onTap: () {
-            Navigator.pushNamed(context, '/sellingPage');
+            Navigator.pushNamed(context, '/sellingPage',arguments: myShopViewModel);
           },
           color: context.secondaryHeaderColor,
           foregroundColor: Colors.white,
@@ -70,7 +70,7 @@ class ShopView extends StatelessWidget {
           icon: Icons.attach_money,
           caption: 'Fund',
           onTap: () {
-            Navigator.pushNamed(context, '/fundingPage');
+            Navigator.pushNamed(context, '/fundingPage',arguments: myShopViewModel);
           },
           color: context.primaryColor,
           foregroundColor: Colors.white,
@@ -81,7 +81,7 @@ class ShopView extends StatelessWidget {
           icon: Icons.swap_horiz,
           caption: 'Card',
           onTap: () {
-            Navigator.pushNamed(context, '/cardTransactionsPage');
+            Navigator.pushNamed(context, '/cardTransactionsPage',arguments: myShopViewModel);
           },
           color: context.primaryColor,
           foregroundColor: Colors.white,
@@ -90,7 +90,7 @@ class ShopView extends StatelessWidget {
           icon: Icons.swap_horiz,
           caption: 'Cash',
           onTap: () {
-            Navigator.pushNamed(context, '/cashTransactionsPage');
+            Navigator.pushNamed(context, '/cashTransactionsPage',arguments: myShopViewModel);
           },
           color: context.secondaryHeaderColor,
           foregroundColor: Colors.white,

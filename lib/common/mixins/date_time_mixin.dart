@@ -1,4 +1,24 @@
 mixin DateTimeMixin {
+  String getDayOfWeekLabel(int dayOfWeek) {
+    if (dayOfWeek == 1)
+      return 'M';
+    else if (dayOfWeek == 2)
+      return 'T';
+    else if (dayOfWeek == 3)
+      return 'W';
+    else if (dayOfWeek == 4)
+      return 'T';
+    else if (dayOfWeek == 5)
+      return 'F';
+    else if (dayOfWeek == 6)
+      return 'S';
+    else if (dayOfWeek == 7)
+      return 'S';
+    else
+      throw Exception(
+          'Unknown Day of Week Parameter.Method getDayOfWeekShort()');
+  }
+
   String getDayOfWeekShort(int dayOfWeek) {
     if (dayOfWeek == 1)
       return 'Mon';
@@ -128,5 +148,17 @@ mixin DateTimeMixin {
         return '${dateTime.hour - 12}:$minute PM';
     }
     return null;
+  }
+
+  int mapHourToMeridianHour(int hour) {
+    if (hour != null) {
+      if (hour == 0 || hour == 12)
+        return 12;
+      else if (hour < 12)
+        return hour;
+      else
+        return hour - 12;
+    }
+    return 0;
   }
 }

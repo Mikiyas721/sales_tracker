@@ -11,7 +11,7 @@ class InvalidPhoneNumberFailure extends PhoneNumberFailure {
 const regExp = r'^(?:[0])?[9]{1}?[0-9]{8}$';
 
 class PhoneNumber {
-  String value;
+  final String value;
 
   PhoneNumber._(this.value);
 

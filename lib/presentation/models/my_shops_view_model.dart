@@ -11,11 +11,13 @@ class MyShopsViewModel extends SimpleListViewModel<ShopViewModel> {
 }
 
 class ShopViewModel extends ViewModel {
+  final String id;
   final String name;
   final String phoneNumber;
   final String location;
 
   ShopViewModel({
+    @required this.id,
     @required this.name,
     @required this.phoneNumber,
     @required this.location,
@@ -23,6 +25,7 @@ class ShopViewModel extends ViewModel {
 
   @override
   List<Object> get props => [
+        id,
         name,
         phoneNumber,
         location,

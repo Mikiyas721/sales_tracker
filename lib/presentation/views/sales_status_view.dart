@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/widgets/empty_error_view.dart';
+import 'package:sales_tracker/common/widgets/my_loading_view.dart';
 import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
 import 'package:sales_tracker/presentation/widgets/my_tab_button.dart';
 import '../../common/common.dart';
@@ -9,13 +11,15 @@ class SalesStatusView extends StatelessWidget {
   final void Function(bool isActive) onToday;
   final void Function(bool isActive) onThisWeek;
   final void Function(bool isActive) onThisMonth;
+  final VoidCallback onReload;
 
   const SalesStatusView(
       {Key key,
       @required this.salesStatusViewModel,
       @required this.onToday,
       @required this.onThisWeek,
-      @required this.onThisMonth})
+      @required this.onThisMonth,
+      this.onReload})
       : super(key: key);
 
   @override
@@ -53,9 +57,29 @@ class SalesStatusView extends StatelessWidget {
                     salesStatusViewModel.activeButtonIndex == 2 ? true : false,
                 onTap: onThisMonth,
               ),
+              getBody(context)
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  Widget getBody(BuildContext context) {
+    if (salesStatusViewModel.isLoading) return MyLoadingView();
+    if (salesStatusViewModel.loadingFailure != null)
+      return EmptyErrorView.defaultError(
+          description: salesStatusViewModel.loadingFailure.message,
+          onAction: onReload);
+    if (salesStatusViewModel.bars.isEmpty)
+      return EmptyErrorView.defaultEmpty(
+        description:
+            'You have no transactions ${getTitle(salesStatusViewModel.activeButtonIndex)}',
+        onAction: onReload,
+      );
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
         Text(
           'Sold',
           style: context.caption,

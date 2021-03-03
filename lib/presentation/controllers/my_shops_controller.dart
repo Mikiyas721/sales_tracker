@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/application/my_shops/my_shops_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
+import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_shop.dart';
 import 'package:sales_tracker/injection.dart';
@@ -18,6 +19,7 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
     return MyShopsViewModel(
         list: s.shops
             ?.map((e) => ShopViewModel(
+                  id: e.id,
                   name: e.name.value,
                   phoneNumber: e.phoneNumber.value,
                   location: e.address.value,
@@ -31,14 +33,20 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
 
   void loadShops() async {
     bloc.add(MyShopsLoadingEvent());
-    final fetchShopsResult = await getIt
-        .get<FetchShops>()
-        .execute(getIt.get<SplashBloc>().state.user.getOrElse(() => null)?.id);
-    fetchShopsResult.fold((l) {
-      bloc.add(MyShopsLoadingFailedEvent(l));
-      toastError(l.message);
-    }, (r) {
-      bloc.add(MyShopsLoadingSucceededEvent(r));
+    final user = getIt.get<SplashBloc>().state.user;
+    user.fold(() {
+      bloc.add(
+          MyShopsLoadingFailedEvent(SimpleFailure("Undefined Salesperson")));
+      toastError("Undefined Salesperson");
+    }, (salesperson) async {
+      final fetchShopsResult =
+          await getIt.get<FetchShops>().execute(salesperson.id);
+      fetchShopsResult.fold((l) {
+        bloc.add(MyShopsLoadingFailedEvent(l));
+        toastError(l.message);
+      }, (r) {
+        bloc.add(MyShopsLoadingSucceededEvent(r));
+      });
     });
   }
 }

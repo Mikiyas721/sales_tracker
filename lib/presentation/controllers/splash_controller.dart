@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/view_model.dart';

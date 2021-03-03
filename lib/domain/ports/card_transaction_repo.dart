@@ -4,5 +4,8 @@ import 'package:sales_tracker/domain/entities/card_transaction.dart';
 
 abstract class ICardTransactionRepo{
   Future<Either<Failure, CardTransaction>> create(CardTransaction sellTransaction);
-  Future<Either<Failure,List<CardTransaction>>> fetchAll();
+  Future<Either<Failure,List<CardTransaction>>> fetchAll(String salespersonId, String shopId);
+  Future<Either<Failure, List<CardTransaction>>> fetchToday(String salespersonId);
+  Future<Either<Failure, List<CardTransaction>>> fetchThisWeek(String salespersonId);
+  Future<Either<Failure, List<CardTransaction>>> fetchThisMonth(String salespersonId);
 }

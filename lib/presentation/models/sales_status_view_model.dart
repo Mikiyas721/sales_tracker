@@ -1,9 +1,11 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/view_model.dart';
 
 class SalesStatusViewModel extends ViewModel {
+  final bool isLoading;
+  final Failure loadingFailure;
   final int activeButtonIndex;
   final String soldAmount;
   final String fundedAmount;
@@ -12,6 +14,8 @@ class SalesStatusViewModel extends ViewModel {
   final double maxY;
 
   SalesStatusViewModel({
+    @required this.isLoading,
+    @required this.loadingFailure,
     @required this.activeButtonIndex,
     @required this.soldAmount,
     @required this.fundedAmount,
@@ -20,14 +24,22 @@ class SalesStatusViewModel extends ViewModel {
   }) : maxY = _getMax(bars);
 
   @override
-  List<Object> get props =>
-      [activeButtonIndex, soldAmount, fundedAmount, loanedAmount, bars];
+  List<Object> get props => [
+        isLoading,
+        loadingFailure,
+        activeButtonIndex,
+        soldAmount,
+        fundedAmount,
+        loanedAmount,
+        bars
+      ];
 }
 
 double _getMax(List<BarData> bars) {
   double max = 0;
   bars.forEach((element) {
     if (element.barHeight > max) max = element.barHeight;
+    if (element.stackHeight > max) max = element.stackHeight;
   });
   return max;
 }

@@ -10,7 +10,7 @@ class FetchCashTransactions {
 
   const FetchCashTransactions(this._cashTransactionRepo);
 
-  Future<Either<Failure, List<CashTransaction>>> execute() {
-    return _cashTransactionRepo.fetchAll();
+  Future<Either<Failure, List<CashTransaction>>> execute(String salespersonId, String shopId) {
+    return _cashTransactionRepo.fetchAll(salespersonId, shopId);
   }
 }

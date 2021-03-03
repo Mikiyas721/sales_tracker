@@ -13,7 +13,7 @@ class LongAddressFailure extends AddressFailure{
   String get message => 'Address is too long';
 }
 class Address{
-  String value;
+  final String value;
 
   Address._(this.value);
 
