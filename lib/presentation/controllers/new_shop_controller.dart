@@ -61,12 +61,15 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
       address: this.bloc.state.address.getOrElse(() => null),
       phoneNumber: this.bloc.state.phoneNumber.getOrElse(() => null),
     );
-    print(bloc.state.address.getOrElse(() => null)?.value);
+    print(bloc.state.name);
+    print(bloc.state.address);
+    print(bloc.state.phoneNumber);
     shop.fold(
       () {
         toastError("Invalid Input");
       },
       (shop) async {
+        bloc.add(NewShopAddRequestedEvent());
         final salesperson = getIt.get<SplashBloc>().state.user;
         salesperson.fold(() {
           toastError("Undefined Salesperson");

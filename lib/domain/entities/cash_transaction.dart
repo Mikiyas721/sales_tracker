@@ -47,14 +47,12 @@ class CashTransaction extends Entity{
       updatedAt
     ].any((e) => e == null)) return none();
 
-    final cashAmount = CashAmount.createFromNum(amount).getOrElse(() => null);
+    final cashAmount = CashAmount.createFromNumForFund(amount).getOrElse(() => null);
     if (cashAmount == null) return none();
 
     final shopObject = shop.fold(() => null, (a) => a);
-    if(shopObject==null) return none();
 
     final salePersonObject = salesPerson.fold(() => null, (a) => a);
-    if(salePersonObject==null) return none();
 
     return some(
       CashTransaction._(

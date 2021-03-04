@@ -31,7 +31,8 @@ class LoginRequestEvent extends LoginEvent {
 class LoginRequestSucceededEvent extends LoginEvent {
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
-    yield currentState.copyWith(hasRequested:true);
+    yield currentState.copyWith(
+      hasRequested: true, loginRequestFailure: none(),);
   }
 }
 
@@ -43,6 +44,7 @@ class LoginRequestFailedEvent extends LoginEvent {
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
     yield currentState.copyWith(
-        isRequesting: false, loginRequestFailure: Failure.getFailure(requestFailure));
+        isRequesting: false,
+        loginRequestFailure: Failure.getFailure(requestFailure));
   }
 }

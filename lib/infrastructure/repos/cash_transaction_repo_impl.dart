@@ -8,16 +8,16 @@ import 'package:sales_tracker/infrastructure/datasources/cash_transaction_dataso
 import 'package:sales_tracker/infrastructure/dto/cash_transaction_dto.dart';
 
 @LazySingleton(as: ICashTransactionRepo)
-class FundTransactionRepoImpl implements ICashTransactionRepo {
+class CashTransactionRepoImpl implements ICashTransactionRepo {
   final CashTransactionCrudDataSource fundTransactionCrudDataSource;
 
-  FundTransactionRepoImpl(this.fundTransactionCrudDataSource);
+  CashTransactionRepoImpl(this.fundTransactionCrudDataSource);
 
   @override
   Future<Either<Failure, CashTransaction>> create(
-      CashTransaction fundTransaction) async {
+      CashTransaction cashTransaction) async {
     final result = await fundTransactionCrudDataSource
-        .create(CashTransactionDto.fromDomain(fundTransaction));
+        .create(CashTransactionDto.fromDomain(cashTransaction));
     return result.either.fold(
       (l) => left(l),
       (r) => r
@@ -34,7 +34,7 @@ class FundTransactionRepoImpl implements ICashTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {"shopId": "$salespersonId"}
+            {"shopId": "$shopId"}
           ]
         }
       }

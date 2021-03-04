@@ -4,18 +4,25 @@ abstract class CashTransactionsEvent extends BlocEvent<CashTransactionsState> {}
 
 class CashTransactionsLoadingEvent extends CashTransactionsEvent {
   @override
-  Stream<CashTransactionsState> handle(CashTransactionsState currentState) async* {
+  Stream<CashTransactionsState> handle(
+      CashTransactionsState currentState) async* {
     yield currentState.copyWith(isLoading: true);
   }
 }
+
 class CashTransactionsLoadingSucceededEvent extends CashTransactionsEvent {
   final List<CashTransaction> funds;
 
   CashTransactionsLoadingSucceededEvent(this.funds);
 
   @override
-  Stream<CashTransactionsState> handle(CashTransactionsState currentState) async* {
-    yield currentState.copyWith(isLoading:false, funds: funds);
+  Stream<CashTransactionsState> handle(
+      CashTransactionsState currentState) async* {
+    yield currentState.copyWith(
+      isLoading: false,
+      funds: funds,
+      fetchingFundsFailure: none(),
+    );
   }
 }
 
@@ -25,8 +32,10 @@ class CashTransactionsLoadingFailedEvent extends CashTransactionsEvent {
   CashTransactionsLoadingFailedEvent(this.loadingFailure);
 
   @override
-  Stream<CashTransactionsState> handle(CashTransactionsState currentState) async* {
+  Stream<CashTransactionsState> handle(
+      CashTransactionsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, fetchingFundsFailure: Failure.getFailure(loadingFailure));
+        isLoading: false,
+        fetchingFundsFailure: Failure.getFailure(loadingFailure));
   }
 }

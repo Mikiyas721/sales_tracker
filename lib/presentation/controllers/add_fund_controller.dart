@@ -40,16 +40,17 @@ class AddFundController extends BlocViewModelController<AddFundBloc,
     user.fold(() {
       bloc.add(AddFundFailedEvent(SimpleFailure("Undefined Salesperson")));
       toastError("Undefined Salesperson");
-    }, (a) {
-      final saleTransaction = CashTransaction.createFromInputs(
-        salesPersonId: a.id,
+    }, (salesperson) {
+      bloc.add(AddFundRequestedEvent());
+      final cashTransaction = CashTransaction.createFromInputs(
+        salesPersonId: salesperson.id,
         shopId: shopId,
         amount: bloc.state.paidAmount.getOrElse(() => null),
       );
-      saleTransaction.fold(() {
+      cashTransaction.fold(() {
         bloc.add(AddFundFailedEvent(SimpleFailure("Invalid Funding Inputs")));
         toastError('Invalid Funding Inputs');
-      }, (a) async* {
+      }, (a) async {
         final result = await getIt.get<AddCashTransaction>().execute(a);
         result.fold((l) {
           bloc.add(AddFundFailedEvent(l));

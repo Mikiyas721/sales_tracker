@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/presentation/controllers/add_fund_controller.dart';
 import '../../presentation/models/fund_view_model.dart';
 import '../../presentation/widgets/my_button.dart';
 import '../../presentation/widgets/my_text_field.dart';
@@ -18,16 +20,23 @@ class FundingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<AddFundController>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         MyTextField(
-            icon: Icons.attach_money,
-            labelText: 'amount',
-            errorText: fundViewModel.amountError,
-            onChanged: onAmountChanged),
+          icon: Icons.attach_money,
+          labelText: 'amount',
+          errorText: fundViewModel.amountError,
+          onChanged: onAmountChanged,
+          controller: controller.paidAmountTextFieldController,
+        ),
         200.vSpace,
-        MyButton(label: 'Fund', onSubmit: onFund)
+        MyButton(
+          label: 'Fund',
+          onSubmit: onFund,
+          isLoading: fundViewModel.isFunding
+        )
       ],
     );
   }

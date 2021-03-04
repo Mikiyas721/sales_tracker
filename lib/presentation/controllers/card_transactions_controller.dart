@@ -26,14 +26,14 @@ class CardTransactionsController extends BlocViewModelController<
         list: s.sales
             ?.map<CardTransactionViewModel>((e) => CardTransactionViewModel(
                 amount: e.amount.value.toString(),
-                date: getDateString(e.createdAt),
-                time: getTimeString(e.createdAt)))
+                date: getShortDateString(e.createdAt),
+                time: mapTimeToMeridian(e.createdAt)))
             ?.toList(),
         isLoading: s.isLoading,
         loadingError: s.fetchingSalesFailure?.getOrElse(() => null)?.message);
   }
 
-  void loadShops() async {
+  void loadCardTransactions() async {
     bloc.add(CardTransactionsLoadingEvent());
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {
@@ -41,8 +41,9 @@ class CardTransactionsController extends BlocViewModelController<
           SimpleFailure('Undefined Salesperson')));
       toastError("Undefined Salesperson");
     }, (salesperson) async {
-      final fetchShopsResult =
-          await getIt.get<FetchCardTransactions>().execute(salesperson.id, shopId);
+      final fetchShopsResult = await getIt
+          .get<FetchCardTransactions>()
+          .execute(salesperson.id, shopId);
       fetchShopsResult.fold((l) {
         bloc.add(CardTransactionsLoadingFailedEvent(l));
         toastError(l.message);

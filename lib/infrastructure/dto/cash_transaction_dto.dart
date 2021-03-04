@@ -49,14 +49,15 @@ class CashTransactionDto extends IdDto<CashTransaction> implements TimeStampedDt
     );
   }
 
-  static CashTransactionDto fromDomain(CashTransaction fundTransaction) {
+  static CashTransactionDto fromDomain(CashTransaction cashTransaction) {
+    print('${cashTransaction.id}|${cashTransaction.salesPersonId}|${cashTransaction.shopId}|${cashTransaction.amount.value}');
     return CashTransactionDto(
-      id: fundTransaction.id,
-      salesPersonId: fundTransaction.salesPersonId,
-      shopId: fundTransaction.shopId,
-      amount: fundTransaction.amount.value,
-      createdAt: fundTransaction.createdAt,
-      updatedAt: fundTransaction.updatedAt,
+      id: cashTransaction.id,
+      salesPersonId: cashTransaction.salesPersonId,
+      shopId: cashTransaction.shopId,
+      amount: cashTransaction.amount.value,
+      createdAt: cashTransaction.createdAt,
+      updatedAt: cashTransaction.updatedAt,
     );
   }
 }

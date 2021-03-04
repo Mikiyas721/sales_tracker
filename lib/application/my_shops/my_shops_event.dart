@@ -16,7 +16,11 @@ class MyShopsLoadingSucceededEvent extends MyShopsEvent {
 
   @override
   Stream<MyShopsState> handle(MyShopsState currentState) async* {
-    yield currentState.copyWith(isLoading:false, shops: shops);
+    yield currentState.copyWith(
+      isLoading: false,
+      shops: shops,
+      myShopsLoadingFailure: none(),
+    );
   }
 }
 
@@ -28,6 +32,8 @@ class MyShopsLoadingFailedEvent extends MyShopsEvent {
   @override
   Stream<MyShopsState> handle(MyShopsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, myShopsLoadingFailure: Failure.getFailure(loadingFailure));
+      isLoading: false,
+      myShopsLoadingFailure: Failure.getFailure(loadingFailure),
+    );
   }
 }

@@ -75,9 +75,11 @@ class SalesStatusView extends StatelessWidget {
 
   Widget getBody(BuildContext context) {
     if (salesStatusViewModel.isLoading) return MyLoadingView();
-    if (salesStatusViewModel.loadingFailure.isNone())
+    if (salesStatusViewModel.loadingFailure.isSome())
       return EmptyErrorView.defaultError(
-          description: salesStatusViewModel.loadingFailure?.getOrElse(() => null)?.message,
+          description: salesStatusViewModel.loadingFailure
+              ?.getOrElse(() => null)
+              ?.message,
           onAction: onReload);
     if (salesStatusViewModel.bars.isEmpty)
       return EmptyErrorView.defaultEmpty(
@@ -165,15 +167,26 @@ class SalesStatusView extends StatelessWidget {
 BarChartGroupData getBar(int x, double barHeight, double stackHeight) {
   return BarChartGroupData(
     x: x,
-    barRods: [
-      BarChartRodData(
-        colors: [Colors.red],
-        width: 20,
-        borderRadius: BorderRadius.all(Radius.circular(3)),
-        y: barHeight,
-        rodStackItems: [BarChartRodStackItem(0, stackHeight, Colors.blue)],
-      )
-    ],
+    barRods: stackHeight > barHeight
+        ? [
+            BarChartRodData(
+              colors: [Colors.blue],
+              width: 20,
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+              y: stackHeight,
+            )
+          ]
+        : [
+            BarChartRodData(
+              colors: [Colors.red],
+              width: 20,
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+              y: barHeight,
+              rodStackItems: [
+                BarChartRodStackItem(0, stackHeight, Colors.blue)
+              ],
+            )
+          ],
   );
 }
 

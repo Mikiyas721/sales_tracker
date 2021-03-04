@@ -12,7 +12,7 @@ abstract class AddFundState extends BlocState with _$AddFundState{
 }) = _AddFundState;
 
   factory AddFundState.initial() => AddFundState(
-    paidAmount: CashAmount.createFromNum(0),
+    paidAmount: CashAmount.createFromNumForFund(0),
     fundTransactionFailure: none(),
     hasRequested: false,
     hasSubmitted: false,

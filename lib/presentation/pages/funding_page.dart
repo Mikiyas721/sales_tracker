@@ -34,10 +34,10 @@ class FundingPage extends StatelessWidget {
               ViewModelBuilder.withController<FundViewModel,
                       AddFundController>(
                   create: () => AddFundController(context, shop.id),
-                  //TODO Pass ShopId as parameter
                   builder: (context, controller, model) {
                     return FundingView(
                       fundViewModel: model,
+                      onAmountChanged: controller.onPaidAmount,
                       onFund: controller.onRegister,
                     );
                   }),

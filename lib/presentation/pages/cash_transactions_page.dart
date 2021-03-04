@@ -19,11 +19,11 @@ class CashTransactionsPage extends StatelessWidget {
         padding: 20.hPadding,
         child: ViewModelBuilder.withController<CashTransactionsViewModel, CashTransactionsController>(
           create: () => CashTransactionsController(context,shopViewModel.id),
-          onInit: (controller)=> controller.loadShops(),
+          onInit: (controller)=> controller.loadCashTransactions(),
           builder: (context, controller, model) {
             return CashTransactionsView(
               funds: model,
-              onReload: controller.loadShops,
+              onReload: controller.loadCashTransactions,
             );
           },
         ),

@@ -24,7 +24,7 @@ class AddSalePaidAmountChangedEvent extends AddSaleEvent {
   Stream<AddSaleState> handle(
       AddSaleState currentState) async* {
     yield currentState.copyWith(
-        paidAmount: CashAmount.createFromString(paidAmount));
+        paidAmount: CashAmount.createFromStringForSale(paidAmount));
   }
 }
 
@@ -50,7 +50,7 @@ class AddSaleSucceededEvent extends AddSaleEvent {
       AddSaleState currentState) async* {
     yield currentState.copyWith(
       totalAmount: CardAmount.createFromNum(0),
-      paidAmount: CashAmount.createFromNum(0),
+      paidAmount: CashAmount.createFromNumForSale(0),
       saleTransactionFailure: none(),
       hasRequested: false,
       hasSubmitted: false,

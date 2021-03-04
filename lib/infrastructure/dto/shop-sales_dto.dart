@@ -43,7 +43,7 @@ class ShopSalesDto extends IdDto<ShopSales> implements TimeStampedDto {
         shopId: shopId,
         updatedAt: updatedAt,
         createdAt: createdAt,
-        shop: shop.toDomain(),
+        shop: shop?.toDomain(),
         salesperson: salesPerson?.toDomain());
   }
 

@@ -66,11 +66,10 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
       double barHeight = 0;
       double stackHeight = 0;
       cards?.forEach((element) {
-        if (element.createdAt.hour < i && element.createdAt.hour > i - 1)
-          barHeight += element.amount.value;
+        if (element.createdAt.hour == i - 1) barHeight += element.amount.value;
       });
       cash?.forEach((element) {
-        if (element.createdAt.hour < i && element.createdAt.hour > i - 1)
+        if (element.createdAt.hour == i - 1)
           stackHeight += element.amount.value;
       });
       barData.add(BarData(
@@ -213,5 +212,13 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
         });
       });
     }
+  }
+
+  void onReload() {
+    if (bloc.state.activeButtonIndex == 0)
+      onToday(true);
+    else if (bloc.state.activeButtonIndex == 1)
+      onThisWeek(true);
+    else if (bloc.state.activeButtonIndex == 2) onThisMonth(true);
   }
 }

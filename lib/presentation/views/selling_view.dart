@@ -36,10 +36,10 @@ class SellingView extends StatelessWidget {
             icon: Icons.attach_money,
             labelText: 'paid amount',
             errorText: saleViewModel.paidAmountError,
-            controller: controller.totalAmountTextFieldController,
+            controller: controller.paidAmountTextFieldController,
             onChanged: onPaidAmount),
         165.vSpace,
-        MyButton(label: 'Register', onSubmit: onRegister),
+        MyButton(label: 'Register', onSubmit: onRegister, isLoading: saleViewModel.isRegistering,),
       ],
     );
   }

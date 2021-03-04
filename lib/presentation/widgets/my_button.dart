@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../../common/common.dart';
 
 class MyButton extends StatelessWidget {
@@ -22,7 +23,9 @@ class MyButton extends StatelessWidget {
       color: context.primaryColor,
       textColor: Colors.white,
       onPressed: onSubmit,
-      child: isLoading ? CircularProgressIndicator() : Text(label),
+      child: isLoading
+          ? SpinKitFadingCircle(color: Colors.white, size: 40)
+          : Text(label),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(40))),
       minWidth: minWidth,

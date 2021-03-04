@@ -50,14 +50,15 @@ class CardTransactionDto extends IdDto<CardTransaction> implements TimeStampedDt
     );
   }
 
-  static CardTransactionDto fromDomain(CardTransaction salesTransaction){
+  static CardTransactionDto fromDomain(CardTransaction cardTransaction){
+    print('${cardTransaction.id}|${cardTransaction.salesPersonId}|${cardTransaction.shopId}|${cardTransaction.amount.value}');
     return CardTransactionDto(
-        id:salesTransaction.id,
-        salesPersonId:salesTransaction.salesPersonId,
-        shopId:salesTransaction.shopId,
-        soldAmount:salesTransaction.amount.value,
-        createdAt:salesTransaction.createdAt,
-        updatedAt:salesTransaction.updatedAt,
+        id:cardTransaction.id,
+        salesPersonId:cardTransaction.salesPersonId,
+        shopId:cardTransaction.shopId,
+        soldAmount:cardTransaction.amount.value,
+        createdAt:cardTransaction.createdAt,
+        updatedAt:cardTransaction.updatedAt,
     );
   }
 }

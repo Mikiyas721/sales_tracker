@@ -12,17 +12,17 @@ class CardTransactionsPage extends StatelessWidget {
     final ShopViewModel shopViewModel = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sale Transactions'),
+        title: Text('Card Transactions'),
       ),
       body: Padding(
         padding: 20.hPadding,
         child: ViewModelBuilder.withController<CardTransactionsViewModel, CardTransactionsController>(
             create: () => CardTransactionsController(context, shopViewModel.id),
-            onInit:  (controller)=>controller.loadShops(),
+            onInit:  (controller)=>controller.loadCardTransactions(),
             builder: (context, controller, model) {
               return CardTransactionsView(
                 sales: model,
-                onReload: controller.loadShops,
+                onReload: controller.loadCardTransactions,
               );
             }),
       ),

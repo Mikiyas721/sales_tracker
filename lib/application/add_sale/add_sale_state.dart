@@ -14,7 +14,7 @@ abstract class AddSaleState extends BlocState
 
   factory AddSaleState.initial() => AddSaleState(
         totalAmount: CardAmount.createFromNum(0),
-        paidAmount:  CashAmount.createFromNum(0),
+        paidAmount:  CashAmount.createFromNumForSale(0),
         saleTransactionFailure: none(),
         hasRequested: false,
         hasSubmitted: false,

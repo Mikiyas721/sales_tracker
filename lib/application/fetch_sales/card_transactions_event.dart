@@ -4,18 +4,25 @@ abstract class CardTransactionsEvent extends BlocEvent<CardTransactionsState> {}
 
 class CardTransactionsLoadingEvent extends CardTransactionsEvent {
   @override
-  Stream<CardTransactionsState> handle(CardTransactionsState currentState) async* {
+  Stream<CardTransactionsState> handle(
+      CardTransactionsState currentState) async* {
     yield currentState.copyWith(isLoading: true);
   }
 }
+
 class CardTransactionsLoadingSucceededEvent extends CardTransactionsEvent {
   final List<CardTransaction> sales;
 
   CardTransactionsLoadingSucceededEvent(this.sales);
 
   @override
-  Stream<CardTransactionsState> handle(CardTransactionsState currentState) async* {
-    yield currentState.copyWith(isLoading:false, sales: sales);
+  Stream<CardTransactionsState> handle(
+      CardTransactionsState currentState) async* {
+    yield currentState.copyWith(
+      isLoading: false,
+      sales: sales,
+      fetchingSalesFailure: none(),
+    );
   }
 }
 
@@ -25,9 +32,10 @@ class CardTransactionsLoadingFailedEvent extends CardTransactionsEvent {
   CardTransactionsLoadingFailedEvent(this.loadingFailure);
 
   @override
-  Stream<CardTransactionsState> handle(CardTransactionsState currentState) async* {
+  Stream<CardTransactionsState> handle(
+      CardTransactionsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, fetchingSalesFailure: Failure.getFailure(loadingFailure));
+        isLoading: false,
+        fetchingSalesFailure: Failure.getFailure(loadingFailure));
   }
 }
-

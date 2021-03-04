@@ -12,7 +12,7 @@ main() {
     "should create fund transaction",
     () async {
       final fundTransaction = CashTransaction.createFromInputs(
-              amount: CashAmount.createFromNum(10).getOrElse(() => null),
+              amount: CashAmount.createFromNumForFund(10).getOrElse(() => null),
               salesPersonId: "sdljkfslkdjfslkdjf",
               shopId: "asdjklhalsdklasd")
           .getOrElse(() => null);

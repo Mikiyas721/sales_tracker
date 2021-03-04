@@ -28,7 +28,8 @@ class LoadingStatsSucceededStatsEvent extends StatsEvent {
 
   @override
   Stream<StatsState> handle(StatsState currentState) async* {
-    yield currentState.copyWith(cards: cards, cash: cash, isLoading: false);
+    yield currentState.copyWith(
+        cards: cards, cash: cash, isLoading: false, loadingFailure: none());
   }
 }
 

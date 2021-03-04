@@ -25,15 +25,39 @@ class HomePage extends StatelessWidget {
                     onToday: controller.onToday,
                     onThisWeek: controller.onThisWeek,
                     onThisMonth: controller.onThisMonth,
+                    onReload: controller.onReload,
                   );
                 }),
           ),
           Align(
-              alignment: Alignment(0.9,-0.87),
-              child: IconButton(icon: Icon(Icons.logout), onPressed: () {})),
+              alignment: Alignment(0.9, -0.87),
+              child: IconButton(
+                  icon: Icon(Icons.logout),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                              title: Text('Signing out'),
+                              content:
+                                  Text('Are you sure you want to log out?'),
+                              actions: [
+                                FlatButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Cancel')),
+                                FlatButton(
+                                    onPressed: () {
+                                      //How can I access a controller without using ViewModelBuilder
+                                    },
+                                    child: Text('Ok'))
+                              ]);
+                        });
+                  })),
           Positioned(
-            left:20,
-            right:20,
+            left: 20,
+            right: 20,
             bottom: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

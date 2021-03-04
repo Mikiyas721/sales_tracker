@@ -25,15 +25,16 @@ class CashTransactionsController extends BlocViewModelController<
     return CashTransactionsViewModel(
         list: s.funds
             ?.map<CashTransactionViewModel>((e) => CashTransactionViewModel(
-                amount: e.amount.value.toString(),
-                time: getTimeString(e.createdAt),
-                date: getShortDateString(e.createdAt)))
+                  amount: e.amount.value.toString(),
+                  date: getShortDateString(e.createdAt),
+                  time: mapTimeToMeridian(e.createdAt),
+                ))
             ?.toList(),
         isLoading: s.isLoading,
         loadingError: s.fetchingFundsFailure?.getOrElse(() => null)?.message);
   }
 
-  void loadShops() async {
+  void loadCashTransactions() async {
     bloc.add(CashTransactionsLoadingEvent());
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {

@@ -8,21 +8,21 @@ import 'package:sales_tracker/infrastructure/datasources/card_transaction_dataso
 import 'package:sales_tracker/infrastructure/dto/card_transaction_dto.dart';
 
 @LazySingleton(as: ICardTransactionRepo)
-class SaleTransactionRepoImpl extends ICardTransactionRepo {
+class CardTransactionRepoImpl extends ICardTransactionRepo {
   final CardTransactionCrudDataSource saleTransactionCrudDataSource;
 
-  SaleTransactionRepoImpl(this.saleTransactionCrudDataSource);
+  CardTransactionRepoImpl(this.saleTransactionCrudDataSource);
 
   @override
   Future<Either<Failure, CardTransaction>> create(
-      CardTransaction sellTransaction) async {
+      CardTransaction cardTransaction) async {
     final result = await saleTransactionCrudDataSource
-        .create(CardTransactionDto.fromDomain(sellTransaction));
+        .create(CardTransactionDto.fromDomain(cardTransaction));
     return result.either.fold(
         (l) => left(l),
         (r) => r
             .toDomain()
-            .fold(() => left(SimpleFailure('Invalid Da')), (a) => right(a)));
+            .fold(() => left(SimpleFailure('Invalid Data')), (a) => right(a)));
   }
 
   @override
@@ -33,7 +33,7 @@ class SaleTransactionRepoImpl extends ICardTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {"shopId": "$salespersonId"}
+            {"shopId": "$shopId"}
           ]
         }
       }

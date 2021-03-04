@@ -55,6 +55,7 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
       bloc.add(AddSaleFailedEvent(SimpleFailure('Undefined Salesperson')));
       toastError("Undefined Salesperson");
     }, (a) {
+      bloc.add(AddSaleRequestedEvent());
       final cardTransaction = CardTransaction.createFromInputs(
         salesPersonId: a.id,
         shopId: shopId,
@@ -66,15 +67,14 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
           amount: bloc.state.paidAmount.getOrElse(() => null));
 
       cardTransaction.fold(() {
-        bloc.add(AddSaleFailedEvent(SimpleFailure('Invalid Selling Inputs')));
-        toastError('Invalid Selling Inputs');
-      }, (a) async* {
+        bloc.add(AddSaleFailedEvent(SimpleFailure('Invalid Card')));
+        toastError('Invalid Card');
+      }, (a) async {
         final cardResult = await getIt.get<AddCardTransaction>().execute(a);
         cardResult.fold((l) {
           bloc.add(AddSaleFailedEvent(l));
           toastError(l.message);
         }, (r) {
-          ///??? what if the first one works and this doesn't
           cashTransaction.fold(() {
             bloc.add(
                 AddSaleFailedEvent(SimpleFailure('Invalid Selling Inputs')));

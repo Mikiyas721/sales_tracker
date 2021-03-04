@@ -11,7 +11,7 @@ class AddFundPaidAmountChangedEvent extends AddFundEvent {
   Stream<AddFundState> handle(
       AddFundState currentState) async* {
     yield currentState.copyWith(
-        paidAmount: CashAmount.createFromString(paidAmount));
+        paidAmount: CashAmount.createFromStringForFund(paidAmount));
   }
 }
 
@@ -36,7 +36,7 @@ class AddFundSucceededEvent extends AddFundEvent {
   Stream<AddFundState> handle(
       AddFundState currentState) async* {
     yield currentState.copyWith(
-      paidAmount: CashAmount.createFromNum(0),
+      paidAmount: CashAmount.createFromNumForFund(0),
       fundTransactionFailure: none(),
       hasRequested: false,
       hasSubmitted: false,

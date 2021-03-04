@@ -28,7 +28,7 @@ import 'domain/use_cases/fetch_this_month.dart';
 import 'domain/use_cases/fetch_this_week_stats.dart';
 import 'domain/use_cases/fetch_today_stats.dart';
 import 'infrastructure/repos/firebase_repo_impl.dart';
-import 'infrastructure/repos/fund_transaction_repo_impl.dart';
+import 'infrastructure/repos/cash_transaction_repo_impl.dart';
 import 'domain/use_cases/get_current_autheticated_user.dart';
 import 'domain/ports/card_transaction_repo.dart';
 import 'domain/ports/cash_transaction_repo.dart';
@@ -43,7 +43,7 @@ import 'application/my_shops/my_shops_bloc.dart';
 import 'application/new_shop/new_shop_bloc.dart';
 import 'domain/use_cases/request_firebase_verification_code.dart';
 import 'common/datasource/rest_datasource/rest_datasource.dart';
-import 'infrastructure/repos/sale_transaction_repo_impl.dart';
+import 'infrastructure/repos/card_transaction_repo_impl.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
 import 'infrastructure/repos/sales_person_repo_impl.dart';
 import 'domain/use_cases/save_user.dart';
@@ -99,9 +99,9 @@ GetIt $initGetIt(
   gh.lazySingleton<CashTransactionCrudDataSource>(
       () => CashTransactionLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<ICardTransactionRepo>(
-      () => SaleTransactionRepoImpl(get<CardTransactionCrudDataSource>()));
+      () => CardTransactionRepoImpl(get<CardTransactionCrudDataSource>()));
   gh.lazySingleton<ICashTransactionRepo>(
-      () => FundTransactionRepoImpl(get<CashTransactionCrudDataSource>()));
+      () => CashTransactionRepoImpl(get<CashTransactionCrudDataSource>()));
   gh.lazySingleton<ISalesPersonRepo>(
       () => SalesPersonRepoImpl(get<SalesPeopleCrudDataSource>()));
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));

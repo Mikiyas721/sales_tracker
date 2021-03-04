@@ -36,7 +36,6 @@ class ShopSales extends Entity {
       createdAt,
       updatedAt,
     ].any((element) => element == null)) return none();
-    if (shop.isNone()) return none();
     return some(ShopSales._(
         id: id,
         salesPersonId: salesPersonId,

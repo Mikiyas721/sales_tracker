@@ -49,7 +49,11 @@ class NewShopView extends StatelessWidget {
             controller: newShopController.phoneTextFieldController,
             onChanged: onPhoneNumberChanged),
         200.vSpace,
-        MyButton(label: 'Add', onSubmit: onAdd),
+        MyButton(
+          label: 'Add',
+          onSubmit: onAdd,
+          isLoading: newShopViewModel.isAdding,
+        ),
       ],
     );
   }
