@@ -4,7 +4,7 @@ part of '../login/login_bloc.dart';
 abstract class LoginState extends BlocState with _$LoginState {
   const factory LoginState({
     Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-    Failure loginRequestFailure,
+    Option<Failure> loginRequestFailure,
     bool hasSubmitted,
     bool isRequesting,
     bool hasRequested,
@@ -12,7 +12,7 @@ abstract class LoginState extends BlocState with _$LoginState {
 
   factory LoginState.initial() => LoginState(
         phoneNumber: PhoneNumber.create(""),
-        loginRequestFailure: null,
+        loginRequestFailure: none(),
         hasSubmitted: false,
         isRequesting: false,
         hasRequested: false,

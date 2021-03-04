@@ -6,7 +6,7 @@ abstract class AddSaleState extends BlocState
   const factory AddSaleState({
     Either<CardAmountFailure, CardAmount> totalAmount,
     Either<CashAmountFailure, CashAmount> paidAmount,
-    Failure saleTransactionFailure,
+    Option<Failure> saleTransactionFailure,
     bool hasSubmitted,
     bool hasRequested,
     bool requestCompleted,
@@ -15,7 +15,7 @@ abstract class AddSaleState extends BlocState
   factory AddSaleState.initial() => AddSaleState(
         totalAmount: CardAmount.createFromNum(0),
         paidAmount:  CashAmount.createFromNum(0),
-        saleTransactionFailure: null,
+        saleTransactionFailure: none(),
         hasRequested: false,
         hasSubmitted: false,
         requestCompleted: false,

@@ -17,7 +17,7 @@ class _$AddSaleStateTearOff {
   _AddSaleState call(
       {Either<CardAmountFailure, CardAmount> totalAmount,
       Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure saleTransactionFailure,
+      Option<Failure> saleTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted}) {
@@ -40,7 +40,7 @@ const $AddSaleState = _$AddSaleStateTearOff();
 mixin _$AddSaleState {
   Either<CardAmountFailure, CardAmount> get totalAmount;
   Either<CashAmountFailure, CashAmount> get paidAmount;
-  Failure get saleTransactionFailure;
+  Option<Failure> get saleTransactionFailure;
   bool get hasSubmitted;
   bool get hasRequested;
   bool get requestCompleted;
@@ -57,7 +57,7 @@ abstract class $AddSaleStateCopyWith<$Res> {
   $Res call(
       {Either<CardAmountFailure, CardAmount> totalAmount,
       Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure saleTransactionFailure,
+      Option<Failure> saleTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted});
@@ -89,7 +89,7 @@ class _$AddSaleStateCopyWithImpl<$Res> implements $AddSaleStateCopyWith<$Res> {
           : paidAmount as Either<CashAmountFailure, CashAmount>,
       saleTransactionFailure: saleTransactionFailure == freezed
           ? _value.saleTransactionFailure
-          : saleTransactionFailure as Failure,
+          : saleTransactionFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       hasRequested:
@@ -111,7 +111,7 @@ abstract class _$AddSaleStateCopyWith<$Res>
   $Res call(
       {Either<CardAmountFailure, CardAmount> totalAmount,
       Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure saleTransactionFailure,
+      Option<Failure> saleTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted});
@@ -145,7 +145,7 @@ class __$AddSaleStateCopyWithImpl<$Res> extends _$AddSaleStateCopyWithImpl<$Res>
           : paidAmount as Either<CashAmountFailure, CashAmount>,
       saleTransactionFailure: saleTransactionFailure == freezed
           ? _value.saleTransactionFailure
-          : saleTransactionFailure as Failure,
+          : saleTransactionFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       hasRequested:
@@ -172,7 +172,7 @@ class _$_AddSaleState implements _AddSaleState {
   @override
   final Either<CashAmountFailure, CashAmount> paidAmount;
   @override
-  final Failure saleTransactionFailure;
+  final Option<Failure> saleTransactionFailure;
   @override
   final bool hasSubmitted;
   @override
@@ -229,7 +229,7 @@ abstract class _AddSaleState implements AddSaleState {
   const factory _AddSaleState(
       {Either<CardAmountFailure, CardAmount> totalAmount,
       Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure saleTransactionFailure,
+      Option<Failure> saleTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted}) = _$_AddSaleState;
@@ -239,7 +239,7 @@ abstract class _AddSaleState implements AddSaleState {
   @override
   Either<CashAmountFailure, CashAmount> get paidAmount;
   @override
-  Failure get saleTransactionFailure;
+  Option<Failure> get saleTransactionFailure;
   @override
   bool get hasSubmitted;
   @override

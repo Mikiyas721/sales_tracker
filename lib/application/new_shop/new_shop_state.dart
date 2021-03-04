@@ -6,7 +6,7 @@ abstract class NewShopState extends BlocState with _$NewShopState {
     Either<NameFailure, Name> name,
     Either<AddressFailure, Address> address,
     Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-    Failure addShopFailure,
+    Option<Failure> addShopFailure,
     bool hasSubmitted,
     bool isAdding,
     bool hasAdded,
@@ -16,7 +16,7 @@ abstract class NewShopState extends BlocState with _$NewShopState {
       name: Name.create(''),
       address: Address.create(''),
       phoneNumber: PhoneNumber.create(''),
-      addShopFailure: null,
+      addShopFailure: none(),
       hasSubmitted: false,
       isAdding: false,
       hasAdded: false);

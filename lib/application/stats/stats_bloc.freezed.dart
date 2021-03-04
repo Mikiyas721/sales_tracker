@@ -17,7 +17,7 @@ class _$StatsStateTearOff {
   _StatsState call(
       {List<CardTransaction> cards,
       List<CashTransaction> cash,
-      Failure loadingFailure,
+      Option<Failure> loadingFailure,
       int activeButtonIndex,
       bool isLoading}) {
     return _StatsState(
@@ -38,7 +38,7 @@ const $StatsState = _$StatsStateTearOff();
 mixin _$StatsState {
   List<CardTransaction> get cards;
   List<CashTransaction> get cash;
-  Failure get loadingFailure;
+  Option<Failure> get loadingFailure;
   int get activeButtonIndex;
   bool get isLoading;
 
@@ -54,7 +54,7 @@ abstract class $StatsStateCopyWith<$Res> {
   $Res call(
       {List<CardTransaction> cards,
       List<CashTransaction> cash,
-      Failure loadingFailure,
+      Option<Failure> loadingFailure,
       int activeButtonIndex,
       bool isLoading});
 }
@@ -80,7 +80,7 @@ class _$StatsStateCopyWithImpl<$Res> implements $StatsStateCopyWith<$Res> {
       cash: cash == freezed ? _value.cash : cash as List<CashTransaction>,
       loadingFailure: loadingFailure == freezed
           ? _value.loadingFailure
-          : loadingFailure as Failure,
+          : loadingFailure as Option<Failure>,
       activeButtonIndex: activeButtonIndex == freezed
           ? _value.activeButtonIndex
           : activeButtonIndex as int,
@@ -98,7 +98,7 @@ abstract class _$StatsStateCopyWith<$Res> implements $StatsStateCopyWith<$Res> {
   $Res call(
       {List<CardTransaction> cards,
       List<CashTransaction> cash,
-      Failure loadingFailure,
+      Option<Failure> loadingFailure,
       int activeButtonIndex,
       bool isLoading});
 }
@@ -126,7 +126,7 @@ class __$StatsStateCopyWithImpl<$Res> extends _$StatsStateCopyWithImpl<$Res>
       cash: cash == freezed ? _value.cash : cash as List<CashTransaction>,
       loadingFailure: loadingFailure == freezed
           ? _value.loadingFailure
-          : loadingFailure as Failure,
+          : loadingFailure as Option<Failure>,
       activeButtonIndex: activeButtonIndex == freezed
           ? _value.activeButtonIndex
           : activeButtonIndex as int,
@@ -149,7 +149,7 @@ class _$_StatsState implements _StatsState {
   @override
   final List<CashTransaction> cash;
   @override
-  final Failure loadingFailure;
+  final Option<Failure> loadingFailure;
   @override
   final int activeButtonIndex;
   @override
@@ -198,7 +198,7 @@ abstract class _StatsState implements StatsState {
   const factory _StatsState(
       {List<CardTransaction> cards,
       List<CashTransaction> cash,
-      Failure loadingFailure,
+      Option<Failure> loadingFailure,
       int activeButtonIndex,
       bool isLoading}) = _$_StatsState;
 
@@ -207,7 +207,7 @@ abstract class _StatsState implements StatsState {
   @override
   List<CashTransaction> get cash;
   @override
-  Failure get loadingFailure;
+  Option<Failure> get loadingFailure;
   @override
   int get activeButtonIndex;
   @override

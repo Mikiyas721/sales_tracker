@@ -15,7 +15,9 @@ class _$MyShopsStateTearOff {
 
 // ignore: unused_element
   _MyShopsState call(
-      {bool isLoading, Failure myShopsLoadingFailure, List<Shop> shops}) {
+      {bool isLoading,
+      Option<Failure> myShopsLoadingFailure,
+      List<Shop> shops}) {
     return _MyShopsState(
       isLoading: isLoading,
       myShopsLoadingFailure: myShopsLoadingFailure,
@@ -31,7 +33,7 @@ const $MyShopsState = _$MyShopsStateTearOff();
 /// @nodoc
 mixin _$MyShopsState {
   bool get isLoading;
-  Failure get myShopsLoadingFailure;
+  Option<Failure> get myShopsLoadingFailure;
   List<Shop> get shops;
 
   @JsonKey(ignore: true)
@@ -43,7 +45,10 @@ abstract class $MyShopsStateCopyWith<$Res> {
   factory $MyShopsStateCopyWith(
           MyShopsState value, $Res Function(MyShopsState) then) =
       _$MyShopsStateCopyWithImpl<$Res>;
-  $Res call({bool isLoading, Failure myShopsLoadingFailure, List<Shop> shops});
+  $Res call(
+      {bool isLoading,
+      Option<Failure> myShopsLoadingFailure,
+      List<Shop> shops});
 }
 
 /// @nodoc
@@ -64,7 +69,7 @@ class _$MyShopsStateCopyWithImpl<$Res> implements $MyShopsStateCopyWith<$Res> {
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       myShopsLoadingFailure: myShopsLoadingFailure == freezed
           ? _value.myShopsLoadingFailure
-          : myShopsLoadingFailure as Failure,
+          : myShopsLoadingFailure as Option<Failure>,
       shops: shops == freezed ? _value.shops : shops as List<Shop>,
     ));
   }
@@ -77,7 +82,10 @@ abstract class _$MyShopsStateCopyWith<$Res>
           _MyShopsState value, $Res Function(_MyShopsState) then) =
       __$MyShopsStateCopyWithImpl<$Res>;
   @override
-  $Res call({bool isLoading, Failure myShopsLoadingFailure, List<Shop> shops});
+  $Res call(
+      {bool isLoading,
+      Option<Failure> myShopsLoadingFailure,
+      List<Shop> shops});
 }
 
 /// @nodoc
@@ -100,7 +108,7 @@ class __$MyShopsStateCopyWithImpl<$Res> extends _$MyShopsStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       myShopsLoadingFailure: myShopsLoadingFailure == freezed
           ? _value.myShopsLoadingFailure
-          : myShopsLoadingFailure as Failure,
+          : myShopsLoadingFailure as Option<Failure>,
       shops: shops == freezed ? _value.shops : shops as List<Shop>,
     ));
   }
@@ -114,7 +122,7 @@ class _$_MyShopsState implements _MyShopsState {
   @override
   final bool isLoading;
   @override
-  final Failure myShopsLoadingFailure;
+  final Option<Failure> myShopsLoadingFailure;
   @override
   final List<Shop> shops;
 
@@ -153,13 +161,13 @@ class _$_MyShopsState implements _MyShopsState {
 abstract class _MyShopsState implements MyShopsState {
   const factory _MyShopsState(
       {bool isLoading,
-      Failure myShopsLoadingFailure,
+      Option<Failure> myShopsLoadingFailure,
       List<Shop> shops}) = _$_MyShopsState;
 
   @override
   bool get isLoading;
   @override
-  Failure get myShopsLoadingFailure;
+  Option<Failure> get myShopsLoadingFailure;
   @override
   List<Shop> get shops;
   @override

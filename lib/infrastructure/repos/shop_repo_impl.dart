@@ -37,4 +37,23 @@ class ShopRepoImpl extends IShopRepo {
     return result.either.fold(
         (l) => left(l), (r) => right(IdDto.toDomainList<Shop, ShopDto>(r)));
   }
+
+  @override
+  Future<Either<Failure, Shop>> getShopByPhoneNumber(String phoneNumber) async {
+    final result = await shopCrudDataSource.find(options: {
+      "filter": {
+        "where": {
+          "phoneNumber": {"eq": "$phoneNumber"}
+        }
+      }
+    });
+    return result.either.fold((l) => left(l), (r) {
+      if (r.isEmpty)
+        return left(SimpleFailure("No such shop"));
+      else
+        return r[0].toDomain().fold(
+            () => left(SimpleFailure("Couldn't convert to Domain")),
+            (a) => right(a));
+    });
+  }
 }

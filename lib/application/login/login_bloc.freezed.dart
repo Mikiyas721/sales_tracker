@@ -16,7 +16,7 @@ class _$LoginStateTearOff {
 // ignore: unused_element
   _LoginState call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure loginRequestFailure,
+      Option<Failure> loginRequestFailure,
       bool hasSubmitted,
       bool isRequesting,
       bool hasRequested}) {
@@ -37,7 +37,7 @@ const $LoginState = _$LoginStateTearOff();
 /// @nodoc
 mixin _$LoginState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
-  Failure get loginRequestFailure;
+  Option<Failure> get loginRequestFailure;
   bool get hasSubmitted;
   bool get isRequesting;
   bool get hasRequested;
@@ -53,7 +53,7 @@ abstract class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl<$Res>;
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure loginRequestFailure,
+      Option<Failure> loginRequestFailure,
       bool hasSubmitted,
       bool isRequesting,
       bool hasRequested});
@@ -81,7 +81,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       loginRequestFailure: loginRequestFailure == freezed
           ? _value.loginRequestFailure
-          : loginRequestFailure as Failure,
+          : loginRequestFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isRequesting:
@@ -100,7 +100,7 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   @override
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure loginRequestFailure,
+      Option<Failure> loginRequestFailure,
       bool hasSubmitted,
       bool isRequesting,
       bool hasRequested});
@@ -130,7 +130,7 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       loginRequestFailure: loginRequestFailure == freezed
           ? _value.loginRequestFailure
-          : loginRequestFailure as Failure,
+          : loginRequestFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isRequesting:
@@ -153,7 +153,7 @@ class _$_LoginState implements _LoginState {
   @override
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
-  final Failure loginRequestFailure;
+  final Option<Failure> loginRequestFailure;
   @override
   final bool hasSubmitted;
   @override
@@ -205,7 +205,7 @@ class _$_LoginState implements _LoginState {
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure loginRequestFailure,
+      Option<Failure> loginRequestFailure,
       bool hasSubmitted,
       bool isRequesting,
       bool hasRequested}) = _$_LoginState;
@@ -213,7 +213,7 @@ abstract class _LoginState implements LoginState {
   @override
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
-  Failure get loginRequestFailure;
+  Option<Failure> get loginRequestFailure;
   @override
   bool get hasSubmitted;
   @override

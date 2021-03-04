@@ -16,7 +16,7 @@ class _$AddFundStateTearOff {
 // ignore: unused_element
   _AddFundState call(
       {Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure fundTransactionFailure,
+      Option<Failure> fundTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted}) {
@@ -37,7 +37,7 @@ const $AddFundState = _$AddFundStateTearOff();
 /// @nodoc
 mixin _$AddFundState {
   Either<CashAmountFailure, CashAmount> get paidAmount;
-  Failure get fundTransactionFailure;
+  Option<Failure> get fundTransactionFailure;
   bool get hasSubmitted;
   bool get hasRequested;
   bool get requestCompleted;
@@ -53,7 +53,7 @@ abstract class $AddFundStateCopyWith<$Res> {
       _$AddFundStateCopyWithImpl<$Res>;
   $Res call(
       {Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure fundTransactionFailure,
+      Option<Failure> fundTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted});
@@ -81,7 +81,7 @@ class _$AddFundStateCopyWithImpl<$Res> implements $AddFundStateCopyWith<$Res> {
           : paidAmount as Either<CashAmountFailure, CashAmount>,
       fundTransactionFailure: fundTransactionFailure == freezed
           ? _value.fundTransactionFailure
-          : fundTransactionFailure as Failure,
+          : fundTransactionFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       hasRequested:
@@ -102,7 +102,7 @@ abstract class _$AddFundStateCopyWith<$Res>
   @override
   $Res call(
       {Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure fundTransactionFailure,
+      Option<Failure> fundTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted});
@@ -132,7 +132,7 @@ class __$AddFundStateCopyWithImpl<$Res> extends _$AddFundStateCopyWithImpl<$Res>
           : paidAmount as Either<CashAmountFailure, CashAmount>,
       fundTransactionFailure: fundTransactionFailure == freezed
           ? _value.fundTransactionFailure
-          : fundTransactionFailure as Failure,
+          : fundTransactionFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       hasRequested:
@@ -156,7 +156,7 @@ class _$_AddFundState implements _AddFundState {
   @override
   final Either<CashAmountFailure, CashAmount> paidAmount;
   @override
-  final Failure fundTransactionFailure;
+  final Option<Failure> fundTransactionFailure;
   @override
   final bool hasSubmitted;
   @override
@@ -208,7 +208,7 @@ class _$_AddFundState implements _AddFundState {
 abstract class _AddFundState implements AddFundState {
   const factory _AddFundState(
       {Either<CashAmountFailure, CashAmount> paidAmount,
-      Failure fundTransactionFailure,
+      Option<Failure> fundTransactionFailure,
       bool hasSubmitted,
       bool hasRequested,
       bool requestCompleted}) = _$_AddFundState;
@@ -216,7 +216,7 @@ abstract class _AddFundState implements AddFundState {
   @override
   Either<CashAmountFailure, CashAmount> get paidAmount;
   @override
-  Failure get fundTransactionFailure;
+  Option<Failure> get fundTransactionFailure;
   @override
   bool get hasSubmitted;
   @override

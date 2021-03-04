@@ -39,6 +39,7 @@ class LoadingStatsFailedStatsEvent extends StatsEvent {
 
   @override
   Stream<StatsState> handle(StatsState currentState) async* {
-    yield currentState.copyWith(loadingFailure: cardsFailure, isLoading: false);
+    yield currentState.copyWith(
+        loadingFailure: Failure.getFailure(cardsFailure), isLoading: false);
   }
 }

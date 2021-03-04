@@ -36,8 +36,8 @@ class AddFundSucceededEvent extends AddFundEvent {
   Stream<AddFundState> handle(
       AddFundState currentState) async* {
     yield currentState.copyWith(
-      paidAmount: null,
-      fundTransactionFailure: null,
+      paidAmount: CashAmount.createFromNum(0),
+      fundTransactionFailure: none(),
       hasRequested: false,
       hasSubmitted: false,
       requestCompleted: true,
@@ -46,15 +46,15 @@ class AddFundSucceededEvent extends AddFundEvent {
 }
 
 class AddFundFailedEvent extends AddFundEvent {
-  final Failure saleTransactionFailure;
+  final Failure fundTransactionFailure;
 
-  AddFundFailedEvent(this.saleTransactionFailure);
+  AddFundFailedEvent(this.fundTransactionFailure);
 
   @override
   Stream<AddFundState> handle(
       AddFundState currentState) async* {
     yield currentState.copyWith(
-      fundTransactionFailure: saleTransactionFailure,
+      fundTransactionFailure: Failure.getFailure(fundTransactionFailure),
       hasRequested: false,
     );
   }

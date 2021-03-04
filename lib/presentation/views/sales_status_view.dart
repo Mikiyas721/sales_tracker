@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/widgets/empty_error_view.dart';
@@ -24,52 +25,59 @@ class SalesStatusView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Text(
-              getTitle(salesStatusViewModel.activeButtonIndex),
-              style: context.headline2,
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 60),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          60.vSpace,
+          Row(
             children: [
-              MyTabButton(
-                label: 'T',
-                isActive:
-                    salesStatusViewModel.activeButtonIndex == 0 ? true : false,
-                onTap: onToday,
+              Text(
+                getTitle(salesStatusViewModel.activeButtonIndex),
+                style: context.headline3,
               ),
-              MyTabButton(
-                label: 'W',
-                isActive:
-                    salesStatusViewModel.activeButtonIndex == 1 ? true : false,
-                onTap: onThisWeek,
-              ),
-              MyTabButton(
-                label: 'M',
-                isActive:
-                    salesStatusViewModel.activeButtonIndex == 2 ? true : false,
-                onTap: onThisMonth,
-              ),
-              getBody(context)
             ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 20, bottom: 60),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MyTabButton(
+                  label: 'T',
+                  isActive: salesStatusViewModel.activeButtonIndex == 0
+                      ? true
+                      : false,
+                  onTap: onToday,
+                ),
+                MyTabButton(
+                  label: 'W',
+                  isActive: salesStatusViewModel.activeButtonIndex == 1
+                      ? true
+                      : false,
+                  onTap: onThisWeek,
+                ),
+                MyTabButton(
+                  label: 'M',
+                  isActive: salesStatusViewModel.activeButtonIndex == 2
+                      ? true
+                      : false,
+                  onTap: onThisMonth,
+                ),
+              ],
+            ),
+          ),
+          getBody(context)
+        ],
+      ),
     );
   }
 
   Widget getBody(BuildContext context) {
     if (salesStatusViewModel.isLoading) return MyLoadingView();
-    if (salesStatusViewModel.loadingFailure != null)
+    if (salesStatusViewModel.loadingFailure.isNone())
       return EmptyErrorView.defaultError(
-          description: salesStatusViewModel.loadingFailure.message,
+          description: salesStatusViewModel.loadingFailure?.getOrElse(() => null)?.message,
           onAction: onReload);
     if (salesStatusViewModel.bars.isEmpty)
       return EmptyErrorView.defaultEmpty(

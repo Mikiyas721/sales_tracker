@@ -16,6 +16,7 @@ class CashTransactionsController extends BlocViewModelController<
     CashTransactionsViewModel> with ToastMixin, DateTimeMixin {
   final BuildContext context;
   final String shopId;
+
   CashTransactionsController(this.context, this.shopId)
       : super(getIt.get<CashTransactionsBloc>(), true);
 
@@ -29,9 +30,7 @@ class CashTransactionsController extends BlocViewModelController<
                 date: getShortDateString(e.createdAt)))
             ?.toList(),
         isLoading: s.isLoading,
-        loadingError: s.fetchingFundsFailure != null
-            ? s.fetchingFundsFailure.message
-            : null);
+        loadingError: s.fetchingFundsFailure?.getOrElse(() => null)?.message);
   }
 
   void loadShops() async {
@@ -42,8 +41,9 @@ class CashTransactionsController extends BlocViewModelController<
           SimpleFailure('Undefined Salesperson')));
       toastError('Undefined Salesperson');
     }, (salesperson) async {
-      final fetchShopsResult =
-          await getIt.get<FetchCashTransactions>().execute(salesperson.id, shopId);
+      final fetchShopsResult = await getIt
+          .get<FetchCashTransactions>()
+          .execute(salesperson.id, shopId);
       fetchShopsResult.fold((l) {
         bloc.add(CashTransactionsLoadingFailedEvent(l));
         toastError(l.message);

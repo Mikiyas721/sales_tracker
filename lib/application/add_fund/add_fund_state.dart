@@ -5,7 +5,7 @@ part of 'add_fund_bloc.dart';
 abstract class AddFundState extends BlocState with _$AddFundState{
   const factory AddFundState({
     Either<CashAmountFailure, CashAmount> paidAmount,
-    Failure fundTransactionFailure,
+    Option<Failure> fundTransactionFailure,
     bool hasSubmitted,
     bool hasRequested,
     bool requestCompleted,
@@ -13,7 +13,7 @@ abstract class AddFundState extends BlocState with _$AddFundState{
 
   factory AddFundState.initial() => AddFundState(
     paidAmount: CashAmount.createFromNum(0),
-    fundTransactionFailure: null,
+    fundTransactionFailure: none(),
     hasRequested: false,
     hasSubmitted: false,
     requestCompleted: false,

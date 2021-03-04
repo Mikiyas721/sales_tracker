@@ -50,6 +50,7 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
 
   List<BarData> _getBars(int activeButtonIndex, List<CardTransaction> cards,
       List<CashTransaction> cash) {
+    if (cards.isEmpty && cash.isEmpty) return [];
     if (activeButtonIndex == 0)
       return _getTodayBars(cards, cash);
     else if (activeButtonIndex == 1)
@@ -64,11 +65,11 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
     for (int i = 9; i < 18; i++) {
       double barHeight = 0;
       double stackHeight = 0;
-      cards.forEach((element) {
+      cards?.forEach((element) {
         if (element.createdAt.hour < i && element.createdAt.hour > i - 1)
           barHeight += element.amount.value;
       });
-      cash.forEach((element) {
+      cash?.forEach((element) {
         if (element.createdAt.hour < i && element.createdAt.hour > i - 1)
           stackHeight += element.amount.value;
       });
@@ -87,10 +88,10 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
     for (int i = 1; i < 8; i++) {
       double barHeight = 0;
       double stackHeight = 0;
-      cards.forEach((element) {
+      cards?.forEach((element) {
         if (element.createdAt.weekday == i) barHeight += element.amount.value;
       });
-      cash.forEach((element) {
+      cash?.forEach((element) {
         if (element.createdAt.weekday == i) stackHeight += element.amount.value;
       });
       barData.add(BarData(
@@ -108,12 +109,12 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
     for (int i = 0; i < 4; i++) {
       double barHeight = 0;
       double stackHeight = 0;
-      cards.forEach((element) {
+      cards?.forEach((element) {
         if (element.createdAt.day >= (i * 7) + 1 &&
             element.createdAt.day <= (i + 1) * 7)
           barHeight += element.amount.value;
       });
-      cash.forEach((element) {
+      cash?.forEach((element) {
         if (element.createdAt.day >= (i * 7) + 1 &&
             element.createdAt.day <= (i + 1) * 7)
           stackHeight += element.amount.value;
@@ -167,13 +168,13 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
         toastError("Undefined Salesperson");
       }, (salesperson) async {
         final cardResult =
-        await getIt.get<FetchThisWeekCard>().execute(salesperson.id);
+            await getIt.get<FetchThisWeekCard>().execute(salesperson.id);
         cardResult.fold((l) {
           bloc.add(LoadingStatsFailedStatsEvent(l));
           toastError(l.message);
         }, (cards) async {
           final cashResult =
-          await getIt.get<FetchThisWeekCash>().execute(salesperson.id);
+              await getIt.get<FetchThisWeekCash>().execute(salesperson.id);
           cashResult.fold((l) {
             bloc.add(LoadingStatsFailedStatsEvent(l));
             toastError(l.message);
@@ -196,13 +197,13 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
         toastError("Undefined Salesperson");
       }, (salesperson) async {
         final cardResult =
-        await getIt.get<FetchThisMonthCard>().execute(salesperson.id);
+            await getIt.get<FetchThisMonthCard>().execute(salesperson.id);
         cardResult.fold((l) {
           bloc.add(LoadingStatsFailedStatsEvent(l));
           toastError(l.message);
         }, (cards) async {
           final cashResult =
-          await getIt.get<FetchThisMonthCash>().execute(salesperson.id);
+              await getIt.get<FetchThisMonthCash>().execute(salesperson.id);
           cashResult.fold((l) {
             bloc.add(LoadingStatsFailedStatsEvent(l));
             toastError(l.message);

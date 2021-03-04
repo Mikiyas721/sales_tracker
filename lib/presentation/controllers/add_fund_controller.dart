@@ -23,7 +23,7 @@ class AddFundController extends BlocViewModelController<AddFundBloc,
   @override
   FundViewModel mapStateToViewModel(AddFundState s) {
     return FundViewModel(
-        amount: s.paidAmount.getOrElse(() => null)?.value.toString(),
+        amount: s.paidAmount?.getOrElse(() => null)?.value?.toString(),
         amountError: s.hasSubmitted
             ? s.paidAmount.fold((l) => l.message, (r) => null)
             : null,

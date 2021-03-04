@@ -28,11 +28,11 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
   @override
   SaleViewModel mapStateToViewModel(AddSaleState s) {
     return SaleViewModel(
-      totalAmount: s.totalAmount.fold((l) => null, (r) => r)?.value.toString(),
+      totalAmount: s.totalAmount?.fold((l) => null, (r) => r)?.value.toString(),
       totalAmountError: s.hasSubmitted
           ? (s.totalAmount.fold((l) => l.message, (r) => null))
           : null,
-      paidAmount: s.paidAmount.fold((l) => null, (r) => r)?.value.toString(),
+      paidAmount: s.paidAmount?.fold((l) => null, (r) => r)?.value.toString(),
       paidAmountError: s.hasSubmitted
           ? (s.paidAmount.fold((l) => l.message, (r) => null))
           : null,

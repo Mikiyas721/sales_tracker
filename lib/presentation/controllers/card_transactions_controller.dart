@@ -30,9 +30,7 @@ class CardTransactionsController extends BlocViewModelController<
                 time: getTimeString(e.createdAt)))
             ?.toList(),
         isLoading: s.isLoading,
-        loadingError: s.fetchingSalesFailure != null
-            ? s.fetchingSalesFailure.message
-            : null);
+        loadingError: s.fetchingSalesFailure?.getOrElse(() => null)?.message);
   }
 
   void loadShops() async {

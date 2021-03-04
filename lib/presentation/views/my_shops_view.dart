@@ -9,8 +9,9 @@ import '../../common/common.dart';
 class MyShopsView extends StatelessWidget {
   final MyShopsViewModel myShops;
   final VoidCallback onReload;
+  final VoidCallback onRegister;
 
-  const MyShopsView({Key key, this.myShops, this.onReload}) : super(key: key);
+  const MyShopsView({Key key, this.myShops, this.onReload, this.onRegister}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class MyShopsView extends StatelessWidget {
             child: MyLoadingView()),
         emptyView: Center(
             child: EmptyErrorView.defaultEmpty(
-              onAction: onReload,
+              description: 'You have no shops. Click the button below to start registering',
+              actionLabel: 'Register',
+              onAction: onRegister,
             )));
   }
 }

@@ -33,7 +33,7 @@ class NewShopPhoneNumberChangedEvent implements NewShopEvent {
 
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
-    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
+    yield currentState.copyWith(phoneNumber: PhoneNumber.createWithCountryCode(phoneNumber));
   }
 }
 
@@ -59,10 +59,10 @@ class NewShopAddSucceededEvent implements NewShopEvent {
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
     yield currentState.copyWith(
-      name: null,
-      address: null,
-      phoneNumber: null,
-      addShopFailure: null,
+      name: Name.create(''),
+      address: Address.create(''),
+      phoneNumber: PhoneNumber.create(''),
+      addShopFailure: none(),
       hasSubmitted: false,
       isAdding: false,
       hasAdded: true,
@@ -79,7 +79,7 @@ class NewShopAddFailedEvent implements NewShopEvent {
   Stream<NewShopState> handle(NewShopState currentState) async* {
     yield currentState.copyWith(
       isAdding: false,
-      addShopFailure: this.addShopFailure,
+      addShopFailure: Failure.getFailure(addShopFailure),
     );
   }
 }

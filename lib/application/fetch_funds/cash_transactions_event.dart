@@ -27,6 +27,6 @@ class CashTransactionsLoadingFailedEvent extends CashTransactionsEvent {
   @override
   Stream<CashTransactionsState> handle(CashTransactionsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, fetchingFundsFailure: loadingFailure);
+        isLoading: false, fetchingFundsFailure: Failure.getFailure(loadingFailure));
   }
 }

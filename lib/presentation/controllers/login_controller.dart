@@ -17,7 +17,7 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
   @override
   LoginViewModel mapStateToViewModel(LoginState s) {
     return LoginViewModel(
-      phoneNumber: s.phoneNumber.getOrElse(() => null)?.value,
+      phoneNumber: s.phoneNumber?.getOrElse(() => null)?.value,
       phoneNumberError: s.hasSubmitted
           ? s.phoneNumber.fold((l) => l.message, (r) => null)
           : null,

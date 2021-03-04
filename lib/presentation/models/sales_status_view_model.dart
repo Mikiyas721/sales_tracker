@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/common/failure.dart';
@@ -5,7 +6,7 @@ import 'package:sales_tracker/common/view_model.dart';
 
 class SalesStatusViewModel extends ViewModel {
   final bool isLoading;
-  final Failure loadingFailure;
+  final Option<Failure> loadingFailure;
   final int activeButtonIndex;
   final String soldAmount;
   final String fundedAmount;

@@ -26,9 +26,7 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
                 ))
             ?.toList(),
         isLoading: s.isLoading,
-        loadingError: s.myShopsLoadingFailure != null
-            ? s.myShopsLoadingFailure.message
-            : null);
+        loadingError: s.myShopsLoadingFailure?.getOrElse(() => null)?.message);
   }
 
   void loadShops() async {
@@ -48,5 +46,9 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
         bloc.add(MyShopsLoadingSucceededEvent(r));
       });
     });
+  }
+
+  void onRegister() {
+    Navigator.pushNamed(context, '/newShopPage');
   }
 }

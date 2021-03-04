@@ -16,7 +16,7 @@ class _$CardTransactionsStateTearOff {
 // ignore: unused_element
   _CardTransactionsState call(
       {bool isLoading,
-      Failure fetchingSalesFailure,
+      Option<Failure> fetchingSalesFailure,
       List<CardTransaction> sales}) {
     return _CardTransactionsState(
       isLoading: isLoading,
@@ -33,7 +33,7 @@ const $CardTransactionsState = _$CardTransactionsStateTearOff();
 /// @nodoc
 mixin _$CardTransactionsState {
   bool get isLoading;
-  Failure get fetchingSalesFailure;
+  Option<Failure> get fetchingSalesFailure;
   List<CardTransaction> get sales;
 
   @JsonKey(ignore: true)
@@ -47,7 +47,7 @@ abstract class $CardTransactionsStateCopyWith<$Res> {
       _$CardTransactionsStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoading,
-      Failure fetchingSalesFailure,
+      Option<Failure> fetchingSalesFailure,
       List<CardTransaction> sales});
 }
 
@@ -70,7 +70,7 @@ class _$CardTransactionsStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       fetchingSalesFailure: fetchingSalesFailure == freezed
           ? _value.fetchingSalesFailure
-          : fetchingSalesFailure as Failure,
+          : fetchingSalesFailure as Option<Failure>,
       sales: sales == freezed ? _value.sales : sales as List<CardTransaction>,
     ));
   }
@@ -85,7 +85,7 @@ abstract class _$CardTransactionsStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoading,
-      Failure fetchingSalesFailure,
+      Option<Failure> fetchingSalesFailure,
       List<CardTransaction> sales});
 }
 
@@ -110,7 +110,7 @@ class __$CardTransactionsStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       fetchingSalesFailure: fetchingSalesFailure == freezed
           ? _value.fetchingSalesFailure
-          : fetchingSalesFailure as Failure,
+          : fetchingSalesFailure as Option<Failure>,
       sales: sales == freezed ? _value.sales : sales as List<CardTransaction>,
     ));
   }
@@ -124,7 +124,7 @@ class _$_CardTransactionsState implements _CardTransactionsState {
   @override
   final bool isLoading;
   @override
-  final Failure fetchingSalesFailure;
+  final Option<Failure> fetchingSalesFailure;
   @override
   final List<CardTransaction> sales;
 
@@ -164,13 +164,13 @@ class _$_CardTransactionsState implements _CardTransactionsState {
 abstract class _CardTransactionsState implements CardTransactionsState {
   const factory _CardTransactionsState(
       {bool isLoading,
-      Failure fetchingSalesFailure,
+      Option<Failure> fetchingSalesFailure,
       List<CardTransaction> sales}) = _$_CardTransactionsState;
 
   @override
   bool get isLoading;
   @override
-  Failure get fetchingSalesFailure;
+  Option<Failure> get fetchingSalesFailure;
   @override
   List<CardTransaction> get sales;
   @override

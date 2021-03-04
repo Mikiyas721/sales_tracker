@@ -29,6 +29,7 @@ class MyShopsPage extends StatelessWidget {
                 return MyShopsView(
                   myShops: model,
                   onReload: controller.loadShops,
+                  onRegister: controller.onRegister,
                 );
               }),
     );

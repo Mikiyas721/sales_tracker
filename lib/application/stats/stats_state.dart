@@ -5,7 +5,7 @@ abstract class StatsState extends BlocState with _$StatsState {
   const factory StatsState({
     List<CardTransaction> cards,
     List<CashTransaction> cash,
-    Failure loadingFailure,
+    Option<Failure> loadingFailure,
     int activeButtonIndex,
     bool isLoading,
   }) = _StatsState;
@@ -13,7 +13,7 @@ abstract class StatsState extends BlocState with _$StatsState {
   factory StatsState.initial() => StatsState(
       cards: [],
       cash: [],
-      loadingFailure: null,
+      loadingFailure: none(),
       activeButtonIndex: 0,
       isLoading: false);
 }

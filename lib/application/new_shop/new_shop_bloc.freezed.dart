@@ -18,7 +18,7 @@ class _$NewShopStateTearOff {
       {Either<NameFailure, Name> name,
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure addShopFailure,
+      Option<Failure> addShopFailure,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded}) {
@@ -43,7 +43,7 @@ mixin _$NewShopState {
   Either<NameFailure, Name> get name;
   Either<AddressFailure, Address> get address;
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
-  Failure get addShopFailure;
+  Option<Failure> get addShopFailure;
   bool get hasSubmitted;
   bool get isAdding;
   bool get hasAdded;
@@ -61,7 +61,7 @@ abstract class $NewShopStateCopyWith<$Res> {
       {Either<NameFailure, Name> name,
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure addShopFailure,
+      Option<Failure> addShopFailure,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
@@ -95,7 +95,7 @@ class _$NewShopStateCopyWithImpl<$Res> implements $NewShopStateCopyWith<$Res> {
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       addShopFailure: addShopFailure == freezed
           ? _value.addShopFailure
-          : addShopFailure as Failure,
+          : addShopFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
@@ -115,7 +115,7 @@ abstract class _$NewShopStateCopyWith<$Res>
       {Either<NameFailure, Name> name,
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure addShopFailure,
+      Option<Failure> addShopFailure,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded});
@@ -151,7 +151,7 @@ class __$NewShopStateCopyWithImpl<$Res> extends _$NewShopStateCopyWithImpl<$Res>
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
       addShopFailure: addShopFailure == freezed
           ? _value.addShopFailure
-          : addShopFailure as Failure,
+          : addShopFailure as Option<Failure>,
       hasSubmitted:
           hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
       isAdding: isAdding == freezed ? _value.isAdding : isAdding as bool,
@@ -178,7 +178,7 @@ class _$_NewShopState implements _NewShopState {
   @override
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
-  final Failure addShopFailure;
+  final Option<Failure> addShopFailure;
   @override
   final bool hasSubmitted;
   @override
@@ -239,7 +239,7 @@ abstract class _NewShopState implements NewShopState {
       {Either<NameFailure, Name> name,
       Either<AddressFailure, Address> address,
       Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Failure addShopFailure,
+      Option<Failure> addShopFailure,
       bool hasSubmitted,
       bool isAdding,
       bool hasAdded}) = _$_NewShopState;
@@ -251,7 +251,7 @@ abstract class _NewShopState implements NewShopState {
   @override
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
-  Failure get addShopFailure;
+  Option<Failure> get addShopFailure;
   @override
   bool get hasSubmitted;
   @override

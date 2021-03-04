@@ -11,49 +11,51 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        actions: [IconButton(icon: Icon(Icons.logout), onPressed: () {})],
-      ),
-      body: Padding(
-        padding: 20.hPadding,
-        child: Column(children: [
-          50.vSpace,
-          ViewModelBuilder.withController<SalesStatusViewModel,
-                  StatsController>(
-              create: () => StatsController(context),
-              onInit: (controller) => controller,
-              builder: (context, controller, model) {
-                return SalesStatusView(
-                  salesStatusViewModel: model,
-                  onToday: controller.onToday,
-                  onThisWeek: controller.onThisWeek,
-                  onThisMonth: controller.onThisMonth,
-                );
-              }),
-          Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyButton(
-                label: 'Add Shop',
-                onSubmit: () {
-                  Navigator.pushNamed(context, '/newShopPage');
-                },
-                minWidth: width * 0.44,
-              ),
-              MyButton(
-                label: 'My Shops',
-                onSubmit: () {
-                  Navigator.pushNamed(context, '/myShopsPage');
-                },
-                minWidth: width * 0.44,
-              ),
-            ],
+      body: Stack(
+        children: [
+          Padding(
+            padding: 20.hPadding,
+            child: ViewModelBuilder.withController<SalesStatusViewModel,
+                    StatsController>(
+                create: () => StatsController(context),
+                onInit: (controller) => controller.onToday(true),
+                builder: (context, controller, model) {
+                  return SalesStatusView(
+                    salesStatusViewModel: model,
+                    onToday: controller.onToday,
+                    onThisWeek: controller.onThisWeek,
+                    onThisMonth: controller.onThisMonth,
+                  );
+                }),
           ),
-          20.vSpace
-        ]),
+          Align(
+              alignment: Alignment(0.9,-0.87),
+              child: IconButton(icon: Icon(Icons.logout), onPressed: () {})),
+          Positioned(
+            left:20,
+            right:20,
+            bottom: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyButton(
+                  label: 'Add Shop',
+                  onSubmit: () {
+                    Navigator.pushNamed(context, '/newShopPage');
+                  },
+                  minWidth: width * 0.44,
+                ),
+                MyButton(
+                  label: 'My Shops',
+                  onSubmit: () {
+                    Navigator.pushNamed(context, '/myShopsPage');
+                  },
+                  minWidth: width * 0.44,
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

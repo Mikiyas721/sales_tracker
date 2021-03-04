@@ -4,13 +4,13 @@ part of 'card_transactions_bloc.dart';
 abstract class CardTransactionsState extends BlocState with _$CardTransactionsState{
   const factory CardTransactionsState({
     bool isLoading,
-    Failure fetchingSalesFailure,
+    Option<Failure> fetchingSalesFailure,
     List<CardTransaction> sales,
   }) = _CardTransactionsState;
 
   factory CardTransactionsState.initial() => CardTransactionsState(
-    sales: null,
-    fetchingSalesFailure: null,
+    sales: [],
+    fetchingSalesFailure: none(),
     isLoading: false,
   );
 }

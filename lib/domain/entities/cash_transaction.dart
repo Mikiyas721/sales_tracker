@@ -79,7 +79,7 @@ class CashTransaction extends Entity{
       salesPersonId,
       shopId,
       amount,
-    ].any((element) => null)) return none();
+    ].any((element) => element==null)) return none();
 
     return Some(CashTransaction._(
       salesPersonId: salesPersonId,

@@ -13,6 +13,7 @@ import 'domain/use_cases/add_cash_transaction.dart';
 import 'application/add_fund/add_fund_bloc.dart';
 import 'application/add_sale/add_sale_bloc.dart';
 import 'domain/use_cases/add_shop.dart';
+import 'domain/use_cases/add_shop-sales.dart';
 import 'common/datasource/cache_datasource/cache_datasource.dart';
 import 'infrastructure/datasources/card_transaction_datasource.dart';
 import 'application/fetch_sales/card_transactions_bloc.dart';
@@ -34,6 +35,7 @@ import 'domain/ports/cash_transaction_repo.dart';
 import 'domain/ports/firebase_repo.dart';
 import 'domain/ports/sales_person_repo.dart';
 import 'domain/ports/shop_repo.dart';
+import 'domain/ports/shop-sales_repo.dart';
 import 'domain/ports/user_repo.dart';
 import 'domain/use_cases/load_logged_in_user.dart';
 import 'application/login/login_bloc.dart';
@@ -48,6 +50,8 @@ import 'domain/use_cases/save_user.dart';
 import 'common/datasource/cache_datasource/shared_preferences_cache_datasource.dart';
 import 'infrastructure/datasources/shop_datasource.dart';
 import 'infrastructure/repos/shop_repo_impl.dart';
+import 'infrastructure/datasources/shop-sales_datasource.dart';
+import 'infrastructure/repos/shop_sales_repo_impl.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/stats/stats_bloc.dart';
 import 'infrastructure/datasources/user_cache_datasource.dart';
@@ -82,6 +86,8 @@ GetIt $initGetIt(
       () => SalesPeopleLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<ShopCrudDataSource>(
       () => ShopLoopbackDataSource(get<RestDataSource>()));
+  gh.lazySingleton<ShopSalesCrudDataSource>(
+      () => ShopSalesLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<SplashBloc>(() => SplashBloc());
   gh.factory<StatsBloc>(() => StatsBloc());
   gh.lazySingleton<UserCacheDataSource>(
@@ -99,6 +105,8 @@ GetIt $initGetIt(
   gh.lazySingleton<ISalesPersonRepo>(
       () => SalesPersonRepoImpl(get<SalesPeopleCrudDataSource>()));
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));
+  gh.lazySingleton<IShopSalesRepo>(
+      () => ShopSalesRepoImpl(get<ShopSalesCrudDataSource>()));
   gh.lazySingleton<IUserRepo>(() => UserRepo(get<UserCacheDataSource>()));
   gh.lazySingleton<LoadLoggedInUser>(() => LoadLoggedInUser(get<IUserRepo>()));
   gh.lazySingleton<SaveUser>(() => SaveUser(get<IUserRepo>()));
@@ -107,6 +115,7 @@ GetIt $initGetIt(
   gh.lazySingleton<AddCashTransaction>(
       () => AddCashTransaction(get<ICashTransactionRepo>()));
   gh.lazySingleton<AddShop>(() => AddShop(get<IShopRepo>()));
+  gh.lazySingleton<AddShopSales>(() => AddShopSales(get<IShopSalesRepo>()));
   gh.lazySingleton<FetchCardTransactions>(
       () => FetchCardTransactions(get<ICardTransactionRepo>()));
   gh.lazySingleton<FetchCashTransactions>(

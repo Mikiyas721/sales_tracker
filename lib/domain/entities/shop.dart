@@ -39,8 +39,7 @@ class Shop extends Entity{
       phoneNumber,
       createdAt,
       updatedAt,
-      balance,
-    ].any((element) => null)) return none();
+    ].any((element) => element==null)) return none();
 
     final nameObject = Name.create(name).getOrElse(() => null);
     if (nameObject == null) return none();
@@ -58,7 +57,7 @@ class Shop extends Entity{
       phoneNumber: phoneNumberObject,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      balance: balance,
+      balance: balance??0,
     ));
   }
 
@@ -71,7 +70,7 @@ class Shop extends Entity{
       name,
       address,
       phoneNumber,
-    ].any((element) => null)) return none();
+    ].any((element) => element==null)) return none();
 
     return some(
       Shop._(

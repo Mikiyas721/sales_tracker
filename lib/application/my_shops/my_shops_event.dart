@@ -28,6 +28,6 @@ class MyShopsLoadingFailedEvent extends MyShopsEvent {
   @override
   Stream<MyShopsState> handle(MyShopsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, myShopsLoadingFailure: loadingFailure);
+        isLoading: false, myShopsLoadingFailure: Failure.getFailure(loadingFailure));
   }
 }

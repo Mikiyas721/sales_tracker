@@ -16,7 +16,7 @@ class _$CashTransactionsStateTearOff {
 // ignore: unused_element
   _CashTransactionsState call(
       {bool isLoading,
-      Failure fetchingFundsFailure,
+      Option<Failure> fetchingFundsFailure,
       List<CashTransaction> funds}) {
     return _CashTransactionsState(
       isLoading: isLoading,
@@ -33,7 +33,7 @@ const $CashTransactionsState = _$CashTransactionsStateTearOff();
 /// @nodoc
 mixin _$CashTransactionsState {
   bool get isLoading;
-  Failure get fetchingFundsFailure;
+  Option<Failure> get fetchingFundsFailure;
   List<CashTransaction> get funds;
 
   @JsonKey(ignore: true)
@@ -47,7 +47,7 @@ abstract class $CashTransactionsStateCopyWith<$Res> {
       _$CashTransactionsStateCopyWithImpl<$Res>;
   $Res call(
       {bool isLoading,
-      Failure fetchingFundsFailure,
+      Option<Failure> fetchingFundsFailure,
       List<CashTransaction> funds});
 }
 
@@ -70,7 +70,7 @@ class _$CashTransactionsStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       fetchingFundsFailure: fetchingFundsFailure == freezed
           ? _value.fetchingFundsFailure
-          : fetchingFundsFailure as Failure,
+          : fetchingFundsFailure as Option<Failure>,
       funds: funds == freezed ? _value.funds : funds as List<CashTransaction>,
     ));
   }
@@ -85,7 +85,7 @@ abstract class _$CashTransactionsStateCopyWith<$Res>
   @override
   $Res call(
       {bool isLoading,
-      Failure fetchingFundsFailure,
+      Option<Failure> fetchingFundsFailure,
       List<CashTransaction> funds});
 }
 
@@ -110,7 +110,7 @@ class __$CashTransactionsStateCopyWithImpl<$Res>
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       fetchingFundsFailure: fetchingFundsFailure == freezed
           ? _value.fetchingFundsFailure
-          : fetchingFundsFailure as Failure,
+          : fetchingFundsFailure as Option<Failure>,
       funds: funds == freezed ? _value.funds : funds as List<CashTransaction>,
     ));
   }
@@ -124,7 +124,7 @@ class _$_CashTransactionsState implements _CashTransactionsState {
   @override
   final bool isLoading;
   @override
-  final Failure fetchingFundsFailure;
+  final Option<Failure> fetchingFundsFailure;
   @override
   final List<CashTransaction> funds;
 
@@ -164,13 +164,13 @@ class _$_CashTransactionsState implements _CashTransactionsState {
 abstract class _CashTransactionsState implements CashTransactionsState {
   const factory _CashTransactionsState(
       {bool isLoading,
-      Failure fetchingFundsFailure,
+      Option<Failure> fetchingFundsFailure,
       List<CashTransaction> funds}) = _$_CashTransactionsState;
 
   @override
   bool get isLoading;
   @override
-  Failure get fetchingFundsFailure;
+  Option<Failure> get fetchingFundsFailure;
   @override
   List<CashTransaction> get funds;
   @override

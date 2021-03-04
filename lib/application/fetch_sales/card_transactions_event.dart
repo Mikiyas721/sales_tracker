@@ -27,7 +27,7 @@ class CardTransactionsLoadingFailedEvent extends CardTransactionsEvent {
   @override
   Stream<CardTransactionsState> handle(CardTransactionsState currentState) async* {
     yield currentState.copyWith(
-        isLoading: false, fetchingSalesFailure: loadingFailure);
+        isLoading: false, fetchingSalesFailure: Failure.getFailure(loadingFailure));
   }
 }
 

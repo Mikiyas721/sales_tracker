@@ -4,13 +4,13 @@ part of 'cash_transactions_bloc.dart';
 abstract class CashTransactionsState extends BlocState with _$CashTransactionsState {
   const factory CashTransactionsState({
     bool isLoading,
-    Failure fetchingFundsFailure,
+    Option<Failure> fetchingFundsFailure,
     List<CashTransaction> funds,
   }) = _CashTransactionsState;
 
   factory CashTransactionsState.initial() => CashTransactionsState(
-        funds: null,
-        fetchingFundsFailure: null,
+        funds: [],
+        fetchingFundsFailure: none(),
         isLoading: false,
       );
 }

@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:sales_tracker/common/bloc/bloc_helpers.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/domain/value_objects/cash_amount.dart';
+import 'package:sales_tracker/infrastructure/repos/fund_transaction_repo_impl.dart';
 
 part 'add_fund_event.dart';
 

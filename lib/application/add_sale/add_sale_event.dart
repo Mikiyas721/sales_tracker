@@ -49,9 +49,9 @@ class AddSaleSucceededEvent extends AddSaleEvent {
   Stream<AddSaleState> handle(
       AddSaleState currentState) async* {
     yield currentState.copyWith(
-      totalAmount: null,
-      paidAmount: null,
-      saleTransactionFailure: null,
+      totalAmount: CardAmount.createFromNum(0),
+      paidAmount: CashAmount.createFromNum(0),
+      saleTransactionFailure: none(),
       hasRequested: false,
       hasSubmitted: false,
       requestCompleted: true,
@@ -68,7 +68,7 @@ class AddSaleFailedEvent extends AddSaleEvent {
   Stream<AddSaleState> handle(
       AddSaleState currentState) async* {
     yield currentState.copyWith(
-      saleTransactionFailure: saleTransactionFailure,
+      saleTransactionFailure: Failure.getFailure(saleTransactionFailure),
       hasRequested: false,
     );
   }

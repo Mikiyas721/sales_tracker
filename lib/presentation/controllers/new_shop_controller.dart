@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/new_shop/new_shop_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
+import 'package:sales_tracker/domain/entities/shop-sales.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
+import 'package:sales_tracker/domain/use_cases/add_shop-sales.dart';
 import 'package:sales_tracker/domain/use_cases/add_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
+import '../../application/splash/splash_bloc.dart';
 
 class NewShopController extends BlocViewModelController<NewShopBloc,
     NewShopEvent, NewShopState, NewShopViewModel> with ToastMixin {
@@ -24,13 +27,13 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
   @override
   NewShopViewModel mapStateToViewModel(NewShopState s) {
     return NewShopViewModel(
-      name: s.name.fold((l) => null, (r) => r.value),
+      name: s.name?.fold((l) => null, (r) => r.value),
       nameError:
           s.hasSubmitted ? (s.name.fold((l) => l.message, (r) => null)) : null,
-      address: s.address.fold((l) => null, (r) => r.value),
+      address: s.address?.fold((l) => null, (r) => r.value),
       addressError:
           s.hasSubmitted ? s.address.fold((l) => l.message, (r) => null) : null,
-      phoneNumber: s.phoneNumber.fold((l) => null, (r) => r.value),
+      phoneNumber: s.phoneNumber?.fold((l) => null, (r) => r.value),
       phoneNumberError: s.hasSubmitted
           ? s.phoneNumber.fold((l) => l.message, (r) => null)
           : null,
@@ -58,23 +61,44 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
       address: this.bloc.state.address.getOrElse(() => null),
       phoneNumber: this.bloc.state.phoneNumber.getOrElse(() => null),
     );
+    print(bloc.state.address.getOrElse(() => null)?.value);
     shop.fold(
-      () {},
-      (s) async {
-        final result = await getIt.get<AddShop>().execute(s);
-        result.fold(
-          (l) {
-            bloc.add(NewShopAddFailedEvent(l));
-            toastError(l.message);
-          },
-          (r) {
-            bloc.add(NewShopAddSucceededEvent());
-            nameTextFieldController.text = "";
-            addressTextFieldController.text = "";
-            phoneTextFieldController.text = "";
-            toastSuccess("Shop Added Successfully!");
-          },
-        );
+      () {
+        toastError("Invalid Input");
+      },
+      (shop) async {
+        final salesperson = getIt.get<SplashBloc>().state.user;
+        salesperson.fold(() {
+          toastError("Undefined Salesperson");
+        }, (user) async {
+          final result = await getIt.get<AddShop>().execute(shop);
+          result.fold(
+            (l) {
+              bloc.add(NewShopAddFailedEvent(l));
+              toastError(l.message);
+            },
+            (r) {
+              ShopSales.createForPostRequest(
+                      salesPersonId: user.id, shopId: r.id)
+                  .fold(() {
+                toastError("Invalid Data");
+              }, (a) async {
+                final shopSalesResult =
+                    await getIt.get<AddShopSales>().execute(a);
+                shopSalesResult.fold((l) {
+                  bloc.add(NewShopAddFailedEvent(l));
+                  toastError(l.message);
+                }, (r) {
+                  bloc.add(NewShopAddSucceededEvent());
+                  nameTextFieldController.text = "";
+                  addressTextFieldController.text = "";
+                  phoneTextFieldController.text = "";
+                  toastSuccess("Shop Added Successfully!");
+                });
+              });
+            },
+          );
+        });
       },
     );
   }

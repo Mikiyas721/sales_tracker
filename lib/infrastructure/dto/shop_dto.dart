@@ -25,7 +25,7 @@ class ShopDto extends IdDto<Shop> implements TimeStampedDto {
     @required this.phoneNumber,
     @required this.createdAt,
     @required this.updatedAt,
-    this.balance,
+    this.balance = 0,
   });
 
   factory ShopDto.fromJson(Map<String, dynamic> json) =>
