@@ -23,7 +23,7 @@ import 'common/datasource/dio_rest_datasource.dart';
 import 'domain/use_cases/fetch_card_transactions.dart';
 import 'domain/use_cases/fetch_cash_transactions.dart';
 import 'domain/use_cases/fetch_sales_person.dart';
-import 'domain/use_cases/fetch_shop.dart';
+import 'domain/use_cases/fetch_shops.dart';
 import 'domain/use_cases/fetch_this_month.dart';
 import 'domain/use_cases/fetch_this_week_stats.dart';
 import 'domain/use_cases/fetch_today_stats.dart';
@@ -51,7 +51,7 @@ import 'common/datasource/cache_datasource/shared_preferences_cache_datasource.d
 import 'infrastructure/datasources/shop_datasource.dart';
 import 'infrastructure/repos/shop_repo_impl.dart';
 import 'infrastructure/datasources/shop-sales_datasource.dart';
-import 'infrastructure/repos/shop_sales_repo_impl.dart';
+import 'infrastructure/repos/shop-sales_repo_impl.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/stats/stats_bloc.dart';
 import 'infrastructure/datasources/user_cache_datasource.dart';
@@ -122,7 +122,7 @@ GetIt $initGetIt(
       () => FetchCashTransactions(get<ICashTransactionRepo>()));
   gh.lazySingleton<FetchSalesPerson>(
       () => FetchSalesPerson(get<ISalesPersonRepo>()));
-  gh.lazySingleton<FetchShops>(() => FetchShops(get<IShopRepo>()));
+  gh.lazySingleton<FetchShops>(() => FetchShops(get<IShopSalesRepo>()));
   gh.lazySingleton<FetchThisMonthCard>(
       () => FetchThisMonthCard(get<ICardTransactionRepo>()));
   gh.lazySingleton<FetchThisMonthCash>(

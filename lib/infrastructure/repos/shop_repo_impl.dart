@@ -25,15 +25,8 @@ class ShopRepoImpl extends IShopRepo {
   }
 
   @override
-  Future<Either<RestResponseFailure, List<Shop>>> fetchAll(
-      String salesPersonId) async {
-    final result = await shopCrudDataSource.find(options: {
-      "filter": {
-        "where": {
-          "salesPersonId": {"eq": "$salesPersonId"}
-        }
-      }
-    });
+  Future<Either<RestResponseFailure, List<Shop>>> fetchAll() async {
+    final result = await shopCrudDataSource.find();
     return result.either.fold(
         (l) => left(l), (r) => right(IdDto.toDomainList<Shop, ShopDto>(r)));
   }

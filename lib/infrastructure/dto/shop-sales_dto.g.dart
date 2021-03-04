@@ -17,6 +17,12 @@ ShopSalesDto _$ShopSalesDtoFromJson(Map<String, dynamic> json) {
     updatedAt: json['updatedAt'] == null
         ? null
         : DateTime.parse(json['updatedAt'] as String),
+    shop: json['shop'] == null
+        ? null
+        : ShopDto.fromJson(json['shop'] as Map<String, dynamic>),
+    salesPerson: json['salesPerson'] == null
+        ? null
+        : SalesPersonDto.fromJson(json['salesPerson'] as Map<String, dynamic>),
   );
 }
 
@@ -35,5 +41,7 @@ Map<String, dynamic> _$ShopSalesDtoToJson(ShopSalesDto instance) {
 
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
+  writeNotNull('shop', instance.shop);
+  writeNotNull('salesPerson', instance.salesPerson);
   return val;
 }

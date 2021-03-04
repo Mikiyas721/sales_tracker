@@ -29,12 +29,14 @@ class ShopSalesRepoImpl extends IShopSalesRepo {
       String salespersonId) async {
     final shopSalesResults = await shopSalesCrudDataSource.find(options: {
       "filter": {
+        "include": {"relation": "shop"},
         "where": {
           "salesPersonId": {"eq": "$salespersonId"}
         }
-      }
+      },
     });
-    return shopSalesResults.either.fold((l) => left(l),
-        (r) => right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r)));
+    return shopSalesResults.either.fold((l) => left(l), (r) {
+      return right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r));
+    });
   }
 }

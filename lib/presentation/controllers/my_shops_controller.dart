@@ -3,7 +3,7 @@ import 'package:sales_tracker/application/my_shops/my_shops_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
-import 'package:sales_tracker/domain/use_cases/fetch_shop.dart';
+import 'package:sales_tracker/domain/use_cases/fetch_shops.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/my_shops_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
