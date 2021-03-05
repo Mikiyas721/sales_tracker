@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/id_dto.dart';
 import 'package:sales_tracker/domain/entities/card_transaction.dart';
+import 'package:sales_tracker/domain/entities/cash_transaction.dart';
 import 'package:sales_tracker/domain/ports/card_transaction_repo.dart';
 import 'package:sales_tracker/infrastructure/datasources/card_transaction_datasource.dart';
 import 'package:sales_tracker/infrastructure/dto/card_transaction_dto.dart';
@@ -99,5 +100,11 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
         (l) => left(l),
         (r) =>
             right(IdDto.toDomainList<CardTransaction, CardTransactionDto>(r)));
+  }
+
+  @override
+  Future<Either<Failure, Map>> addSalesTransaction(CardTransaction cardTransaction, CashTransaction cashTransaction) async{
+    final result = await saleTransactionCrudDataSource.addSalesTransaction(cashTransaction, cardTransaction);
+    return result.either.fold((l) => left(l), (r) => right(r.value));
   }
 }

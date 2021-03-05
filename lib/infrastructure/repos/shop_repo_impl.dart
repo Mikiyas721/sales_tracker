@@ -15,11 +15,11 @@ class ShopRepoImpl extends IShopRepo {
   ShopRepoImpl(this.shopCrudDataSource);
 
   @override
-  Future<Either<Failure, Shop>> create(Shop shop) async {
-    final result = await shopCrudDataSource.create(ShopDto.fromDomain(shop));
+  Future<Either<Failure, Shop>> create(Shop shop, String salespersonId) async {
+    final result = await shopCrudDataSource.addSalespersonShop(ShopDto.fromDomain(shop),salespersonId);
     return result.either.fold(
         (l) => left(l),
-        (r) => r
+        (r) => ShopDto.fromJson(r.value)
             .toDomain()
             .fold(() => left(SimpleFailure('Invalid Data')), (a) => right(a)));
   }

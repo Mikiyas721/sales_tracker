@@ -10,13 +10,7 @@ class AddShop {
 
   const AddShop(this._iShopRepo);
 
-  Future<Either<Failure, Shop>> execute(Shop shop) async {
-    final shopResult =
-        await _iShopRepo.getShopByPhoneNumber(shop.phoneNumber.value);
-    return shopResult.fold((l) async {
-      /// Might create duplicate due to toDomain method
-      final newShop = await _iShopRepo.create(shop);
-      return newShop.fold((l) => left(l), (shop) => right(shop));
-    }, (shop) => right(shop));
+  Future<Either<Failure, Shop>> execute(Shop shop, String salespersonId) async {
+    return _iShopRepo.create(shop, salespersonId);
   }
 }

@@ -12,13 +12,16 @@ import 'domain/use_cases/add_card_transaction.dart';
 import 'domain/use_cases/add_cash_transaction.dart';
 import 'application/add_fund/add_fund_bloc.dart';
 import 'application/add_sale/add_sale_bloc.dart';
+import 'domain/use_cases/add_sale_transaction.dart';
 import 'domain/use_cases/add_shop.dart';
-import 'domain/use_cases/add_shop-sales.dart';
 import 'common/datasource/cache_datasource/cache_datasource.dart';
 import 'infrastructure/datasources/card_transaction_datasource.dart';
+import 'infrastructure/repos/card_transaction_repo_impl.dart';
 import 'application/fetch_sales/card_transactions_bloc.dart';
 import 'infrastructure/datasources/cash_transaction_datasource.dart';
+import 'infrastructure/repos/cash_transaction_repo_impl.dart';
 import 'application/fetch_funds/cash_transactions_bloc.dart';
+import 'domain/use_cases/clear_loggedin_user.dart';
 import 'common/datasource/dio_rest_datasource.dart';
 import 'domain/use_cases/fetch_card_transactions.dart';
 import 'domain/use_cases/fetch_cash_transactions.dart';
@@ -28,7 +31,6 @@ import 'domain/use_cases/fetch_this_month.dart';
 import 'domain/use_cases/fetch_this_week_stats.dart';
 import 'domain/use_cases/fetch_today_stats.dart';
 import 'infrastructure/repos/firebase_repo_impl.dart';
-import 'infrastructure/repos/cash_transaction_repo_impl.dart';
 import 'domain/use_cases/get_current_autheticated_user.dart';
 import 'domain/ports/card_transaction_repo.dart';
 import 'domain/ports/cash_transaction_repo.dart';
@@ -43,7 +45,6 @@ import 'application/my_shops/my_shops_bloc.dart';
 import 'application/new_shop/new_shop_bloc.dart';
 import 'domain/use_cases/request_firebase_verification_code.dart';
 import 'common/datasource/rest_datasource/rest_datasource.dart';
-import 'infrastructure/repos/card_transaction_repo_impl.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
 import 'infrastructure/repos/sales_person_repo_impl.dart';
 import 'domain/use_cases/save_user.dart';
@@ -114,8 +115,11 @@ GetIt $initGetIt(
       () => AddCardTransaction(get<ICardTransactionRepo>()));
   gh.lazySingleton<AddCashTransaction>(
       () => AddCashTransaction(get<ICashTransactionRepo>()));
+  gh.lazySingleton<AddSaleTransaction>(
+      () => AddSaleTransaction(get<ICardTransactionRepo>()));
   gh.lazySingleton<AddShop>(() => AddShop(get<IShopRepo>()));
-  gh.lazySingleton<AddShopSales>(() => AddShopSales(get<IShopSalesRepo>()));
+  gh.lazySingleton<ClearLoggedInUser>(
+      () => ClearLoggedInUser(get<IUserRepo>()));
   gh.lazySingleton<FetchCardTransactions>(
       () => FetchCardTransactions(get<ICardTransactionRepo>()));
   gh.lazySingleton<FetchCashTransactions>(

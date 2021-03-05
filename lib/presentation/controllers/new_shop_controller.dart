@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/new_shop/new_shop_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
-import 'package:sales_tracker/domain/entities/shop-sales.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
-import 'package:sales_tracker/domain/use_cases/add_shop-sales.dart';
 import 'package:sales_tracker/domain/use_cases/add_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
@@ -74,33 +72,14 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
         salesperson.fold(() {
           toastError("Undefined Salesperson");
         }, (user) async {
-          final result = await getIt.get<AddShop>().execute(shop);
-          result.fold(
-            (l) {
-              bloc.add(NewShopAddFailedEvent(l));
-              toastError(l.message);
-            },
-            (r) {
-              ShopSales.createForPostRequest(
-                      salesPersonId: user.id, shopId: r.id)
-                  .fold(() {
-                toastError("Invalid Data");
-              }, (a) async {
-                final shopSalesResult =
-                    await getIt.get<AddShopSales>().execute(a);
-                shopSalesResult.fold((l) {
-                  bloc.add(NewShopAddFailedEvent(l));
-                  toastError(l.message);
-                }, (r) {
-                  bloc.add(NewShopAddSucceededEvent());
-                  nameTextFieldController.text = "";
-                  addressTextFieldController.text = "";
-                  phoneTextFieldController.text = "";
-                  toastSuccess("Shop Added Successfully!");
-                });
-              });
-            },
-          );
+          final result = await getIt.get<AddShop>().execute(shop, user.id);
+          result.fold((l) {
+            bloc.add(NewShopAddFailedEvent(l));
+            toastError(l.message);
+          }, (r) {
+            bloc.add(NewShopAddSucceededEvent());
+            toastSuccess("Shop Added Successfully");
+          });
         });
       },
     );

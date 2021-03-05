@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/add_fund/add_fund_bloc.dart';
 import 'package:sales_tracker/application/add_sale/add_sale_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
@@ -6,8 +7,10 @@ import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/card_transaction.dart';
 import 'package:sales_tracker/domain/entities/cash_transaction.dart';
+import 'package:sales_tracker/domain/entities/user.dart';
 import 'package:sales_tracker/domain/use_cases/add_card_transaction.dart';
 import 'package:sales_tracker/domain/use_cases/add_cash_transaction.dart';
+import 'package:sales_tracker/domain/use_cases/add_sale_transaction.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sale_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
@@ -50,50 +53,63 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
 
   void onRegister() {
     bloc.add(AddSaleSubmittedEvent());
-    final user = getIt.get<SplashBloc>().state.user;
-    user.fold(() {
+    final userResult = getIt.get<SplashBloc>().state.user;
+    userResult.fold(() {
       bloc.add(AddSaleFailedEvent(SimpleFailure('Undefined Salesperson')));
       toastError("Undefined Salesperson");
-    }, (a) {
-      bloc.add(AddSaleRequestedEvent());
-      final cardTransaction = CardTransaction.createFromInputs(
-        salesPersonId: a.id,
-        shopId: shopId,
-        amount: bloc.state.totalAmount.getOrElse(() => null),
-      );
-      final cashTransaction = CashTransaction.createFromInputs(
-          salesPersonId: a.id,
-          shopId: shopId,
-          amount: bloc.state.paidAmount.getOrElse(() => null));
-
-      cardTransaction.fold(() {
-        bloc.add(AddSaleFailedEvent(SimpleFailure('Invalid Card')));
-        toastError('Invalid Card');
-      }, (a) async {
-        final cardResult = await getIt.get<AddCardTransaction>().execute(a);
-        cardResult.fold((l) {
-          bloc.add(AddSaleFailedEvent(l));
-          toastError(l.message);
-        }, (r) {
-          cashTransaction.fold(() {
-            bloc.add(
-                AddSaleFailedEvent(SimpleFailure('Invalid Selling Inputs')));
-            toastError('Invalid Selling Inputs');
-          }, (a) async* {
-            final cardResult = await getIt.get<AddCashTransaction>().execute(a);
-            cardResult.fold((l) {
-              bloc.add(AddSaleFailedEvent(l));
-              toastError(l.message);
-            }, (r) {
-              bloc.add(AddSaleSucceededEvent());
-              toastSuccess('Transaction Added Successfully');
-            });
-          });
-          bloc.add(AddSaleSucceededEvent());
-          totalAmountTextFieldController.text = "";
-          paidAmountTextFieldController.text = "";
-        });
-      });
+    }, (user) {
+      _ifUser(user);
     });
+  }
+
+  void _ifUser(User user) {
+    bloc.add(AddSaleRequestedEvent());
+    final cardTransaction = CardTransaction.createFromInputs(
+      salesPersonId: user.id,
+      shopId: shopId,
+      amount: bloc.state.totalAmount.getOrElse(() => null),
+    );
+    cardTransaction.fold(() {
+      _throwInvalidInputs();
+    }, (cardTransaction) async {
+      _ifCardTransaction(user, cardTransaction);
+    });
+  }
+
+  void _ifCardTransaction(User user, CardTransaction cardTransaction) {
+    final cashTransaction = CashTransaction.createFromInputs(
+        salesPersonId: user.id,
+        shopId: shopId,
+        amount: bloc.state.paidAmount.getOrElse(() => null));
+    cashTransaction.fold(() {
+      _throwInvalidInputs();
+    }, (cashTransaction) async {
+      _ifCashTransaction(user, cardTransaction, cashTransaction);
+    });
+  }
+
+  void _ifCashTransaction(User user, CardTransaction cardTransaction,
+      CashTransaction cashTransaction) async {
+    final salesTransactionResult = await getIt
+        .get<AddSaleTransaction>()
+        .execute(cardTransaction, cashTransaction);
+    salesTransactionResult.fold((l) {
+      bloc.add(AddSaleFailedEvent(l));
+      toastError(l.message);
+    }, (r) {
+      bloc.add(AddSaleSucceededEvent());
+      _clearTextFields();
+      toastSuccess("Successfully Added Sale");
+    });
+  }
+
+  void _clearTextFields() {
+    totalAmountTextFieldController.text = "";
+    paidAmountTextFieldController.text = "";
+  }
+
+  void _throwInvalidInputs() {
+    AddSaleFailedEvent(SimpleFailure('Invalid Input'));
+    toastError("Invalid Inputs");
   }
 }
