@@ -23,13 +23,15 @@ class LoginPage extends StatelessWidget {
               ),
               200.vSpace,
               ViewModelBuilder.withController<LoginViewModel, UserController>(
-                  create: () => UserController(context),
-                  builder: (context, controller, model) {
-                    return LoginView(
-                        loginViewModel: model,
-                        onPhoneNumberChanged: controller.onPhoneNumberChanged,
-                        onSubmit: controller.onSubmit);
-                  }),
+                create: () => UserController(context),
+                builder: (context, controller, model) {
+                  return LoginView(
+                    loginViewModel: model,
+                    onPhoneNumberChanged: controller.onPhoneNumberChanged,
+                    onSubmit: controller.onSubmit,
+                  );
+                },
+              ),
               20.vSpace
             ],
           ),

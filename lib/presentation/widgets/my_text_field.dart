@@ -7,6 +7,7 @@ class MyTextField extends StatelessWidget {
   final IconData icon;
   final TextInputType keyboardType;
   final void Function(String value) onChanged;
+  final void Function(String value) onSubmitted;
   final TextEditingController controller;
 
   const MyTextField({
@@ -17,6 +18,7 @@ class MyTextField extends StatelessWidget {
     @required this.onChanged,
     this.keyboardType = TextInputType.number,
     this.controller,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,11 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-            errorText: errorText, prefixIcon: Icon(icon), labelText: labelText),
+          errorText: errorText,
+          prefixIcon: Icon(icon),
+          labelText: labelText,
+        ),
+        onSubmitted: onSubmitted,
       ),
     );
   }

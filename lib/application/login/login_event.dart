@@ -10,7 +10,7 @@ class LoginPhoneNumberChangedEvent extends LoginEvent {
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
     yield currentState.copyWith(
-        phoneNumber: PhoneNumber.createWithCountryCode(phoneNumber));
+        phoneNumber: PhoneNumber.create(phoneNumber));
   }
 }
 

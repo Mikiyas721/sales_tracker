@@ -9,12 +9,18 @@ import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 abstract class PhoneAuthResult {}
 
 class PhoneAuthSuccessResult implements PhoneAuthResult {
-  String token;
+  final String token;
+
+  PhoneAuthSuccessResult(this.token);
 }
 
 class PhoneAuthCodeSentResult implements PhoneAuthResult {}
 
-class PhoneAuthFailedResult implements PhoneAuthResult {}
+class PhoneAuthFailedResult implements PhoneAuthResult {
+  final String failure;
+
+  PhoneAuthFailedResult(this.failure);
+}
 
 @LazySingleton(as: IFirebaseRepo)
 class FirebaseRepoImpl extends IFirebaseRepo {
@@ -22,42 +28,35 @@ class FirebaseRepoImpl extends IFirebaseRepo {
   String verificationId;
 
   @override
-  Future<Either<Failure, PhoneAuthResult>> requestCode(
-      PhoneNumber phoneNumber) async {
+  Future<PhoneAuthResult> requestCode(PhoneNumber phoneNumber) async {
     Completer<PhoneAuthResult> completer = Completer();
-    try {
-      authInstance.verifyPhoneNumber(
-        phoneNumber: phoneNumber.value,
-        timeout: Duration(seconds: 30),
-        verificationCompleted: (AuthCredential authCredential) async {
-          completer.complete(PhoneAuthSuccessResult());
-          AuthResult result =
-              await authInstance.signInWithCredential(authCredential);
-          final idToken = await result.user.getIdToken();
-          if (result.user != null) return true;
-          return false;
-        },
-        verificationFailed: (AuthException exception) {},
-        codeSent: (String verification, [int forceResend]) {
-          verificationId = verification;
-        },
-        codeAutoRetrievalTimeout: (verificationId) {
-          completer.complete(PhoneAuthCodeSentResult());
-        },
-      );
-    } catch (Exception, StackTrace) {
-      return left(SimpleFailure("Firebase Error.Error requesting for code."));
-    }
-    return right(await completer.future);
+    authInstance.verifyPhoneNumber(
+      phoneNumber: phoneNumber.value,
+      timeout: Duration(seconds: 30),
+      verificationCompleted: (AuthCredential authCredential) async {
+        UserCredential result = await authInstance.signInWithCredential(authCredential);
+        final idToken = await result.user.getIdToken();
+        completer.complete(PhoneAuthSuccessResult(idToken));
+      },
+      verificationFailed: (FirebaseAuthException exception) {
+        completer.complete(PhoneAuthFailedResult(exception.message));
+      },
+      codeSent: (String verification, [int forceResend]) {
+        verificationId = verification;
+      },
+      codeAutoRetrievalTimeout: (verificationId) {
+        completer.complete(PhoneAuthCodeSentResult());
+      },
+    );
+    return await completer.future;
   }
 
   @override
-  Future<Either<Failure, FirebaseUser>> verifyCode(
-      String verificationCode) async {
-    AuthCredential credential = PhoneAuthProvider.getCredential(
-        verificationId: verificationId, smsCode: verificationCode);
-    AuthResult result = await authInstance.signInWithCredential(credential);
-    if (result.user != null) return left(SimpleFailure('Invalid Data'));
-    return right(result.user);
+  Future<Either<Failure, String>> verifyCode(String verificationCode) async {
+    AuthCredential credential =
+        PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: verificationCode);
+    UserCredential result = await authInstance.signInWithCredential(credential);
+    final idToken = await result.user.getIdToken();
+    return right(idToken);
   }
 }

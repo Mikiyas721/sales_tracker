@@ -6,7 +6,7 @@ import 'package:sales_tracker/common/mixins/date_time_mixin.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/card_transaction.dart';
 import 'package:sales_tracker/domain/entities/cash_transaction.dart';
-import 'package:sales_tracker/domain/use_cases/fetch_this_month.dart';
+import 'package:sales_tracker/domain/use_cases/fetch_this_month_stats.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_this_week_stats.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_today_stats.dart';
 import 'package:sales_tracker/injection.dart';

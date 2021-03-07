@@ -5,11 +5,12 @@ import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/use_cases/clear_loggedin_user.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_sales_person.dart';
 import 'package:sales_tracker/domain/use_cases/request_firebase_verification_code.dart';
+import 'package:sales_tracker/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/login_view_model.dart';
 
-class UserController extends BlocViewModelController<LoginBloc, LoginEvent,
-    LoginState, LoginViewModel> with ToastMixin {
+class UserController extends BlocViewModelController<LoginBloc, LoginEvent, LoginState, LoginViewModel>
+    with ToastMixin {
   final BuildContext context;
 
   UserController(this.context) : super(getIt.get<LoginBloc>(), false);
@@ -18,9 +19,7 @@ class UserController extends BlocViewModelController<LoginBloc, LoginEvent,
   LoginViewModel mapStateToViewModel(LoginState s) {
     return LoginViewModel(
       phoneNumber: s.phoneNumber?.getOrElse(() => null)?.value,
-      phoneNumberError: s.hasSubmitted
-          ? s.phoneNumber.fold((l) => l.message, (r) => null)
-          : null,
+      phoneNumberError: s.hasSubmitted ? s.phoneNumber.fold((l) => l.message, (r) => null) : null,
       isSubmitting: s.isRequesting,
     );
   }
@@ -34,23 +33,22 @@ class UserController extends BlocViewModelController<LoginBloc, LoginEvent,
     bloc.state.phoneNumber.fold((l) {
       toastError(l.message);
     }, (phoneNumber) async {
-      final apiResult =
-          await getIt.get<FetchSalesPerson>().execute(phoneNumber);
+      final apiResult = await getIt.get<FetchSalesPerson>().execute(phoneNumber);
       apiResult.fold((l) {
         bloc.add(LoginRequestFailedEvent(l));
         toastError(l.message);
       }, (r) async {
         print(r);
-        final firebaseResult = await getIt
-            .get<RequestFirebaseVerificationCode>()
-            .execute(phoneNumber);
-        firebaseResult.fold((l) {
-          bloc.add(LoginRequestFailedEvent(l));
-          toastError(l.message);
-        }, (a) {
-          bloc.add(LoginRequestSucceededEvent());
-          toastSuccess("Requested Successfully!");
-        });
+        final phoneAuthResult = await getIt.get<RequestFirebaseVerificationCode>().execute(phoneNumber);
+
+        if (phoneAuthResult is PhoneAuthSuccessResult) {
+          //phoneAuthResult.token
+          //todo call api
+        } else if (phoneAuthResult is PhoneAuthFailedResult) {
+          toastError(phoneAuthResult.failure);
+        } else if (phoneAuthResult is PhoneAuthCodeSentResult) {
+          print("");
+        }
       });
     });
   }

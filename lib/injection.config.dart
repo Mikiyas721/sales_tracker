@@ -27,7 +27,7 @@ import 'domain/use_cases/fetch_card_transactions.dart';
 import 'domain/use_cases/fetch_cash_transactions.dart';
 import 'domain/use_cases/fetch_sales_person.dart';
 import 'domain/use_cases/fetch_shops.dart';
-import 'domain/use_cases/fetch_this_month.dart';
+import 'domain/use_cases/fetch_this_month_stats.dart';
 import 'domain/use_cases/fetch_this_week_stats.dart';
 import 'domain/use_cases/fetch_today_stats.dart';
 import 'infrastructure/repos/firebase_repo_impl.dart';
@@ -43,6 +43,7 @@ import 'domain/use_cases/load_logged_in_user.dart';
 import 'application/login/login_bloc.dart';
 import 'application/my_shops/my_shops_bloc.dart';
 import 'application/new_shop/new_shop_bloc.dart';
+import 'injection.dart';
 import 'domain/use_cases/request_firebase_verification_code.dart';
 import 'common/datasource/rest_datasource/rest_datasource.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
@@ -62,16 +63,15 @@ import 'domain/use_cases/verify_firebase_code.dart';
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-GetIt $initGetIt(
+Future<GetIt> $initGetIt(
   GetIt get, {
   String environment,
   EnvironmentFilter environmentFilter,
-}) {
+}) async {
   final gh = GetItHelper(get, environment, environmentFilter);
+  final registerModule = _$RegisterModule();
   gh.factory<AddFundBloc>(() => AddFundBloc());
   gh.lazySingleton<AddSaleBloc>(() => AddSaleBloc());
-  gh.lazySingleton<CacheDataSource>(
-      () => SharedPreferencesCacheDataSource(get<SharedPreferences>()));
   gh.factory<CardTransactionsBloc>(() => CardTransactionsBloc());
   gh.factory<CashTransactionsBloc>(() => CashTransactionsBloc());
   gh.lazySingleton<GetCurrentAuthenticatedUser>(
@@ -85,16 +85,18 @@ GetIt $initGetIt(
   gh.lazySingleton<RestDataSource>(() => DioRestDataSource());
   gh.lazySingleton<SalesPeopleCrudDataSource>(
       () => SalesPeopleLoopbackDataSource(get<RestDataSource>()));
+  final resolvedSharedPreferences = await registerModule.prefs;
+  gh.factory<SharedPreferences>(() => resolvedSharedPreferences);
   gh.lazySingleton<ShopCrudDataSource>(
       () => ShopLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<ShopSalesCrudDataSource>(
       () => ShopSalesLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<SplashBloc>(() => SplashBloc());
   gh.factory<StatsBloc>(() => StatsBloc());
-  gh.lazySingleton<UserCacheDataSource>(
-      () => UserCacheDataSource(get<CacheDataSource>()));
   gh.lazySingleton<VerifyFirebaseCode>(
       () => VerifyFirebaseCode(get<IFirebaseRepo>()));
+  gh.lazySingleton<CacheDataSource>(
+      () => SharedPreferencesCacheDataSource(get<SharedPreferences>()));
   gh.lazySingleton<CardTransactionCrudDataSource>(
       () => CardTransactionLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<CashTransactionCrudDataSource>(
@@ -108,9 +110,8 @@ GetIt $initGetIt(
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));
   gh.lazySingleton<IShopSalesRepo>(
       () => ShopSalesRepoImpl(get<ShopSalesCrudDataSource>()));
-  gh.lazySingleton<IUserRepo>(() => UserRepo(get<UserCacheDataSource>()));
-  gh.lazySingleton<LoadLoggedInUser>(() => LoadLoggedInUser(get<IUserRepo>()));
-  gh.lazySingleton<SaveUser>(() => SaveUser(get<IUserRepo>()));
+  gh.lazySingleton<UserCacheDataSource>(
+      () => UserCacheDataSource(get<CacheDataSource>()));
   gh.lazySingleton<AddCardTransaction>(
       () => AddCardTransaction(get<ICardTransactionRepo>()));
   gh.lazySingleton<AddCashTransaction>(
@@ -118,8 +119,6 @@ GetIt $initGetIt(
   gh.lazySingleton<AddSaleTransaction>(
       () => AddSaleTransaction(get<ICardTransactionRepo>()));
   gh.lazySingleton<AddShop>(() => AddShop(get<IShopRepo>()));
-  gh.lazySingleton<ClearLoggedInUser>(
-      () => ClearLoggedInUser(get<IUserRepo>()));
   gh.lazySingleton<FetchCardTransactions>(
       () => FetchCardTransactions(get<ICardTransactionRepo>()));
   gh.lazySingleton<FetchCashTransactions>(
@@ -139,5 +138,12 @@ GetIt $initGetIt(
       () => FetchTodayCard(get<ICardTransactionRepo>()));
   gh.lazySingleton<FetchTodayCash>(
       () => FetchTodayCash(get<ICashTransactionRepo>()));
+  gh.lazySingleton<IUserRepo>(() => UserRepo(get<UserCacheDataSource>()));
+  gh.lazySingleton<LoadLoggedInUser>(() => LoadLoggedInUser(get<IUserRepo>()));
+  gh.lazySingleton<SaveUser>(() => SaveUser(get<IUserRepo>()));
+  gh.lazySingleton<ClearLoggedInUser>(
+      () => ClearLoggedInUser(get<IUserRepo>()));
   return get;
 }
+
+class _$RegisterModule extends RegisterModule {}

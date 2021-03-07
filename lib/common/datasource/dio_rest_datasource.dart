@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sales_tracker/domain/use_cases/load_logged_in_user.dart';
+import 'package:sales_tracker/injection.dart';
 import 'rest_datasource/rest_datasource.dart';
 import 'rest_datasource/rest_request.dart';
 import 'rest_datasource/rest_response.dart';
@@ -13,18 +15,37 @@ class DioRestDataSource implements RestDataSource {
 
   DioRestDataSource()
       : dio = Dio(
-          BaseOptions(
-            connectTimeout: 10000,
-            receiveTimeout: 10000,
-            baseUrl: 'http://192.168.1.106:3000/api',
-          ),
-        ) {}
+    BaseOptions(
+      connectTimeout: 10000,
+      receiveTimeout: 10000,
+      baseUrl: 'http://localhost:3000/api',
+    ),
+  ) {
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (RequestOptions options) async {
+          final token=await getIt.get<LoadLoggedInUser>().execute().then((value) => value.fold(() => null, (a) => a.token));
+          if (token != null)
+            options.headers['Authorization'] = token;
+          return options;
+        },
+        onResponse: (Response response) async {
+          return response; // continue
+        },
+        onError: (DioError e) async {
+          return e; //continue
+        },
+      ),
+    );
+
+  }
 
   Future<RestResponseWithFailure> _request(Future<Response> request) async {
     try {
       final response = await request;
       return RestResponse.create(response.data);
     } on DioError catch (e) {
+      print(e);
       switch (e.type) {
         case DioErrorType.CONNECT_TIMEOUT:
           return RestResponseWithFailure(

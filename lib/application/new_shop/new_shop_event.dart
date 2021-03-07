@@ -33,7 +33,7 @@ class NewShopPhoneNumberChangedEvent implements NewShopEvent {
 
   @override
   Stream<NewShopState> handle(NewShopState currentState) async* {
-    yield currentState.copyWith(phoneNumber: PhoneNumber.createWithCountryCode(phoneNumber));
+    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
   }
 }
 

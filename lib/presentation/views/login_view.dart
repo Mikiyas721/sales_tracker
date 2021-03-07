@@ -22,10 +22,13 @@ class LoginView extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         MyTextField(
-            errorText: loginViewModel.phoneNumberError,
-            labelText: 'phone number',
-            icon: Icons.phone,
-            onChanged: onPhoneNumberChanged),
+          errorText: loginViewModel.phoneNumberError,
+          labelText: 'phone number',
+          icon: Icons.phone,
+          onChanged: onPhoneNumberChanged,
+          onSubmitted: (s) => onSubmit(),
+          keyboardType: TextInputType.phone,
+        ),
         100.vSpace,
         MyButton(
           label: 'Verify',

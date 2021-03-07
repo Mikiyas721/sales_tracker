@@ -10,7 +10,7 @@ class VerifyFirebaseCode {
 
   const VerifyFirebaseCode(this._iFirebaseRepo);
 
-  Future<Either<Failure, FirebaseUser>> execute(String verificationCode) async {
+  Future<Either<Failure, String>> execute(String verificationCode) async {
     return await _iFirebaseRepo.verifyCode(verificationCode);
   }
 }

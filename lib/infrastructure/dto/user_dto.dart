@@ -31,7 +31,7 @@ class UserDto extends IdDto<User> {
       id: id,
       name: Name.create(name).getOrElse(() => null),
       phoneNumber:
-      PhoneNumber.createWithCountryCode(phoneNumber).getOrElse(() => null),
+      PhoneNumber.create(phoneNumber).getOrElse(() => null),
     );
   }
 

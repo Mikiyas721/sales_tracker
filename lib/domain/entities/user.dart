@@ -7,12 +7,12 @@ class User extends Entity {
   final String id;
   final Name name;
   final PhoneNumber phoneNumber;
+  final String token;
 
-  User._(this.id, this.name, this.phoneNumber);
+  User._(this.id, this.name, this.phoneNumber, this.token);
 
-  static Option<User> create({String id, Name name, PhoneNumber phoneNumber}) {
-    if ([id, name, phoneNumber].any((element) => element == null))
-      return none();
-    return some(User._(id, name, phoneNumber));
+  static Option<User> create({String id, Name name, PhoneNumber phoneNumber, String token}) {
+    if ([id, name, phoneNumber, token].any((element) => element == null)) return none();
+    return some(User._(id, name, phoneNumber, token));
   }
 }

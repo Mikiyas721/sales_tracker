@@ -13,19 +13,18 @@ class SalesPersonRepoImpl extends ISalesPersonRepo {
   SalesPersonRepoImpl(this.salesPeopleCrudDataSource);
 
   @override
-  Future<Either<Failure, SalesPerson>> fetchSalesperson(
-      PhoneNumber phoneNumber) async {
+  Future<Either<Failure, SalesPerson>> fetchSalesperson(PhoneNumber phoneNumber) async {
+    print(phoneNumber.value);
     final salesPeople = await salesPeopleCrudDataSource.find(options: {
       "filter": {
         "where": {
-          "phoneNumber": {"eq": phoneNumber.value}
-        }
+          "phoneNumber": phoneNumber.value,
+         }
       }
     });
     return salesPeople.either.fold((l) => left(l), (r) {
       if (r.isEmpty)
-        return left(
-            SimpleFailure("No Such User.Please ask to be registered first."));
+        return left(SimpleFailure("No Such User.Please ask to be registered first."));
       else
         return r[0]
             .toDomain()
