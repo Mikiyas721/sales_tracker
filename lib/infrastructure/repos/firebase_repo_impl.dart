@@ -8,13 +8,13 @@ import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
 abstract class PhoneAuthResult {}
 
+class PhoneAuthCodeSentResult implements PhoneAuthResult {}
+
 class PhoneAuthSuccessResult implements PhoneAuthResult {
   final String token;
 
   PhoneAuthSuccessResult(this.token);
 }
-
-class PhoneAuthCodeSentResult implements PhoneAuthResult {}
 
 class PhoneAuthFailedResult implements PhoneAuthResult {
   final String failure;
@@ -34,7 +34,8 @@ class FirebaseRepoImpl extends IFirebaseRepo {
       phoneNumber: phoneNumber.value,
       timeout: Duration(seconds: 30),
       verificationCompleted: (AuthCredential authCredential) async {
-        UserCredential result = await authInstance.signInWithCredential(authCredential);
+        UserCredential result =
+            await authInstance.signInWithCredential(authCredential);
         final idToken = await result.user.getIdToken();
         completer.complete(PhoneAuthSuccessResult(idToken));
       },
@@ -53,8 +54,8 @@ class FirebaseRepoImpl extends IFirebaseRepo {
 
   @override
   Future<Either<Failure, String>> verifyCode(String verificationCode) async {
-    AuthCredential credential =
-        PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: verificationCode);
+    AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId, smsCode: verificationCode);
     UserCredential result = await authInstance.signInWithCredential(credential);
     final idToken = await result.user.getIdToken();
     return right(idToken);

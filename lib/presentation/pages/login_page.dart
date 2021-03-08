@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
-import 'package:sales_tracker/presentation/controllers/user_controller.dart';
+import 'package:sales_tracker/presentation/controllers/login_controller.dart';
 import '../../presentation/models/login_view_model.dart';
 import '../../presentation/views/login_view.dart';
 import '../../common/common.dart';
@@ -16,19 +16,16 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              200.vSpace,
-              Text(
-                'Welcome',
-                style: context.headline3,
-              ),
-              200.vSpace,
-              ViewModelBuilder.withController<LoginViewModel, UserController>(
-                create: () => UserController(context),
+              ViewModelBuilder.withController<LoginViewModel, LoginController>(
+                create: () => LoginController(context),
                 builder: (context, controller, model) {
                   return LoginView(
                     loginViewModel: model,
                     onPhoneNumberChanged: controller.onPhoneNumberChanged,
-                    onSubmit: controller.onSubmit,
+                    onVerificationCodeChanged:
+                        controller.onVerificationCodeChanged,
+                    onSubmitPhoneNumber: controller.onSubmitPhoneNumber,
+                    onVerify: controller.onVerifyCode,
                   );
                 },
               ),

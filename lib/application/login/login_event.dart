@@ -9,42 +9,95 @@ class LoginPhoneNumberChangedEvent extends LoginEvent {
 
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(phoneNumber: PhoneNumber.create(phoneNumber));
+  }
+}
+
+class LoginVerificationCodeChangedEvent extends LoginEvent {
+  final String code;
+
+  LoginVerificationCodeChangedEvent(this.code);
+
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(phoneNumber: PhoneNumber.create(code));
+  }
+}
+
+class LoginPhoneNumberSubmittedEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(hasSubmittedPhoneNumber: true);
+  }
+}
+
+class LoginVerificationCodeRequestedEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(isRequestingCode: true);
+  }
+}
+class LoginAutoRetrievalTimedOutEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(isVerificationView: true);
+  }
+}
+
+class LoginVerificationCodeRequestSucceededEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
     yield currentState.copyWith(
-        phoneNumber: PhoneNumber.create(phoneNumber));
+      codeRequestFailure: none(),
+    );
   }
 }
 
-class LoginSubmittedEvent extends LoginEvent {
-  @override
-  Stream<LoginState> handle(LoginState currentState) async* {
-    yield currentState.copyWith(hasSubmitted: true);
-  }
-}
-
-class LoginRequestEvent extends LoginEvent {
-  @override
-  Stream<LoginState> handle(LoginState currentState) async* {
-    yield currentState.copyWith(isRequesting: true);
-  }
-}
-
-class LoginRequestSucceededEvent extends LoginEvent {
-  @override
-  Stream<LoginState> handle(LoginState currentState) async* {
-    yield currentState.copyWith(
-      hasRequested: true, loginRequestFailure: none(),);
-  }
-}
-
-class LoginRequestFailedEvent extends LoginEvent {
+class LoginVerificationCodeRequestFailedEvent extends LoginEvent {
   final Failure requestFailure;
 
-  LoginRequestFailedEvent(this.requestFailure);
+  LoginVerificationCodeRequestFailedEvent(this.requestFailure);
 
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
     yield currentState.copyWith(
-        isRequesting: false,
-        loginRequestFailure: Failure.getFailure(requestFailure));
+        isRequestingCode: false,
+        codeRequestFailure: Failure.getFailure(requestFailure));
+  }
+}
+
+class LoginVerificationCodeSubmittedEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(hasSubmittedCode: true);
+  }
+}
+
+class LoginVerifyingCodeEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(isVerifyingCode: true);
+  }
+}
+
+class LoginVerifyingCodeSucceededEvent extends LoginEvent {
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(
+      verificationFailure: none(),
+    );
+  }
+}
+
+class LoginVerifyingCodeFailedEvent extends LoginEvent {
+  final Failure requestFailure;
+
+  LoginVerifyingCodeFailedEvent(this.requestFailure);
+
+  @override
+  Stream<LoginState> handle(LoginState currentState) async* {
+    yield currentState.copyWith(
+        isVerifyingCode: false,
+        verificationFailure: Failure.getFailure(requestFailure));
   }
 }

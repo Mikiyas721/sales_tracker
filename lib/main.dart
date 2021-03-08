@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sales_tracker/presentation/pages/card_transactions_page.dart';
 import 'package:sales_tracker/presentation/pages/splash_page.dart';
-import 'package:sales_tracker/presentation/pages/verfication_page.dart';
 import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
 import './presentation/pages/new_shop_page.dart';
@@ -55,7 +54,6 @@ class MyApp extends StatelessWidget {
 final routes = {
   '/': (BuildContext context) => SplashPage(),
   '/loginPage': (BuildContext context) => LoginPage(),
-  '/verificationPage': (BuildContext context) => VerificationPage(),
   '/homePage': (BuildContext context) => HomePage(),
   '/newShopPage': (BuildContext context) => NewShopPage(),
   '/myShopsPage': (BuildContext context) => MyShopsPage(),

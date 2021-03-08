@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/presentation/controllers/login_controller.dart';
 import 'package:sales_tracker/presentation/controllers/stats_controller.dart';
 import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
 import 'package:sales_tracker/presentation/views/sales_status_view.dart';
@@ -31,30 +32,33 @@ class HomePage extends StatelessWidget {
           ),
           Align(
               alignment: Alignment(0.9, -0.87),
-              child: IconButton(
-                  icon: Icon(Icons.logout),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                              title: Text('Signing out'),
-                              content:
-                                  Text('Are you sure you want to log out?'),
-                              actions: [
-                                FlatButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Cancel')),
-                                FlatButton(
-                                    onPressed: () {
-                                      //How can I access a controller without using ViewModelBuilder
-                                    },
-                                    child: Text('Ok'))
-                              ]);
-                        });
-                  })),
+              child: ControllerProvider<LoginController>(
+                create: () => LoginController(context),
+                builder: (context, controller) {
+                  return IconButton(
+                      icon: Icon(Icons.logout),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                  title: Text('Signing out'),
+                                  content:
+                                      Text('Are you sure you want to log out?'),
+                                  actions: [
+                                    FlatButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel')),
+                                    FlatButton(
+                                        onPressed: controller.onLogout,
+                                        child: Text('Ok'))
+                                  ]);
+                            });
+                      });
+                },
+              )),
           Positioned(
             left: 20,
             right: 20,

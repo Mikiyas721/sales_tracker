@@ -16,16 +16,24 @@ class _$LoginStateTearOff {
 // ignore: unused_element
   _LoginState call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Option<Failure> loginRequestFailure,
-      bool hasSubmitted,
-      bool isRequesting,
-      bool hasRequested}) {
+      Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<Failure> codeRequestFailure,
+      Option<Failure> verificationFailure,
+      bool hasSubmittedPhoneNumber,
+      bool isRequestingCode,
+      bool hasSubmittedCode,
+      bool isVerifyingCode,
+      bool isVerificationView}) {
     return _LoginState(
       phoneNumber: phoneNumber,
-      loginRequestFailure: loginRequestFailure,
-      hasSubmitted: hasSubmitted,
-      isRequesting: isRequesting,
-      hasRequested: hasRequested,
+      verificationCode: verificationCode,
+      codeRequestFailure: codeRequestFailure,
+      verificationFailure: verificationFailure,
+      hasSubmittedPhoneNumber: hasSubmittedPhoneNumber,
+      isRequestingCode: isRequestingCode,
+      hasSubmittedCode: hasSubmittedCode,
+      isVerifyingCode: isVerifyingCode,
+      isVerificationView: isVerificationView,
     );
   }
 }
@@ -37,10 +45,14 @@ const $LoginState = _$LoginStateTearOff();
 /// @nodoc
 mixin _$LoginState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
-  Option<Failure> get loginRequestFailure;
-  bool get hasSubmitted;
-  bool get isRequesting;
-  bool get hasRequested;
+  Either<VerificationCodeFailure, VerificationCode> get verificationCode;
+  Option<Failure> get codeRequestFailure;
+  Option<Failure> get verificationFailure;
+  bool get hasSubmittedPhoneNumber;
+  bool get isRequestingCode;
+  bool get hasSubmittedCode;
+  bool get isVerifyingCode;
+  bool get isVerificationView;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith;
@@ -53,10 +65,14 @@ abstract class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl<$Res>;
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Option<Failure> loginRequestFailure,
-      bool hasSubmitted,
-      bool isRequesting,
-      bool hasRequested});
+      Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<Failure> codeRequestFailure,
+      Option<Failure> verificationFailure,
+      bool hasSubmittedPhoneNumber,
+      bool isRequestingCode,
+      bool hasSubmittedCode,
+      bool isVerifyingCode,
+      bool isVerificationView});
 }
 
 /// @nodoc
@@ -70,24 +86,44 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   @override
   $Res call({
     Object phoneNumber = freezed,
-    Object loginRequestFailure = freezed,
-    Object hasSubmitted = freezed,
-    Object isRequesting = freezed,
-    Object hasRequested = freezed,
+    Object verificationCode = freezed,
+    Object codeRequestFailure = freezed,
+    Object verificationFailure = freezed,
+    Object hasSubmittedPhoneNumber = freezed,
+    Object isRequestingCode = freezed,
+    Object hasSubmittedCode = freezed,
+    Object isVerifyingCode = freezed,
+    Object isVerificationView = freezed,
   }) {
     return _then(_value.copyWith(
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
-      loginRequestFailure: loginRequestFailure == freezed
-          ? _value.loginRequestFailure
-          : loginRequestFailure as Option<Failure>,
-      hasSubmitted:
-          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
-      isRequesting:
-          isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
-      hasRequested:
-          hasRequested == freezed ? _value.hasRequested : hasRequested as bool,
+      verificationCode: verificationCode == freezed
+          ? _value.verificationCode
+          : verificationCode
+              as Either<VerificationCodeFailure, VerificationCode>,
+      codeRequestFailure: codeRequestFailure == freezed
+          ? _value.codeRequestFailure
+          : codeRequestFailure as Option<Failure>,
+      verificationFailure: verificationFailure == freezed
+          ? _value.verificationFailure
+          : verificationFailure as Option<Failure>,
+      hasSubmittedPhoneNumber: hasSubmittedPhoneNumber == freezed
+          ? _value.hasSubmittedPhoneNumber
+          : hasSubmittedPhoneNumber as bool,
+      isRequestingCode: isRequestingCode == freezed
+          ? _value.isRequestingCode
+          : isRequestingCode as bool,
+      hasSubmittedCode: hasSubmittedCode == freezed
+          ? _value.hasSubmittedCode
+          : hasSubmittedCode as bool,
+      isVerifyingCode: isVerifyingCode == freezed
+          ? _value.isVerifyingCode
+          : isVerifyingCode as bool,
+      isVerificationView: isVerificationView == freezed
+          ? _value.isVerificationView
+          : isVerificationView as bool,
     ));
   }
 }
@@ -100,10 +136,14 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   @override
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Option<Failure> loginRequestFailure,
-      bool hasSubmitted,
-      bool isRequesting,
-      bool hasRequested});
+      Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<Failure> codeRequestFailure,
+      Option<Failure> verificationFailure,
+      bool hasSubmittedPhoneNumber,
+      bool isRequestingCode,
+      bool hasSubmittedCode,
+      bool isVerifyingCode,
+      bool isVerificationView});
 }
 
 /// @nodoc
@@ -119,24 +159,44 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object phoneNumber = freezed,
-    Object loginRequestFailure = freezed,
-    Object hasSubmitted = freezed,
-    Object isRequesting = freezed,
-    Object hasRequested = freezed,
+    Object verificationCode = freezed,
+    Object codeRequestFailure = freezed,
+    Object verificationFailure = freezed,
+    Object hasSubmittedPhoneNumber = freezed,
+    Object isRequestingCode = freezed,
+    Object hasSubmittedCode = freezed,
+    Object isVerifyingCode = freezed,
+    Object isVerificationView = freezed,
   }) {
     return _then(_LoginState(
       phoneNumber: phoneNumber == freezed
           ? _value.phoneNumber
           : phoneNumber as Either<PhoneNumberFailure, PhoneNumber>,
-      loginRequestFailure: loginRequestFailure == freezed
-          ? _value.loginRequestFailure
-          : loginRequestFailure as Option<Failure>,
-      hasSubmitted:
-          hasSubmitted == freezed ? _value.hasSubmitted : hasSubmitted as bool,
-      isRequesting:
-          isRequesting == freezed ? _value.isRequesting : isRequesting as bool,
-      hasRequested:
-          hasRequested == freezed ? _value.hasRequested : hasRequested as bool,
+      verificationCode: verificationCode == freezed
+          ? _value.verificationCode
+          : verificationCode
+              as Either<VerificationCodeFailure, VerificationCode>,
+      codeRequestFailure: codeRequestFailure == freezed
+          ? _value.codeRequestFailure
+          : codeRequestFailure as Option<Failure>,
+      verificationFailure: verificationFailure == freezed
+          ? _value.verificationFailure
+          : verificationFailure as Option<Failure>,
+      hasSubmittedPhoneNumber: hasSubmittedPhoneNumber == freezed
+          ? _value.hasSubmittedPhoneNumber
+          : hasSubmittedPhoneNumber as bool,
+      isRequestingCode: isRequestingCode == freezed
+          ? _value.isRequestingCode
+          : isRequestingCode as bool,
+      hasSubmittedCode: hasSubmittedCode == freezed
+          ? _value.hasSubmittedCode
+          : hasSubmittedCode as bool,
+      isVerifyingCode: isVerifyingCode == freezed
+          ? _value.isVerifyingCode
+          : isVerifyingCode as bool,
+      isVerificationView: isVerificationView == freezed
+          ? _value.isVerificationView
+          : isVerificationView as bool,
     ));
   }
 }
@@ -145,25 +205,37 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 class _$_LoginState implements _LoginState {
   const _$_LoginState(
       {this.phoneNumber,
-      this.loginRequestFailure,
-      this.hasSubmitted,
-      this.isRequesting,
-      this.hasRequested});
+      this.verificationCode,
+      this.codeRequestFailure,
+      this.verificationFailure,
+      this.hasSubmittedPhoneNumber,
+      this.isRequestingCode,
+      this.hasSubmittedCode,
+      this.isVerifyingCode,
+      this.isVerificationView});
 
   @override
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
-  final Option<Failure> loginRequestFailure;
+  final Either<VerificationCodeFailure, VerificationCode> verificationCode;
   @override
-  final bool hasSubmitted;
+  final Option<Failure> codeRequestFailure;
   @override
-  final bool isRequesting;
+  final Option<Failure> verificationFailure;
   @override
-  final bool hasRequested;
+  final bool hasSubmittedPhoneNumber;
+  @override
+  final bool isRequestingCode;
+  @override
+  final bool hasSubmittedCode;
+  @override
+  final bool isVerifyingCode;
+  @override
+  final bool isVerificationView;
 
   @override
   String toString() {
-    return 'LoginState(phoneNumber: $phoneNumber, loginRequestFailure: $loginRequestFailure, hasSubmitted: $hasSubmitted, isRequesting: $isRequesting, hasRequested: $hasRequested)';
+    return 'LoginState(phoneNumber: $phoneNumber, verificationCode: $verificationCode, codeRequestFailure: $codeRequestFailure, verificationFailure: $verificationFailure, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, isRequestingCode: $isRequestingCode, hasSubmittedCode: $hasSubmittedCode, isVerifyingCode: $isVerifyingCode, isVerificationView: $isVerificationView)';
   }
 
   @override
@@ -173,28 +245,45 @@ class _$_LoginState implements _LoginState {
             (identical(other.phoneNumber, phoneNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.phoneNumber, phoneNumber)) &&
-            (identical(other.loginRequestFailure, loginRequestFailure) ||
+            (identical(other.verificationCode, verificationCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.loginRequestFailure, loginRequestFailure)) &&
-            (identical(other.hasSubmitted, hasSubmitted) ||
+                    .equals(other.verificationCode, verificationCode)) &&
+            (identical(other.codeRequestFailure, codeRequestFailure) ||
                 const DeepCollectionEquality()
-                    .equals(other.hasSubmitted, hasSubmitted)) &&
-            (identical(other.isRequesting, isRequesting) ||
+                    .equals(other.codeRequestFailure, codeRequestFailure)) &&
+            (identical(other.verificationFailure, verificationFailure) ||
                 const DeepCollectionEquality()
-                    .equals(other.isRequesting, isRequesting)) &&
-            (identical(other.hasRequested, hasRequested) ||
+                    .equals(other.verificationFailure, verificationFailure)) &&
+            (identical(
+                    other.hasSubmittedPhoneNumber, hasSubmittedPhoneNumber) ||
+                const DeepCollectionEquality().equals(
+                    other.hasSubmittedPhoneNumber, hasSubmittedPhoneNumber)) &&
+            (identical(other.isRequestingCode, isRequestingCode) ||
                 const DeepCollectionEquality()
-                    .equals(other.hasRequested, hasRequested)));
+                    .equals(other.isRequestingCode, isRequestingCode)) &&
+            (identical(other.hasSubmittedCode, hasSubmittedCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.hasSubmittedCode, hasSubmittedCode)) &&
+            (identical(other.isVerifyingCode, isVerifyingCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.isVerifyingCode, isVerifyingCode)) &&
+            (identical(other.isVerificationView, isVerificationView) ||
+                const DeepCollectionEquality()
+                    .equals(other.isVerificationView, isVerificationView)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(phoneNumber) ^
-      const DeepCollectionEquality().hash(loginRequestFailure) ^
-      const DeepCollectionEquality().hash(hasSubmitted) ^
-      const DeepCollectionEquality().hash(isRequesting) ^
-      const DeepCollectionEquality().hash(hasRequested);
+      const DeepCollectionEquality().hash(verificationCode) ^
+      const DeepCollectionEquality().hash(codeRequestFailure) ^
+      const DeepCollectionEquality().hash(verificationFailure) ^
+      const DeepCollectionEquality().hash(hasSubmittedPhoneNumber) ^
+      const DeepCollectionEquality().hash(isRequestingCode) ^
+      const DeepCollectionEquality().hash(hasSubmittedCode) ^
+      const DeepCollectionEquality().hash(isVerifyingCode) ^
+      const DeepCollectionEquality().hash(isVerificationView);
 
   @JsonKey(ignore: true)
   @override
@@ -205,21 +294,33 @@ class _$_LoginState implements _LoginState {
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
-      Option<Failure> loginRequestFailure,
-      bool hasSubmitted,
-      bool isRequesting,
-      bool hasRequested}) = _$_LoginState;
+      Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<Failure> codeRequestFailure,
+      Option<Failure> verificationFailure,
+      bool hasSubmittedPhoneNumber,
+      bool isRequestingCode,
+      bool hasSubmittedCode,
+      bool isVerifyingCode,
+      bool isVerificationView}) = _$_LoginState;
 
   @override
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
-  Option<Failure> get loginRequestFailure;
+  Either<VerificationCodeFailure, VerificationCode> get verificationCode;
   @override
-  bool get hasSubmitted;
+  Option<Failure> get codeRequestFailure;
   @override
-  bool get isRequesting;
+  Option<Failure> get verificationFailure;
   @override
-  bool get hasRequested;
+  bool get hasSubmittedPhoneNumber;
+  @override
+  bool get isRequestingCode;
+  @override
+  bool get hasSubmittedCode;
+  @override
+  bool get isVerifyingCode;
+  @override
+  bool get isVerificationView;
   @override
   @JsonKey(ignore: true)
   _$LoginStateCopyWith<_LoginState> get copyWith;

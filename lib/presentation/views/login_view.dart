@@ -7,35 +7,72 @@ import '../../common/common.dart';
 class LoginView extends StatelessWidget {
   final LoginViewModel loginViewModel;
   final void Function(String value) onPhoneNumberChanged;
-  final VoidCallback onSubmit;
+  final void Function(String value) onVerificationCodeChanged;
+  final VoidCallback onSubmitPhoneNumber;
+  final VoidCallback onVerify;
 
-  const LoginView(
-      {Key key,
-      @required this.loginViewModel,
-      @required this.onPhoneNumberChanged,
-      @required this.onSubmit})
-      : super(key: key);
+  const LoginView({
+    Key key,
+    @required this.loginViewModel,
+    @required this.onPhoneNumberChanged,
+    @required this.onVerificationCodeChanged,
+    @required this.onSubmitPhoneNumber,
+    @required this.onVerify,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        MyTextField(
-          errorText: loginViewModel.phoneNumberError,
-          labelText: 'phone number',
-          icon: Icons.phone,
-          onChanged: onPhoneNumberChanged,
-          onSubmitted: (s) => onSubmit(),
-          keyboardType: TextInputType.phone,
-        ),
-        100.vSpace,
-        MyButton(
-          label: 'Verify',
-          onSubmit: onSubmit,
-          isLoading: loginViewModel.isSubmitting,
-        )
-      ],
+      children: loginViewModel.isVerificationView
+          ? [
+              200.vSpace,
+              Text(
+                'Verify',
+                style: context.headline3,
+              ),
+              20.vSpace,
+              Text(
+                'We have sent a 6 digit verification code. Please enter the code to continue',
+                style: context.caption,
+              ),
+              200.vSpace,
+              MyTextField(
+                  errorText: loginViewModel.codeError,
+                  labelText: 'phone number',
+                  icon: Icons.phone,
+                  onChanged: onVerificationCodeChanged),
+
+              //TODO change by code input field
+              100.vSpace,
+              MyButton(
+                label: 'Verify',
+                onSubmit: onVerify,
+                isLoading: loginViewModel.isVerifyingCode,
+              )
+            ]
+          : [
+              200.vSpace,
+              Text(
+                'Welcome',
+                style: context.headline3,
+              ),
+              200.vSpace,
+              MyTextField(
+                errorText: loginViewModel.phoneNumberError,
+                labelText: 'phone number',
+                icon: Icons.phone,
+                onChanged: onPhoneNumberChanged,
+                onSubmitted: (s) => onSubmitPhoneNumber(),
+                keyboardType: TextInputType.phone,
+              ),
+              100.vSpace,
+              MyButton(
+                label: 'Submit',
+                onSubmit: onSubmitPhoneNumber,
+                isLoading: loginViewModel.isRequestingCode,
+              )
+            ],
     );
   }
 }
