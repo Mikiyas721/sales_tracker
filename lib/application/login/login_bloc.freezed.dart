@@ -17,6 +17,7 @@ class _$LoginStateTearOff {
   _LoginState call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<SalesPerson> fetchedSalesPerson,
       Option<Failure> codeRequestFailure,
       Option<Failure> verificationFailure,
       bool hasSubmittedPhoneNumber,
@@ -27,6 +28,7 @@ class _$LoginStateTearOff {
     return _LoginState(
       phoneNumber: phoneNumber,
       verificationCode: verificationCode,
+      fetchedSalesPerson: fetchedSalesPerson,
       codeRequestFailure: codeRequestFailure,
       verificationFailure: verificationFailure,
       hasSubmittedPhoneNumber: hasSubmittedPhoneNumber,
@@ -46,6 +48,7 @@ const $LoginState = _$LoginStateTearOff();
 mixin _$LoginState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   Either<VerificationCodeFailure, VerificationCode> get verificationCode;
+  Option<SalesPerson> get fetchedSalesPerson;
   Option<Failure> get codeRequestFailure;
   Option<Failure> get verificationFailure;
   bool get hasSubmittedPhoneNumber;
@@ -66,6 +69,7 @@ abstract class $LoginStateCopyWith<$Res> {
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<SalesPerson> fetchedSalesPerson,
       Option<Failure> codeRequestFailure,
       Option<Failure> verificationFailure,
       bool hasSubmittedPhoneNumber,
@@ -87,6 +91,7 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   $Res call({
     Object phoneNumber = freezed,
     Object verificationCode = freezed,
+    Object fetchedSalesPerson = freezed,
     Object codeRequestFailure = freezed,
     Object verificationFailure = freezed,
     Object hasSubmittedPhoneNumber = freezed,
@@ -103,6 +108,9 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _value.verificationCode
           : verificationCode
               as Either<VerificationCodeFailure, VerificationCode>,
+      fetchedSalesPerson: fetchedSalesPerson == freezed
+          ? _value.fetchedSalesPerson
+          : fetchedSalesPerson as Option<SalesPerson>,
       codeRequestFailure: codeRequestFailure == freezed
           ? _value.codeRequestFailure
           : codeRequestFailure as Option<Failure>,
@@ -137,6 +145,7 @@ abstract class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   $Res call(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<SalesPerson> fetchedSalesPerson,
       Option<Failure> codeRequestFailure,
       Option<Failure> verificationFailure,
       bool hasSubmittedPhoneNumber,
@@ -160,6 +169,7 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   $Res call({
     Object phoneNumber = freezed,
     Object verificationCode = freezed,
+    Object fetchedSalesPerson = freezed,
     Object codeRequestFailure = freezed,
     Object verificationFailure = freezed,
     Object hasSubmittedPhoneNumber = freezed,
@@ -176,6 +186,9 @@ class __$LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
           ? _value.verificationCode
           : verificationCode
               as Either<VerificationCodeFailure, VerificationCode>,
+      fetchedSalesPerson: fetchedSalesPerson == freezed
+          ? _value.fetchedSalesPerson
+          : fetchedSalesPerson as Option<SalesPerson>,
       codeRequestFailure: codeRequestFailure == freezed
           ? _value.codeRequestFailure
           : codeRequestFailure as Option<Failure>,
@@ -206,6 +219,7 @@ class _$_LoginState implements _LoginState {
   const _$_LoginState(
       {this.phoneNumber,
       this.verificationCode,
+      this.fetchedSalesPerson,
       this.codeRequestFailure,
       this.verificationFailure,
       this.hasSubmittedPhoneNumber,
@@ -218,6 +232,8 @@ class _$_LoginState implements _LoginState {
   final Either<PhoneNumberFailure, PhoneNumber> phoneNumber;
   @override
   final Either<VerificationCodeFailure, VerificationCode> verificationCode;
+  @override
+  final Option<SalesPerson> fetchedSalesPerson;
   @override
   final Option<Failure> codeRequestFailure;
   @override
@@ -235,7 +251,7 @@ class _$_LoginState implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(phoneNumber: $phoneNumber, verificationCode: $verificationCode, codeRequestFailure: $codeRequestFailure, verificationFailure: $verificationFailure, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, isRequestingCode: $isRequestingCode, hasSubmittedCode: $hasSubmittedCode, isVerifyingCode: $isVerifyingCode, isVerificationView: $isVerificationView)';
+    return 'LoginState(phoneNumber: $phoneNumber, verificationCode: $verificationCode, fetchedSalesPerson: $fetchedSalesPerson, codeRequestFailure: $codeRequestFailure, verificationFailure: $verificationFailure, hasSubmittedPhoneNumber: $hasSubmittedPhoneNumber, isRequestingCode: $isRequestingCode, hasSubmittedCode: $hasSubmittedCode, isVerifyingCode: $isVerifyingCode, isVerificationView: $isVerificationView)';
   }
 
   @override
@@ -248,6 +264,9 @@ class _$_LoginState implements _LoginState {
             (identical(other.verificationCode, verificationCode) ||
                 const DeepCollectionEquality()
                     .equals(other.verificationCode, verificationCode)) &&
+            (identical(other.fetchedSalesPerson, fetchedSalesPerson) ||
+                const DeepCollectionEquality()
+                    .equals(other.fetchedSalesPerson, fetchedSalesPerson)) &&
             (identical(other.codeRequestFailure, codeRequestFailure) ||
                 const DeepCollectionEquality()
                     .equals(other.codeRequestFailure, codeRequestFailure)) &&
@@ -277,6 +296,7 @@ class _$_LoginState implements _LoginState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(phoneNumber) ^
       const DeepCollectionEquality().hash(verificationCode) ^
+      const DeepCollectionEquality().hash(fetchedSalesPerson) ^
       const DeepCollectionEquality().hash(codeRequestFailure) ^
       const DeepCollectionEquality().hash(verificationFailure) ^
       const DeepCollectionEquality().hash(hasSubmittedPhoneNumber) ^
@@ -295,6 +315,7 @@ abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
       Either<VerificationCodeFailure, VerificationCode> verificationCode,
+      Option<SalesPerson> fetchedSalesPerson,
       Option<Failure> codeRequestFailure,
       Option<Failure> verificationFailure,
       bool hasSubmittedPhoneNumber,
@@ -307,6 +328,8 @@ abstract class _LoginState implements LoginState {
   Either<PhoneNumberFailure, PhoneNumber> get phoneNumber;
   @override
   Either<VerificationCodeFailure, VerificationCode> get verificationCode;
+  @override
+  Option<SalesPerson> get fetchedSalesPerson;
   @override
   Option<Failure> get codeRequestFailure;
   @override

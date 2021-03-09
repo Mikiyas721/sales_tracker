@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sales_tracker/common/bloc/bloc_helpers.dart';
 import 'package:sales_tracker/common/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sales_tracker/domain/entities/sales_person.dart';
 import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 import 'package:sales_tracker/domain/value_objects/verification_code.dart';
 

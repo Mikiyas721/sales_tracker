@@ -41,6 +41,7 @@ import 'domain/ports/shop-sales_repo.dart';
 import 'domain/ports/user_repo.dart';
 import 'domain/use_cases/load_logged_in_user.dart';
 import 'application/login/login_bloc.dart';
+import 'domain/use_cases/login_into_api.dart';
 import 'application/my_shops/my_shops_bloc.dart';
 import 'application/new_shop/new_shop_bloc.dart';
 import 'injection.dart';
@@ -110,6 +111,7 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));
   gh.lazySingleton<IShopSalesRepo>(
       () => ShopSalesRepoImpl(get<ShopSalesCrudDataSource>()));
+  gh.lazySingleton<LoginIntoApi>(() => LoginIntoApi(get<ISalesPersonRepo>()));
   gh.lazySingleton<UserCacheDataSource>(
       () => UserCacheDataSource(get<CacheDataSource>()));
   gh.lazySingleton<AddCardTransaction>(

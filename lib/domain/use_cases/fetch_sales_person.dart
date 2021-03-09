@@ -11,7 +11,7 @@ class FetchSalesPerson {
 
   const FetchSalesPerson(this._iSalesPersonRepo);
 
-  Future<Either<Failure, SalesPerson>> execute(PhoneNumber phoneNumber){
-    return _iSalesPersonRepo.fetchSalesperson(phoneNumber);
+  Future<Either<Failure, SalesPerson>> execute(PhoneNumber phoneNumber)async{
+    return right(SalesPerson.create(phoneNumber: '0941135730').getOrElse(() => null));_iSalesPersonRepo.fetchSalesperson(phoneNumber);
   }
 }

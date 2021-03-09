@@ -21,7 +21,6 @@ class PhoneNumber {
     final reg = RegExp(ethiopianPhoneRegex);
     final match = reg.firstMatch(phoneNumber);
     if (match == null) return left(InvalidPhoneNumberFailure());
-    print("$phoneNumber ${match.group(1)}");
     return right(PhoneNumber._("+2519${match.group(2)}"));
   }
 }

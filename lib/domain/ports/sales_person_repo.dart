@@ -5,4 +5,5 @@ import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 
 abstract class ISalesPersonRepo{
   Future<Either<Failure,SalesPerson>> fetchSalesperson(PhoneNumber phoneNumber);
+  Future<Either<Failure, Map>> login(String idToken);
 }

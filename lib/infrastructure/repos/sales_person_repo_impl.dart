@@ -31,4 +31,9 @@ class SalesPersonRepoImpl extends ISalesPersonRepo {
             .fold(() => left(SimpleFailure('Unable to change to Domain')), (a) => right(a));
     });
   }
+
+  Future<Either<Failure, Map>> login(String idToken)async{
+   final result = await salesPeopleCrudDataSource.logIn(idToken);
+   return result.fold((l)=>left(l), (r) => right(r.value));
+  }
 }

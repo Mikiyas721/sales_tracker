@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sales_tracker/application/login/login_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
+import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
+import 'package:sales_tracker/domain/entities/sales_person.dart';
+import 'package:sales_tracker/domain/entities/user.dart';
 import 'package:sales_tracker/domain/use_cases/clear_loggedin_user.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_sales_person.dart';
+import 'package:sales_tracker/domain/use_cases/login_into_api.dart';
 import 'package:sales_tracker/domain/use_cases/request_firebase_verification_code.dart';
+import 'package:sales_tracker/domain/use_cases/save_user.dart';
 import 'package:sales_tracker/domain/use_cases/verify_firebase_code.dart';
 import 'package:sales_tracker/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:sales_tracker/injection.dart';
@@ -52,14 +57,15 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
       apiResult.fold((l) {
         toastError(l.message);
       }, (r) async {
+        bloc.add(
+            LoginFetchedSalesPersonEvent(Failure.getOption<SalesPerson>(r)));
         bloc.add(LoginVerificationCodeRequestedEvent());
         final phoneAuthResult = await getIt
             .get<RequestFirebaseVerificationCode>()
             .execute(phoneNumber);
 
         if (phoneAuthResult is PhoneAuthSuccessResult) {
-          //phoneAuthResult.token
-          //todo call api
+          loginIntoApi(phoneAuthResult.token);
         } else if (phoneAuthResult is PhoneAuthFailedResult) {
           bloc.add(LoginVerificationCodeRequestedEvent());
           toastError(phoneAuthResult.failure);
@@ -68,6 +74,10 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         }
       });
     });
+  }
+
+  void onWrongNumber() {
+    bloc.add(LoginWrongNumberEvent());
   }
 
   void onVerifyCode() {
@@ -82,10 +92,36 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         bloc.add(LoginVerifyingCodeFailedEvent(l));
         toastError(l.message);
       }, (r) {
-        bloc.add(LoginVerifyingCodeSucceededEvent());
-        //phoneAuthResult.token
-        //todo call api
-        //save token on shared preference
+        loginIntoApi(r);
+      });
+    });
+  }
+
+  void loginIntoApi(String idToken) async {
+    final result = await getIt.get<LoginIntoApi>().execute(idToken);
+    result.fold((l) {
+      bloc.add(LoginVerifyingCodeFailedEvent(l));
+      toastError(l.message);
+    }, (idToken) {
+      bloc.state.fetchedSalesPerson.fold(() {
+        bloc.add(LoginVerifyingCodeFailedEvent(
+            SimpleFailure("No Signed in user found")));
+        toastError("No Signed in user found");
+      }, (user) {
+        final loggedInUser = User.create(
+            id: user.id,
+            name: user.name,
+            phoneNumber: user.phoneNumber,
+            token: idToken['id']);
+        loggedInUser.fold(() {
+          bloc.add(
+              LoginVerifyingCodeFailedEvent(SimpleFailure("No user found")));
+          toastError("No user found");
+        }, (a) async {
+          await getIt.get<SaveUser>().execute(a);
+          bloc.add(LoginVerifyingCodeSucceededEvent());
+          Navigator.pushNamedAndRemoveUntil(context, '/homePage', (route) => false);
+        });
       });
     });
   }

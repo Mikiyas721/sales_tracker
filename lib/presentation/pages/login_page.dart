@@ -26,6 +26,7 @@ class LoginPage extends StatelessWidget {
                         controller.onVerificationCodeChanged,
                     onSubmitPhoneNumber: controller.onSubmitPhoneNumber,
                     onVerify: controller.onVerifyCode,
+                    onWrongNumber: controller.onWrongNumber,
                   );
                 },
               ),
