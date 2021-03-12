@@ -11,7 +11,7 @@ CardTransactionDto _$CardTransactionDtoFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     salesPersonId: json['salesPersonId'] as String,
     shopId: json['shopId'] as String,
-    soldAmount: json['soldAmount'] as int,
+    amount: json['amount'] as int,
     createdAt: json['createdAt'] == null
         ? null
         : DateTime.parse(json['createdAt'] as String),
@@ -28,11 +28,7 @@ CardTransactionDto _$CardTransactionDtoFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CardTransactionDtoToJson(CardTransactionDto instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'salesPersonId': instance.salesPersonId,
-    'shopId': instance.shopId,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -40,9 +36,12 @@ Map<String, dynamic> _$CardTransactionDtoToJson(CardTransactionDto instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  val['salesPersonId'] = instance.salesPersonId;
+  val['shopId'] = instance.shopId;
   writeNotNull('shop', instance.shop);
   writeNotNull('salesPerson', instance.salesPerson);
-  val['soldAmount'] = instance.soldAmount;
+  val['amount'] = instance.amount;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   return val;

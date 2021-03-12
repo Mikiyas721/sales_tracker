@@ -18,15 +18,15 @@ class DioRestDataSource implements RestDataSource {
     BaseOptions(
       connectTimeout: 10000,
       receiveTimeout: 10000,
-      baseUrl: 'http://192.168.1.100:3000/api',
+      baseUrl: 'http://192.168.1.102:3000/api',
     ),
   ) {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options) async {
-          final token=await getIt.get<LoadLoggedInUser>().execute().then((value) => value.fold(() => null, (a) => a.token));
-          if (token != null)
-            options.headers['Authorization'] = token;
+          final user = await getIt.get<LoadLoggedInUser>().execute();
+          if (user.isSome())
+            options.headers['Authorization'] = user.getOrElse(() => null)?.token;
           return options;
         },
         onResponse: (Response response) async {

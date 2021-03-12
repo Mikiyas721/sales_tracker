@@ -8,7 +8,7 @@ part 'sales_person_dto.g.dart';
 
 @JsonSerializable(nullable: false)
 class SalesPersonDto extends IdDto<SalesPerson> implements TimeStampedDto {
-  final String id;
+  @JsonKey(nullable: true,includeIfNull: false) final String id;
   final String name;
   final String phoneNumber;
   @JsonKey(nullable: true, includeIfNull: false) final List<String> shops;

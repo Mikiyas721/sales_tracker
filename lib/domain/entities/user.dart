@@ -8,11 +8,21 @@ class User extends Entity {
   final Name name;
   final PhoneNumber phoneNumber;
   final String token;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  User._(this.id, this.name, this.phoneNumber, this.token);
+  User._(this.id, this.name, this.phoneNumber, this.token, this.createdAt,
+      this.updatedAt);
 
-  static Option<User> create({String id, Name name, PhoneNumber phoneNumber, String token}) {
-    if ([id, name, phoneNumber, token].any((element) => element == null)) return none();
-    return some(User._(id, name, phoneNumber, token));
+  static Option<User> create(
+      {String id,
+      Name name,
+      PhoneNumber phoneNumber,
+      String token,
+      DateTime createdAt,
+      DateTime updatedAt}) {
+    if ([id, name, phoneNumber, token].any((element) => element == null))
+      return none();
+    return some(User._(id, name, phoneNumber, token, createdAt, updatedAt));
   }
 }

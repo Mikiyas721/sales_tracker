@@ -45,7 +45,7 @@ class CashTransactionRepoImpl implements ICashTransactionRepo {
             right(IdDto.toDomainList<CashTransaction, CashTransactionDto>(r)));
   }
 
-  @override //TODO add filter logic to below functions
+  @override
   Future<Either<Failure, List<CashTransaction>>> fetchThisMonth(
       String salespersonId) async {
     final result = await fundTransactionCrudDataSource.find(options: {
@@ -53,7 +53,12 @@ class CashTransactionRepoImpl implements ICashTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(days: 30)).toIso8601String()}"
+              }
+            }
           ]
         }
       }
@@ -72,7 +77,12 @@ class CashTransactionRepoImpl implements ICashTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(days: 7)).toIso8601String()}"
+              }
+            }
           ]
         }
       }
@@ -91,7 +101,12 @@ class CashTransactionRepoImpl implements ICashTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(hours: 24)).toIso8601String()}"
+              }
+            }
           ]
         }
       }

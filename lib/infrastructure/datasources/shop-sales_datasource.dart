@@ -14,7 +14,7 @@ class ShopSalesLoopbackDataSource
     implements ShopSalesCrudDataSource {
   ShopSalesLoopbackDataSource(RestDataSource restDataSource)
       : super(
-            '/shop-sales',
+            '/shopSales',
             restDataSource,
             (shopSales) => shopSales.toJson(),
             (map) => ShopSalesDto.fromJson(map));

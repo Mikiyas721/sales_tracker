@@ -16,7 +16,7 @@ class UserRepo extends IUserRepo{
    return userCacheDataSource.saveMap(_KEY, UserDto.fromDomain(user).toJson());
   }
 
-  Future<Option<User>> getCurrentLoggedInUser()async{
+  Future<Option<User>> getCurrentLoggedInUser(){
     return userCacheDataSource.getMap(_KEY).then((value) => value.flatMap((a) => UserDto.fromJson(a).toDomain()));
   }
   Future<bool> clearLoggedInUser()async{

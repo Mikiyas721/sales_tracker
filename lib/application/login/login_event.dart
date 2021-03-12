@@ -23,16 +23,7 @@ class LoginVerificationCodeChangedEvent extends LoginEvent {
     yield currentState.copyWith(verificationCode: VerificationCode.createFromString(code));
   }
 }
-class LoginFetchedSalesPersonEvent extends LoginEvent {
-  final Option<SalesPerson> salesperson;
 
-  LoginFetchedSalesPersonEvent(this.salesperson);
-
-  @override
-  Stream<LoginState> handle(LoginState currentState) async* {
-    yield currentState.copyWith(fetchedSalesPerson: salesperson);
-  }
-}
 class LoginPhoneNumberSubmittedEvent extends LoginEvent {
   @override
   Stream<LoginState> handle(LoginState currentState) async* {
@@ -60,7 +51,6 @@ class LoginWrongNumberEvent extends LoginEvent {
     yield currentState.copyWith(
       phoneNumber: PhoneNumber.create(""),
       verificationCode: VerificationCode.createFromString(""),
-      fetchedSalesPerson:none(),
       codeRequestFailure: none(),
       verificationFailure: none(),
       hasSubmittedPhoneNumber: false,

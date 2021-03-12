@@ -45,7 +45,7 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
             right(IdDto.toDomainList<CardTransaction, CardTransactionDto>(r)));
   }
 
-  @override //TODO add filter logic to below functions
+  @override
   Future<Either<Failure, List<CardTransaction>>> fetchThisMonth(
       String salespersonId) async {
     final result = await saleTransactionCrudDataSource.find(options: {
@@ -53,7 +53,12 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(days: 30)).toIso8601String()}"
+              }
+            }
           ]
         }
       }
@@ -72,7 +77,12 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(days: 7)).toIso8601String()}"
+              }
+            }
           ]
         }
       }
@@ -91,7 +101,12 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
         "where": {
           "and": [
             {"salesPersonId": "$salespersonId"},
-            {}
+            {
+              "createdAt": {
+                "gt":
+                    "${DateTime.now().subtract(Duration(hours: 24)).toIso8601String()}"
+              }
+            }
           ]
         }
       }
@@ -103,8 +118,10 @@ class CardTransactionRepoImpl extends ICardTransactionRepo {
   }
 
   @override
-  Future<Either<Failure, Map>> addSalesTransaction(CardTransaction cardTransaction, CashTransaction cashTransaction) async{
-    final result = await saleTransactionCrudDataSource.addSalesTransaction(cashTransaction, cardTransaction);
+  Future<Either<Failure, Map>> addSalesTransaction(
+      CardTransaction cardTransaction, CashTransaction cashTransaction) async {
+    final result = await saleTransactionCrudDataSource.addSalesTransaction(
+        cashTransaction, cardTransaction);
     return result.either.fold((l) => left(l), (r) => right(r.value));
   }
 }

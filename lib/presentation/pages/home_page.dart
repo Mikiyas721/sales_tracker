@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/controller/controller_provider.dart';
+import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/controllers/login_controller.dart';
 import 'package:sales_tracker/presentation/controllers/stats_controller.dart';
 import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
 import 'package:sales_tracker/presentation/views/sales_status_view.dart';
 import '../../presentation/widgets/my_button.dart';
 import '../../common/common.dart';
+import '../../application/splash/splash_bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -35,28 +37,46 @@ class HomePage extends StatelessWidget {
               child: ControllerProvider<LoginController>(
                 create: () => LoginController(context),
                 builder: (context, controller) {
-                  return IconButton(
-                      icon: Icon(Icons.logout),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                  title: Text('Signing out'),
-                                  content:
-                                      Text('Are you sure you want to log out?'),
-                                  actions: [
-                                    FlatButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Cancel')),
-                                    FlatButton(
-                                        onPressed: controller.onLogout,
-                                        child: Text('Ok'))
-                                  ]);
-                            });
-                      });
+                  return InkWell(
+                    child: CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.brown,
+                        child: Text(
+                          getInitials(getIt
+                              .get<SplashBloc>()
+                              .state
+                              .user
+                              .getOrElse(() => null)
+                              ?.name
+                              ?.value),
+                          style: TextStyle(color: Colors.white),
+                        )),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                                title: Text(
+                                  'Signing out',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                content:
+                                    Text('Are you sure you want to log out?'),
+                                actions: [
+                                  FlatButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Cancel')),
+                                  FlatButton(
+                                      onPressed: controller.onLogout,
+                                      child: Text('Ok'))
+                                ]);
+                          });
+                    },
+                  );
                 },
               )),
           Positioned(
@@ -87,4 +107,13 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+String getInitials(String name) {
+  if (name == null) return '?';
+  List<String> split = name.split(' ');
+  if (split.length >= 2)
+    return '${split[0][0]}${split[1][0]}';
+  else
+    return '${split[0][0]}';
 }

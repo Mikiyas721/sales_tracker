@@ -29,6 +29,8 @@ class CardTransactionLoopbackDataSource
 
   Future<RestResponseWithFailure> addSalesTransaction(
       CashTransaction cashTransaction, CardTransaction cardTransaction) async {
+    print(CardTransactionDto.fromDomain(cardTransaction).toJson());
+    print(CashTransactionDto.fromDomain(cashTransaction).toJson());
     return restDataSource.post(RestRequest(
       url: '$path/addSalesTransaction',
       data: {

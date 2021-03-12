@@ -20,7 +20,7 @@ class Shop extends Entity{
     this.phoneNumber,
     this.createdAt,
     this.updatedAt,
-    this.balance,
+    this.balance = 0,
   });
 
   static Option<Shop> create({

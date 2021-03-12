@@ -4,11 +4,15 @@ import 'package:sales_tracker/common/datasource/crud_datasource/rest_crud_dataso
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_datasource.dart';
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_request.dart';
 import 'package:sales_tracker/common/datasource/rest_datasource/rest_response.dart';
+import 'package:sales_tracker/domain/use_cases/load_logged_in_user.dart';
 import 'package:sales_tracker/infrastructure/dto/shop_dto.dart';
+
+import '../../injection.dart';
 
 abstract class ShopCrudDataSource
     extends CrudDataSource<ShopDto, RestResponseFailure> {
-  Future<RestResponseWithFailure> addSalespersonShop(ShopDto shopDto, String salesPersonId);
+  Future<RestResponseWithFailure> addSalespersonShop(
+      ShopDto shopDto, String salesPersonId);
 }
 
 @LazySingleton(as: ShopCrudDataSource)
@@ -22,13 +26,11 @@ class ShopLoopbackDataSource extends LoopbackRestCrudDataSource<ShopDto>
           (map) => ShopDto.fromJson(map),
         );
 
-  Future<RestResponseWithFailure> addSalespersonShop(ShopDto shopDto, String salesPersonId)async{
+  Future<RestResponseWithFailure> addSalespersonShop(
+      ShopDto shopDto, String salesPersonId) async {
     return restDataSource.post(RestRequest(
-      url: '$path/addSalespersonShop',
-      data: {
-        'shopToSave': shopDto.toJson(),
-        'salespersonId': salesPersonId
-      },
+      url: '$path/addSalespersonShop/$salesPersonId',
+      data: shopDto.toJson(),
     ));
   }
 }

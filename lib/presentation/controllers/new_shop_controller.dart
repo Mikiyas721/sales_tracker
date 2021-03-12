@@ -59,9 +59,6 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
       address: this.bloc.state.address.getOrElse(() => null),
       phoneNumber: this.bloc.state.phoneNumber.getOrElse(() => null),
     );
-    print(bloc.state.name);
-    print(bloc.state.address);
-    print(bloc.state.phoneNumber);
     shop.fold(
       () {
         toastError("Invalid Input");
@@ -78,7 +75,10 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
             toastError(l.message);
           }, (r) {
             bloc.add(NewShopAddSucceededEvent());
-            toastSuccess("Shop Added Successfully");
+            nameTextFieldController.text = "";
+            addressTextFieldController.text = "";
+            phoneTextFieldController.text = "";
+            toastSuccess("Operation Successful");
           });
         });
       },

@@ -10,7 +10,7 @@ part 'cash_transaction_dto.g.dart';
 
 @JsonSerializable(nullable: false)
 class CashTransactionDto extends IdDto<CashTransaction> implements TimeStampedDto {
-  final String id;
+  @JsonKey(nullable: true,includeIfNull: false) final String id;
   final String salesPersonId;
   final String shopId;
 

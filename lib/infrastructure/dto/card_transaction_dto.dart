@@ -10,14 +10,14 @@ part 'card_transaction_dto.g.dart';
 
 @JsonSerializable(nullable: false)
 class CardTransactionDto extends IdDto<CardTransaction> implements TimeStampedDto {
-  final String id;
+  @JsonKey(nullable: true,includeIfNull: false) final String id;
   final String salesPersonId;
   final String shopId;
 
   @JsonKey(nullable: true,includeIfNull: false) final ShopDto shop;
   @JsonKey(nullable: true,includeIfNull: false) final SalesPersonDto salesPerson;
 
-  final int soldAmount;
+  final int amount;
   @JsonKey(nullable: true,includeIfNull: false) final DateTime createdAt;
   @JsonKey(nullable: true,includeIfNull: false) final DateTime updatedAt;
 
@@ -25,7 +25,7 @@ class CardTransactionDto extends IdDto<CardTransaction> implements TimeStampedDt
     @required this.id,
     @required this.salesPersonId,
     @required this.shopId,
-    @required this.soldAmount,
+    @required this.amount,
     @required this.createdAt,
     @required this.updatedAt,
     this.shop,
@@ -44,7 +44,7 @@ class CardTransactionDto extends IdDto<CardTransaction> implements TimeStampedDt
         shopId:shopId,
         shop:shop?.toDomain()??none(),
         salesPerson:salesPerson?.toDomain()??none(),
-        amount:soldAmount,
+        amount:amount,
         createdAt:createdAt,
         updatedAt:updatedAt,
     );
@@ -56,7 +56,7 @@ class CardTransactionDto extends IdDto<CardTransaction> implements TimeStampedDt
         id:cardTransaction.id,
         salesPersonId:cardTransaction.salesPersonId,
         shopId:cardTransaction.shopId,
-        soldAmount:cardTransaction.amount.value,
+        amount:cardTransaction.amount.value,
         createdAt:cardTransaction.createdAt,
         updatedAt:cardTransaction.updatedAt,
     );

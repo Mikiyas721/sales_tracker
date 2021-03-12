@@ -12,11 +12,6 @@ class LoadLoggedInUser {
   const LoadLoggedInUser(this._iUserRepo);
 
   Future<Option<User>> execute() async {
-    // return User.create(
-    //   id: '603ed575e68f4c0540afb7a6',
-    //   name: Name.create('Mikiyas Tesfaye').getOrElse(() => null),
-    //   phoneNumber: PhoneNumber.create('+251941135730').getOrElse(() => null),
-    // );
     return _iUserRepo.getCurrentLoggedInUser();
   }
 }

@@ -5,7 +5,6 @@ abstract class LoginState extends BlocState with _$LoginState {
   const factory LoginState({
     Either<PhoneNumberFailure, PhoneNumber> phoneNumber,
     Either<VerificationCodeFailure, VerificationCode> verificationCode,
-    Option<SalesPerson> fetchedSalesPerson,
     Option<Failure> codeRequestFailure,
     Option<Failure> verificationFailure,
     bool hasSubmittedPhoneNumber,
@@ -18,7 +17,6 @@ abstract class LoginState extends BlocState with _$LoginState {
   factory LoginState.initial() => LoginState(
         phoneNumber: PhoneNumber.create(""),
         verificationCode: VerificationCode.createFromString(""),
-      fetchedSalesPerson:none(),
         codeRequestFailure: none(),
         verificationFailure: none(),
         hasSubmittedPhoneNumber: false,

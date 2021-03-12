@@ -8,7 +8,7 @@ part 'shop_dto.g.dart';
 
 @JsonSerializable(nullable: false)
 class ShopDto extends IdDto<Shop> implements TimeStampedDto {
-  final String id;
+  @JsonKey(nullable: true,includeIfNull: false) final String id;
   final String name;
   final String address;
   final String phoneNumber;
@@ -46,7 +46,6 @@ class ShopDto extends IdDto<Shop> implements TimeStampedDto {
   }
 
   static ShopDto fromDomain(Shop fundTransaction) {
-    /// Dont we need to check if the passed object is null
     return ShopDto(
       id: fundTransaction.id,
       name: fundTransaction.name.value,

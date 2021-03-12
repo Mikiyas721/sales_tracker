@@ -28,11 +28,7 @@ CashTransactionDto _$CashTransactionDtoFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$CashTransactionDtoToJson(CashTransactionDto instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'salesPersonId': instance.salesPersonId,
-    'shopId': instance.shopId,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -40,6 +36,9 @@ Map<String, dynamic> _$CashTransactionDtoToJson(CashTransactionDto instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  val['salesPersonId'] = instance.salesPersonId;
+  val['shopId'] = instance.shopId;
   writeNotNull('shop', instance.shop);
   writeNotNull('salesPerson', instance.salesPerson);
   val['amount'] = instance.amount;

@@ -84,7 +84,7 @@ class SalesStatusView extends StatelessWidget {
     if (salesStatusViewModel.bars.isEmpty)
       return EmptyErrorView.defaultEmpty(
         description:
-            'You have no transactions ${getTitle(salesStatusViewModel.activeButtonIndex)}',
+            'You have no transaction ${getTitle(salesStatusViewModel.activeButtonIndex)}',
         onAction: onReload,
       );
     return Column(

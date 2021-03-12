@@ -41,10 +41,12 @@ class LoginView extends StatelessWidget {
               ),
               200.vSpace,
               MyTextField(
-                  errorText: loginViewModel.codeError,
-                  labelText: 'verification code',
-                  icon: Icons.code,
-                  onChanged: onVerificationCodeChanged),
+                errorText: loginViewModel.codeError,
+                labelText: 'verification code',
+                icon: Icons.code,
+                onChanged: onVerificationCodeChanged,
+                onSubmitted: (code) => onVerify(),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

@@ -23,12 +23,7 @@ ShopDto _$ShopDtoFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ShopDtoToJson(ShopDto instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'name': instance.name,
-    'address': instance.address,
-    'phoneNumber': instance.phoneNumber,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -36,6 +31,10 @@ Map<String, dynamic> _$ShopDtoToJson(ShopDto instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  val['name'] = instance.name;
+  val['address'] = instance.address;
+  val['phoneNumber'] = instance.phoneNumber;
   writeNotNull('createdAt', instance.createdAt?.toIso8601String());
   writeNotNull('updatedAt', instance.updatedAt?.toIso8601String());
   val['balance'] = instance.balance;
