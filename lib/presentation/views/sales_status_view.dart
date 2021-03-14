@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/widgets/empty_error_view.dart';

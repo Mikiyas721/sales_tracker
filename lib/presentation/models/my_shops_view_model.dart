@@ -5,7 +5,6 @@ class MyShopsViewModel extends SimpleListViewModel<ShopViewModel> {
   final String searchWith;
   MyShopsViewModel({
     List<ShopViewModel> list,
-    bool hasLoaded,
     String loadingError,
     bool isLoading,
     this.searchWith,

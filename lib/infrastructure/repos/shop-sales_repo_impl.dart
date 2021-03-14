@@ -43,26 +43,26 @@ class ShopSalesRepoImpl extends IShopSalesRepo {
   @override
   Future<Either<Failure, List<ShopSales>>> searchForShops(
       String salespersonId, String prop, String value) async {
-    print('$prop $value');
     final shopSalesResults = await shopSalesCrudDataSource.find(options: {
       "filter": {
-        "include": {"relation": "shop"},
+        "include": {
+          "relation": "shop",
+          "scope": {
+            "where": {
+              "$prop": {"like": "$value"}
+            }
+          }
+        },
         "where": {
           "and": [
             {
               "salesPersonId": {"eq": "$salespersonId"}
             },
-            {
-              "shop.$prop": {
-                "like": {"$value"}
-              }
-            }
           ]
         }
       },
     });
-    return shopSalesResults.either.fold((l) => left(l), (r) {
-      return right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r));
-    });
+    return shopSalesResults.either.fold((l) => left(l),
+        (r) => right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r)));
   }
 }

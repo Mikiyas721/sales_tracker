@@ -17,7 +17,7 @@ class SearchShop {
     return result.fold((l) => left(l), (r) {
       List<Shop> shops = [];
       r.forEach((element) {
-        if (element.shop.isSome())
+        if (element.shop != null && element.shop.isSome())
           shops.add(element.shop.getOrElse(() => null));
       });
       return right(shops);
