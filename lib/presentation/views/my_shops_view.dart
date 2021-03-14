@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sales_tracker/common/widgets/empty_error_view.dart';
@@ -10,28 +11,67 @@ class MyShopsView extends StatelessWidget {
   final MyShopsViewModel myShops;
   final VoidCallback onReload;
   final VoidCallback onRegister;
+  final void Function(String value) onSearch;
+  final void Function(String value) onSearchWithSelected;
 
-  const MyShopsView({Key key, this.myShops, this.onReload, this.onRegister}) : super(key: key);
+  const MyShopsView({
+    Key key,
+    this.myShops,
+    this.onReload,
+    this.onRegister,
+    this.onSearch,
+    this.onSearchWithSelected,
+  })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SimpleListView<ShopViewModel>(
-        model: myShops,
-        itemBuilder: (BuildContext context, ShopViewModel model) {
-          return ShopView._(myShopViewModel: model);
-        },
-        errorView: Center(
-            child: EmptyErrorView.defaultError(
-              onAction: onReload,
-            )),
-        loadingView: Center(
-            child: MyLoadingView()),
-        emptyView: Center(
-            child: EmptyErrorView.defaultEmpty(
-              description: 'You have no shops. Click the button below to start registering',
-              actionLabel: 'Register',
-              onAction: onRegister,
-            )));
+    return Scaffold(
+        appBar: AppBar(
+          leadingWidth: 30,
+          title: CupertinoTextField(
+            placeholder: 'Look for a shop',
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              border: Border.all(color: Colors.black26, width: 0.7),
+            ),
+            suffix: PopupMenuButton<String>(
+              itemBuilder: (BuildContext context) {
+                return [
+                  CheckedPopupMenuItem(
+                    child: Text('Name'),
+                    value: 'name',
+                    checked: myShops.searchWith == 'name',
+                  ),
+                  CheckedPopupMenuItem(
+                    child: Text('Phone'),
+                    value: 'phoneNumber',
+                    checked: myShops.searchWith == 'phoneNumber',
+                  )
+                ];
+              }, onSelected:onSearchWithSelected,
+            ),
+            onChanged: onSearch,
+          ),
+        ),
+        body: SimpleListView<ShopViewModel>(
+            model: myShops,
+            itemBuilder: (BuildContext context, ShopViewModel model) {
+              return ShopView._(myShopViewModel: model);
+            },
+            errorView: Center(
+                child: EmptyErrorView.defaultError(
+                  onAction: onReload,
+                )),
+            loadingView: Center(child: MyLoadingView()),
+            emptyView: Center(
+                child: EmptyErrorView.defaultEmpty(
+                  description:
+                  'You have no shops. Click the button below to start registering',
+                  actionLabel: 'Register',
+                  onAction: onRegister,
+                ))));
   }
 }
 
@@ -64,7 +104,8 @@ class ShopView extends StatelessWidget {
           icon: Icons.receipt,
           caption: 'Sale',
           onTap: () {
-            Navigator.pushNamed(context, '/sellingPage',arguments: myShopViewModel);
+            Navigator.pushNamed(context, '/sellingPage',
+                arguments: myShopViewModel);
           },
           color: context.secondaryHeaderColor,
           foregroundColor: Colors.white,
@@ -73,7 +114,8 @@ class ShopView extends StatelessWidget {
           icon: Icons.attach_money,
           caption: 'Fund',
           onTap: () {
-            Navigator.pushNamed(context, '/fundingPage',arguments: myShopViewModel);
+            Navigator.pushNamed(context, '/fundingPage',
+                arguments: myShopViewModel);
           },
           color: context.primaryColor,
           foregroundColor: Colors.white,
@@ -84,7 +126,8 @@ class ShopView extends StatelessWidget {
           icon: Icons.swap_horiz,
           caption: 'Card',
           onTap: () {
-            Navigator.pushNamed(context, '/cardTransactionsPage',arguments: myShopViewModel);
+            Navigator.pushNamed(context, '/cardTransactionsPage',
+                arguments: myShopViewModel);
           },
           color: context.primaryColor,
           foregroundColor: Colors.white,
@@ -93,7 +136,8 @@ class ShopView extends StatelessWidget {
           icon: Icons.swap_horiz,
           caption: 'Cash',
           onTap: () {
-            Navigator.pushNamed(context, '/cashTransactionsPage',arguments: myShopViewModel);
+            Navigator.pushNamed(context, '/cashTransactionsPage',
+                arguments: myShopViewModel);
           },
           color: context.secondaryHeaderColor,
           foregroundColor: Colors.white,

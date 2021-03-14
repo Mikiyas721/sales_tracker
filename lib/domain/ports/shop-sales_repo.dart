@@ -5,4 +5,5 @@ import 'package:sales_tracker/domain/entities/shop-sales.dart';
 abstract class IShopSalesRepo {
   Future<Either<Failure, ShopSales>> addShop(ShopSales shopSales);
   Future<Either<Failure, List<ShopSales>>> fetchMyShops(String salespersonId);
+  Future<Either<Failure, List<ShopSales>>> searchForShops(String salespersonId,String prop,String value);
 }

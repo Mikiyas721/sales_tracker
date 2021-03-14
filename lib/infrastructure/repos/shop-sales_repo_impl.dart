@@ -39,4 +39,30 @@ class ShopSalesRepoImpl extends IShopSalesRepo {
       return right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r));
     });
   }
+
+  @override
+  Future<Either<Failure, List<ShopSales>>> searchForShops(
+      String salespersonId, String prop, String value) async {
+    print('$prop $value');
+    final shopSalesResults = await shopSalesCrudDataSource.find(options: {
+      "filter": {
+        "include": {"relation": "shop"},
+        "where": {
+          "and": [
+            {
+              "salesPersonId": {"eq": "$salespersonId"}
+            },
+            {
+              "shop.$prop": {
+                "like": {"$value"}
+              }
+            }
+          ]
+        }
+      },
+    });
+    return shopSalesResults.either.fold((l) => left(l), (r) {
+      return right(IdDto.toDomainList<ShopSales, ShopSalesDto>(r));
+    });
+  }
 }

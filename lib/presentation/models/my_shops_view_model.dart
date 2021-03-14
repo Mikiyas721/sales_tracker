@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sales_tracker/common/view_model.dart';
 
 class MyShopsViewModel extends SimpleListViewModel<ShopViewModel> {
+  final String searchWith;
   MyShopsViewModel({
     List<ShopViewModel> list,
     bool hasLoaded,
     String loadingError,
     bool isLoading,
-  }) : super(isLoading: isLoading,data: list,error: loadingError);
+    this.searchWith,
+  }) : super(isLoading: isLoading, data: list, error: loadingError);
 }
 
 class ShopViewModel extends ViewModel {

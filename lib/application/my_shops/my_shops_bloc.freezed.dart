@@ -17,11 +17,13 @@ class _$MyShopsStateTearOff {
   _MyShopsState call(
       {bool isLoading,
       Option<Failure> myShopsLoadingFailure,
-      List<Shop> shops}) {
+      List<Shop> shops,
+      String searchWith}) {
     return _MyShopsState(
       isLoading: isLoading,
       myShopsLoadingFailure: myShopsLoadingFailure,
       shops: shops,
+      searchWith: searchWith,
     );
   }
 }
@@ -35,6 +37,7 @@ mixin _$MyShopsState {
   bool get isLoading;
   Option<Failure> get myShopsLoadingFailure;
   List<Shop> get shops;
+  String get searchWith;
 
   @JsonKey(ignore: true)
   $MyShopsStateCopyWith<MyShopsState> get copyWith;
@@ -48,7 +51,8 @@ abstract class $MyShopsStateCopyWith<$Res> {
   $Res call(
       {bool isLoading,
       Option<Failure> myShopsLoadingFailure,
-      List<Shop> shops});
+      List<Shop> shops,
+      String searchWith});
 }
 
 /// @nodoc
@@ -64,6 +68,7 @@ class _$MyShopsStateCopyWithImpl<$Res> implements $MyShopsStateCopyWith<$Res> {
     Object isLoading = freezed,
     Object myShopsLoadingFailure = freezed,
     Object shops = freezed,
+    Object searchWith = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
@@ -71,6 +76,8 @@ class _$MyShopsStateCopyWithImpl<$Res> implements $MyShopsStateCopyWith<$Res> {
           ? _value.myShopsLoadingFailure
           : myShopsLoadingFailure as Option<Failure>,
       shops: shops == freezed ? _value.shops : shops as List<Shop>,
+      searchWith:
+          searchWith == freezed ? _value.searchWith : searchWith as String,
     ));
   }
 }
@@ -85,7 +92,8 @@ abstract class _$MyShopsStateCopyWith<$Res>
   $Res call(
       {bool isLoading,
       Option<Failure> myShopsLoadingFailure,
-      List<Shop> shops});
+      List<Shop> shops,
+      String searchWith});
 }
 
 /// @nodoc
@@ -103,6 +111,7 @@ class __$MyShopsStateCopyWithImpl<$Res> extends _$MyShopsStateCopyWithImpl<$Res>
     Object isLoading = freezed,
     Object myShopsLoadingFailure = freezed,
     Object shops = freezed,
+    Object searchWith = freezed,
   }) {
     return _then(_MyShopsState(
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
@@ -110,6 +119,8 @@ class __$MyShopsStateCopyWithImpl<$Res> extends _$MyShopsStateCopyWithImpl<$Res>
           ? _value.myShopsLoadingFailure
           : myShopsLoadingFailure as Option<Failure>,
       shops: shops == freezed ? _value.shops : shops as List<Shop>,
+      searchWith:
+          searchWith == freezed ? _value.searchWith : searchWith as String,
     ));
   }
 }
@@ -117,7 +128,10 @@ class __$MyShopsStateCopyWithImpl<$Res> extends _$MyShopsStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_MyShopsState implements _MyShopsState {
   const _$_MyShopsState(
-      {this.isLoading, this.myShopsLoadingFailure, this.shops});
+      {this.isLoading,
+      this.myShopsLoadingFailure,
+      this.shops,
+      this.searchWith});
 
   @override
   final bool isLoading;
@@ -125,10 +139,12 @@ class _$_MyShopsState implements _MyShopsState {
   final Option<Failure> myShopsLoadingFailure;
   @override
   final List<Shop> shops;
+  @override
+  final String searchWith;
 
   @override
   String toString() {
-    return 'MyShopsState(isLoading: $isLoading, myShopsLoadingFailure: $myShopsLoadingFailure, shops: $shops)';
+    return 'MyShopsState(isLoading: $isLoading, myShopsLoadingFailure: $myShopsLoadingFailure, shops: $shops, searchWith: $searchWith)';
   }
 
   @override
@@ -142,7 +158,10 @@ class _$_MyShopsState implements _MyShopsState {
                 const DeepCollectionEquality().equals(
                     other.myShopsLoadingFailure, myShopsLoadingFailure)) &&
             (identical(other.shops, shops) ||
-                const DeepCollectionEquality().equals(other.shops, shops)));
+                const DeepCollectionEquality().equals(other.shops, shops)) &&
+            (identical(other.searchWith, searchWith) ||
+                const DeepCollectionEquality()
+                    .equals(other.searchWith, searchWith)));
   }
 
   @override
@@ -150,7 +169,8 @@ class _$_MyShopsState implements _MyShopsState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(myShopsLoadingFailure) ^
-      const DeepCollectionEquality().hash(shops);
+      const DeepCollectionEquality().hash(shops) ^
+      const DeepCollectionEquality().hash(searchWith);
 
   @JsonKey(ignore: true)
   @override
@@ -162,7 +182,8 @@ abstract class _MyShopsState implements MyShopsState {
   const factory _MyShopsState(
       {bool isLoading,
       Option<Failure> myShopsLoadingFailure,
-      List<Shop> shops}) = _$_MyShopsState;
+      List<Shop> shops,
+      String searchWith}) = _$_MyShopsState;
 
   @override
   bool get isLoading;
@@ -170,6 +191,8 @@ abstract class _MyShopsState implements MyShopsState {
   Option<Failure> get myShopsLoadingFailure;
   @override
   List<Shop> get shops;
+  @override
+  String get searchWith;
   @override
   @JsonKey(ignore: true)
   _$MyShopsStateCopyWith<_MyShopsState> get copyWith;

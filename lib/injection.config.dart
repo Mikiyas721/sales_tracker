@@ -50,6 +50,7 @@ import 'common/datasource/rest_datasource/rest_datasource.dart';
 import 'infrastructure/datasources/sales_person_datasource.dart';
 import 'infrastructure/repos/sales_person_repo_impl.dart';
 import 'domain/use_cases/save_user.dart';
+import 'domain/use_cases/search_shop.dart';
 import 'common/datasource/cache_datasource/shared_preferences_cache_datasource.dart';
 import 'infrastructure/datasources/shop_datasource.dart';
 import 'infrastructure/repos/shop_repo_impl.dart';
@@ -112,6 +113,7 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<IShopSalesRepo>(
       () => ShopSalesRepoImpl(get<ShopSalesCrudDataSource>()));
   gh.lazySingleton<LoginIntoApi>(() => LoginIntoApi(get<ISalesPersonRepo>()));
+  gh.lazySingleton<SearchShop>(() => SearchShop(get<IShopSalesRepo>()));
   gh.lazySingleton<UserCacheDataSource>(
       () => UserCacheDataSource(get<CacheDataSource>()));
   gh.lazySingleton<AddCardTransaction>(
