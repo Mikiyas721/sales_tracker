@@ -7,7 +7,8 @@ import 'package:sales_tracker/injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../application/splash/splash_bloc.dart';
 
-class SplashController extends BlocController<SplashBloc, SplashEvent, SplashState> {
+class SplashController
+    extends BlocController<SplashBloc, SplashEvent, SplashState> {
   final BuildContext context;
 
   SplashController(this.context) : super(getIt.get<SplashBloc>(), false);
@@ -15,19 +16,21 @@ class SplashController extends BlocController<SplashBloc, SplashEvent, SplashSta
   loadUser() async {
     final result = await getIt.get<LoadLoggedInUser>().execute();
     await Future.delayed(Duration(seconds: 1));
-    result.fold(() {
-      Navigator.pushReplacementNamed(context, '/loginPage');
-    }, (a) {
-      bloc.add(UserChangedSplashEvent(result));
-    });
+    result.fold(
+      () {
+        Navigator.pushReplacementNamed(context, '/loginPage');
+      },
+      (a) {
+        bloc.add(UserChangedSplashEvent(result));
+      },
+    );
   }
 
   @override
   onStateChanged(SplashState previousState, SplashState currentState) {
     if (previousState.user.isNone() && currentState.user.isSome()) {
       Navigator.pushNamedAndRemoveUntil(context, '/homePage', (a) => false);
-    }
-    else if(previousState.user.isSome() && currentState.user.isNone()){
+    } else if (previousState.user.isSome() && currentState.user.isNone()) {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (a) => false);
     }
   }

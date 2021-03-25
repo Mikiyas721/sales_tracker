@@ -29,21 +29,24 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xff5837B6),
         secondaryHeaderColor: Color(0xff693DE5),
         appBarTheme: AppBarTheme(
-            color: Colors.white,
-            actionsIconTheme: IconThemeData(color: Colors.black),
-            iconTheme: IconThemeData(color: Colors.black),
-            textTheme: TextTheme(
-                headline6: GoogleFonts.poppins(
+          color: Colors.white,
+          actionsIconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.black),
+          textTheme: TextTheme(
+            headline6: GoogleFonts.poppins(
               fontSize: 24,
               color: Colors.black,
-            ))),
+            ),
+          ),
+        ),
         textTheme: TextTheme(
-            headline2: GoogleFonts.montserrat(fontSize: 40, color: Colors.black),
-            headline3: GoogleFonts.montserrat(fontSize: 30, color: Colors.black),
-            headline4: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
-            headline5: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
-            headline6: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
-            caption: GoogleFonts.montserrat(fontSize: 12, color: Colors.grey)),
+          headline2: GoogleFonts.montserrat(fontSize: 40, color: Colors.black),
+          headline3: GoogleFonts.montserrat(fontSize: 30, color: Colors.black),
+          headline4: GoogleFonts.montserrat(fontSize: 20, color: Colors.black),
+          headline5: GoogleFonts.poppins(fontSize: 18, color: Colors.black),
+          headline6: GoogleFonts.poppins(fontSize: 16, color: Colors.black),
+          caption: GoogleFonts.montserrat(fontSize: 12, color: Colors.grey),
+        ),
       ),
       initialRoute: '/',
       routes: routes,

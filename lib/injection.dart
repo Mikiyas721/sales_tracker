@@ -10,7 +10,7 @@ final getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-Future configureDependencies() => $initGetIt(getIt);
+Future configureDependencies() => $initGetIt(getIt, environment: "staging");
 
 @module
 abstract class RegisterModule {

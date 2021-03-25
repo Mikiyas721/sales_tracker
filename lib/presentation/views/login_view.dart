@@ -22,6 +22,9 @@ class LoginView extends StatelessWidget {
     @required this.onWrongNumber,
   }) : super(key: key);
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -72,7 +75,7 @@ class LoginView extends StatelessWidget {
               200.vSpace,
               MyTextField(
                 errorText: loginViewModel.phoneNumberError,
-                labelText: 'phone number',
+                labelText: 'Phone Number',
                 icon: Icons.phone,
                 onChanged: onPhoneNumberChanged,
                 onSubmitted: (s) => onSubmitPhoneNumber(),

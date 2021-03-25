@@ -64,6 +64,7 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
             .execute(phoneNumber);
 
         if (phoneAuthResult is PhoneAuthSuccessResult) {
+          print(phoneAuthResult.token);
           loginIntoApi(phoneAuthResult.token);
         } else if (phoneAuthResult is PhoneAuthFailedResult) {
           bloc.add(LoginVerificationCodeRequestedEvent());
@@ -91,12 +92,14 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         bloc.add(LoginVerifyingCodeFailedEvent(l));
         toastError(l.message);
       }, (r) {
+
         loginIntoApi(r);
       });
     });
   }
 
   void loginIntoApi(String idToken) async {
+    print(idToken);
     final result = await getIt.get<LoginIntoApi>().execute(idToken);
     result.fold((l) {
       bloc.add(LoginVerifyingCodeFailedEvent(l));
