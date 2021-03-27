@@ -46,6 +46,7 @@ import 'domain/ports/sales_person_repo.dart';
 import 'domain/ports/shop_repo.dart';
 import 'domain/ports/shop-sales_repo.dart';
 import 'domain/ports/user_repo.dart';
+import 'application/languages/languages_bloc.dart';
 import 'modules/localization/domain/use_cases/load_active_locale.dart';
 import 'modules/localization/domain/use_cases/load_locales.dart';
 import 'domain/use_cases/load_logged_in_user.dart';
@@ -105,20 +106,10 @@ Future<GetIt> $initGetIt(
       registerFor: {_staging});
   gh.lazySingleton<GetCurrentAuthenticatedUser>(
       () => GetCurrentAuthenticatedUser());
-  gh.lazySingleton<IActiveLocaleRepo>(() => ActiveLocaleRepoImpl(get()));
   gh.lazySingleton<IFirebaseRepo>(() => FirebaseRepoImpl());
-  gh.lazySingleton<ILocalesCacheRepo>(() => LocalesCacheRepoImpl(get()));
   gh.lazySingleton<ILocalesDefaultRepo>(() => LocalesDefaultRepoImpl());
   gh.lazySingleton<ILocalesRemoteRepo>(() => LocalesRemoteRepoImpl());
-  gh.lazySingleton<LoadActiveLocaleId>(
-      () => LoadActiveLocaleId(get<IActiveLocaleRepo>()));
-  gh.lazySingleton<LoadLocales>(
-      () => LoadLocales(get<ILocalesCacheRepo>(), get<ILocalesRemoteRepo>()));
-  gh.lazySingleton<LocaleBloc>(() => LocaleBloc(
-        get<LoadLocales>(),
-        get<ILocalesDefaultRepo>(),
-        get<LoadActiveLocaleId>(),
-      ));
+  gh.factory<LanguagesBloc>(() => LanguagesBloc());
   gh.factory<LoginBloc>(() => LoginBloc());
   gh.factory<MyShopsBloc>(() => MyShopsBloc());
   gh.lazySingleton<NewShopBloc>(() => NewShopBloc());
@@ -128,8 +119,6 @@ Future<GetIt> $initGetIt(
       () => DioRestDataSource(get<ConfigDefinition>()));
   gh.lazySingleton<SalesPeopleCrudDataSource>(
       () => SalesPeopleLoopbackDataSource(get<RestDataSource>()));
-  gh.lazySingleton<SetActiveLocale>(
-      () => SetActiveLocale(get<IActiveLocaleRepo>()));
   final resolvedSharedPreferences = await registerModule.prefs;
   gh.factory<SharedPreferences>(() => resolvedSharedPreferences);
   gh.lazySingleton<ShopCrudDataSource>(
@@ -146,17 +135,32 @@ Future<GetIt> $initGetIt(
       () => CardTransactionLoopbackDataSource(get<RestDataSource>()));
   gh.lazySingleton<CashTransactionCrudDataSource>(
       () => CashTransactionLoopbackDataSource(get<RestDataSource>()));
+  gh.lazySingleton<IActiveLocaleRepo>(
+      () => ActiveLocaleRepoImpl(get<CacheDataSource>()));
   gh.lazySingleton<ICardTransactionRepo>(
       () => CardTransactionRepoImpl(get<CardTransactionCrudDataSource>()));
   gh.lazySingleton<ICashTransactionRepo>(
       () => CashTransactionRepoImpl(get<CashTransactionCrudDataSource>()));
+  gh.lazySingleton<ILocalesCacheRepo>(
+      () => LocalesCacheRepoImpl(get<CacheDataSource>()));
   gh.lazySingleton<ISalesPersonRepo>(
       () => SalesPersonRepoImpl(get<SalesPeopleCrudDataSource>()));
   gh.lazySingleton<IShopRepo>(() => ShopRepoImpl(get<ShopCrudDataSource>()));
   gh.lazySingleton<IShopSalesRepo>(
       () => ShopSalesRepoImpl(get<ShopSalesCrudDataSource>()));
+  gh.lazySingleton<LoadActiveLocaleId>(
+      () => LoadActiveLocaleId(get<IActiveLocaleRepo>()));
+  gh.lazySingleton<LoadLocales>(
+      () => LoadLocales(get<ILocalesCacheRepo>(), get<ILocalesRemoteRepo>()));
+  gh.lazySingleton<LocaleBloc>(() => LocaleBloc(
+        get<LoadLocales>(),
+        get<ILocalesDefaultRepo>(),
+        get<LoadActiveLocaleId>(),
+      ));
   gh.lazySingleton<LoginIntoApi>(() => LoginIntoApi(get<ISalesPersonRepo>()));
   gh.lazySingleton<SearchShop>(() => SearchShop(get<IShopSalesRepo>()));
+  gh.lazySingleton<SetActiveLocale>(
+      () => SetActiveLocale(get<IActiveLocaleRepo>()));
   gh.lazySingleton<UserCacheDataSource>(
       () => UserCacheDataSource(get<CacheDataSource>()));
   gh.lazySingleton<AddCardTransaction>(

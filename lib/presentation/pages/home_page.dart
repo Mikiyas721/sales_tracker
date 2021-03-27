@@ -51,31 +51,7 @@ class HomePage extends StatelessWidget {
                               ?.value),
                           style: TextStyle(color: Colors.white),
                         )),
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                                title: Text(
-                                  'homePage.signingOut'.tr,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                                content:
-                                    Text('homePage.logoutQuestion'.tr),
-                                actions: [
-                                  FlatButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('homePage.cancel'.tr)),
-                                  FlatButton(
-                                      onPressed: controller.onLogout,
-                                      child: Text('homePage.ok'.tr))
-                                ]);
-                          });
-                    },
+                    onTap: controller.onAccountTap,
                   );
                 },
               )),

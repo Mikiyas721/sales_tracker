@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sales_tracker/presentation/pages/card_transactions_page.dart';
+import 'package:sales_tracker/presentation/pages/languages_page.dart';
 import 'package:sales_tracker/presentation/pages/splash_page.dart';
 import './presentation/pages/funding_page.dart';
 import './presentation/pages/my_shops_page.dart';
@@ -64,4 +65,5 @@ final routes = {
   '/fundingPage': (BuildContext context) => FundingPage(),
   '/cashTransactionsPage': (BuildContext context) => CashTransactionsPage(),
   '/cardTransactionsPage': (BuildContext context) => CardTransactionsPage(),
+  '/languagesPage': (BuildContext context) => LanguagesPage(),
 };

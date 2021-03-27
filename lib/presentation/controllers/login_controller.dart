@@ -115,7 +115,8 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         updatedAt: DateTime.parse(response['updatedAt']),
       );
       loggedInUser.fold(() {
-        bloc.add(LoginVerifyingCodeFailedEvent(SimpleFailure("loginPage.noUserFound".tr)));
+        bloc.add(LoginVerifyingCodeFailedEvent(
+            SimpleFailure("loginPage.noUserFound".tr)));
         toastError("loginPage.noUserFound".tr);
       }, (a) async {
         await getIt.get<SaveUser>().execute(a);
@@ -124,6 +125,44 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
             context, '/homePage', (route) => false);
       });
     });
+  }
+
+  void onAccountTap() async {
+    final menuStrings = ['Languages', 'Logout'];
+    final response = await showMenu<String>(
+      context: context,
+      position: RelativeRect.fromLTRB(100, 80, 0, 0),
+      items: menuStrings
+          .map((e) => PopupMenuItem<String>(
+                child: Text('$e'),
+                value: e,
+              ))
+          .toList(),
+    );
+    if (response == menuStrings[0])
+      Navigator.pushNamed(context, '/languagesPage');
+    else if (response == menuStrings[1]) onShowDialog();
+  }
+
+  void onShowDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text(
+                'homePage.signingOut'.tr,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              content: Text('homePage.logoutQuestion'.tr),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('homePage.cancel'.tr)),
+                FlatButton(onPressed: onLogout, child: Text('homePage.ok'.tr))
+              ]);
+        });
   }
 
   void onLogout() async {
