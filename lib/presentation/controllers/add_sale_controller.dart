@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sales_tracker/application/add_fund/add_fund_bloc.dart';
 import 'package:sales_tracker/application/add_sale/add_sale_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/failure.dart';
@@ -8,8 +7,6 @@ import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/card_transaction.dart';
 import 'package:sales_tracker/domain/entities/cash_transaction.dart';
 import 'package:sales_tracker/domain/entities/user.dart';
-import 'package:sales_tracker/domain/use_cases/add_card_transaction.dart';
-import 'package:sales_tracker/domain/use_cases/add_cash_transaction.dart';
 import 'package:sales_tracker/domain/use_cases/add_sale_transaction.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sale_view_model.dart';

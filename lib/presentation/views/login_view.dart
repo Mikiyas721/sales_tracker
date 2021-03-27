@@ -39,7 +39,7 @@ class LoginView extends StatelessWidget {
               ),
               20.vSpace,
               Text(
-                'We have sent a 6 digit verification code.\nPlease enter the code to continue',
+                'We have sent a 6 digit verification code.\nPlease enter the code to continue.',
                 style: context.caption,
               ),
               200.vSpace,

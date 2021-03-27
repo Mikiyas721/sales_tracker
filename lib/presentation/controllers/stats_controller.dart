@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/stats/stats_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/failure.dart';
@@ -9,7 +9,6 @@ import 'package:sales_tracker/domain/entities/cash_transaction.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_this_month_stats.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_this_week_stats.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_today_stats.dart';
-import 'package:sales_tracker/domain/use_cases/load_logged_in_user.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
 import '../../application/splash/splash_bloc.dart';

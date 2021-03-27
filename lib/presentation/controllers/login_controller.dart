@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/login/login_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
 import 'package:sales_tracker/common/failure.dart';
@@ -92,7 +92,6 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         bloc.add(LoginVerifyingCodeFailedEvent(l));
         toastError(l.message);
       }, (r) {
-
         loginIntoApi(r);
       });
     });
