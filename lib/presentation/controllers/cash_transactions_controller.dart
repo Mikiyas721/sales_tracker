@@ -8,6 +8,7 @@ import 'package:sales_tracker/domain/use_cases/fetch_cash_transactions.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/cash_transactions_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class CashTransactionsController extends BlocViewModelController<
     CashTransactionsBloc,
@@ -39,8 +40,8 @@ class CashTransactionsController extends BlocViewModelController<
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {
       bloc.add(CashTransactionsLoadingFailedEvent(
-          SimpleFailure('Undefined Salesperson')));
-      toastError('Undefined Salesperson');
+          SimpleFailure('cashTransactionsPage.undefinedSalesperson'.tr)));
+      toastError('cashTransactionsPage.undefinedSalesperson'.tr);
     }, (salesperson) async {
       final fetchShopsResult = await getIt
           .get<FetchCashTransactions>()

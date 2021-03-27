@@ -10,7 +10,7 @@ class NewShopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Shop'),
+        title: Text('newShopPage.newShop'.tr),
       ),
       body: Padding(
         padding: 20.hPadding,
@@ -20,7 +20,7 @@ class NewShopPage extends StatelessWidget {
             children: [
               100.vSpace,
               Text(
-                'Enter\nshop\ninformation',
+                'newShopPage.prompt'.tr,
                 style: context.headline3,
               ),
               40.vSpace,

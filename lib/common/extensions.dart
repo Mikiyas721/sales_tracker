@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../modules/localization/application/locale/locale_bloc.dart';
 
 extension SpacingExtension on num {
   EdgeInsets get hPadding => EdgeInsets.symmetric(horizontal: this.toDouble());
@@ -22,4 +23,7 @@ extension BuildContextExtension on BuildContext{
   TextStyle get headline6=> Theme.of(this).textTheme.headline6;
   TextStyle get caption=> Theme.of(this).textTheme.caption;
 
+}
+extension StringExtension on String {
+  String get tr=> LocaleBloc.tr(this);
 }

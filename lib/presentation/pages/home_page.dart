@@ -57,22 +57,22 @@ class HomePage extends StatelessWidget {
                           builder: (BuildContext context) {
                             return AlertDialog(
                                 title: Text(
-                                  'Signing out',
+                                  'homePage.signingOut'.tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
                                 content:
-                                    Text('Are you sure you want to log out?'),
+                                    Text('homePage.logoutQuestion'.tr),
                                 actions: [
                                   FlatButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text('Cancel')),
+                                      child: Text('homePage.cancel'.tr)),
                                   FlatButton(
                                       onPressed: controller.onLogout,
-                                      child: Text('Ok'))
+                                      child: Text('homePage.ok'.tr))
                                 ]);
                           });
                     },
@@ -87,14 +87,14 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MyButton(
-                  label: 'Add Shop',
+                  label: 'homePage.addShop'.tr,
                   onSubmit: () {
                     Navigator.pushNamed(context, '/newShopPage');
                   },
                   minWidth: width * 0.44,
                 ),
                 MyButton(
-                  label: 'My Shops',
+                  label: 'homePage.myShops'.tr,
                   onSubmit: () {
                     Navigator.pushNamed(context, '/myShopsPage');
                   },

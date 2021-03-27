@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Sales Tracker',
+                    'splashPage.salesTracker'.tr,
                     style: GoogleFonts.poppins(fontSize: 30, color: Colors.white),
                   ),
                   30.vSpace,

@@ -15,6 +15,7 @@ import 'package:sales_tracker/domain/value_objects/phone_number.dart';
 import 'package:sales_tracker/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/login_view_model.dart';
+import '../../common/common.dart';
 
 class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     LoginState, LoginViewModel> with ToastMixin {
@@ -114,8 +115,8 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         updatedAt: DateTime.parse(response['updatedAt']),
       );
       loggedInUser.fold(() {
-        bloc.add(LoginVerifyingCodeFailedEvent(SimpleFailure("No user found")));
-        toastError("No user found");
+        bloc.add(LoginVerifyingCodeFailedEvent(SimpleFailure("loginPage.noUserFound".tr)));
+        toastError("loginPage.noUserFound".tr);
       }, (a) async {
         await getIt.get<SaveUser>().execute(a);
         bloc.add(LoginVerifyingCodeSucceededEvent());
@@ -130,6 +131,6 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     if (result)
       Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
     else
-      toastError("Unable to logout.Please try again");
+      toastError("loginPage.logoutErrorMessage".tr);
   }
 }

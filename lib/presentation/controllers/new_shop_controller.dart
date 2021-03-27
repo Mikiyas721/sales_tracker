@@ -7,7 +7,7 @@ import 'package:sales_tracker/domain/use_cases/add_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
 import '../../application/splash/splash_bloc.dart';
-
+import '../../common/common.dart';
 class NewShopController extends BlocViewModelController<NewShopBloc,
     NewShopEvent, NewShopState, NewShopViewModel> with ToastMixin {
   final BuildContext context;
@@ -61,13 +61,13 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
     );
     shop.fold(
       () {
-        toastError("Invalid Input");
+        toastError("newShopPage.invalidInput".tr);
       },
       (shop) async {
         bloc.add(NewShopAddRequestedEvent());
         final salesperson = getIt.get<SplashBloc>().state.user;
         salesperson.fold(() {
-          toastError("Undefined Salesperson");
+          toastError("newShopPage.undefinedSalesperson".tr);
         }, (user) async {
           final result = await getIt.get<AddShop>().execute(shop, user.id);
           result.fold((l) {
@@ -78,7 +78,7 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
             nameTextFieldController.text = "";
             addressTextFieldController.text = "";
             phoneTextFieldController.text = "";
-            toastSuccess("Operation Successful");
+            toastSuccess("newShopPage.successfulMessage".tr);
           });
         });
       },

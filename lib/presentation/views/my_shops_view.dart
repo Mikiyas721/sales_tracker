@@ -30,7 +30,7 @@ class MyShopsView extends StatelessWidget {
         appBar: AppBar(
           leadingWidth: 30,
           title: CupertinoTextField(
-            placeholder: 'Look for a shop',
+            placeholder: 'myShopsPage.searchPlaceHolder'.tr,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -40,12 +40,12 @@ class MyShopsView extends StatelessWidget {
               itemBuilder: (BuildContext context) {
                 return [
                   CheckedPopupMenuItem(
-                    child: Text('Name'),
+                    child: Text('myShopsPage.name'.tr),
                     value: 'name',
                     checked: myShops.searchWith == 'name',
                   ),
                   CheckedPopupMenuItem(
-                    child: Text('Phone'),
+                    child: Text('myShopsPage.phone'.tr),
                     value: 'phoneNumber',
                     checked: myShops.searchWith == 'phoneNumber',
                   )
@@ -68,8 +68,8 @@ class MyShopsView extends StatelessWidget {
             emptyView: Center(
                 child: EmptyErrorView.defaultEmpty(
                   description:
-                  'You have no shops. Click the button below to start registering',
-                  actionLabel: 'Register',
+                  'myShopsPage.emptyShopsMessage'.tr,
+                  actionLabel: 'myShopsPage.register'.tr,
                   onAction: onRegister,
                 ))));
   }
@@ -102,7 +102,7 @@ class ShopView extends StatelessWidget {
       actions: [
         IconSlideAction(
           icon: Icons.receipt,
-          caption: 'Sale',
+          caption: 'myShopsPage.sale'.tr,
           onTap: () {
             Navigator.pushNamed(context, '/sellingPage',
                 arguments: myShopViewModel);
@@ -112,7 +112,7 @@ class ShopView extends StatelessWidget {
         ),
         IconSlideAction(
           icon: Icons.attach_money,
-          caption: 'Fund',
+          caption: 'myShopsPage.fund'.tr,
           onTap: () {
             Navigator.pushNamed(context, '/fundingPage',
                 arguments: myShopViewModel);
@@ -124,7 +124,7 @@ class ShopView extends StatelessWidget {
       secondaryActions: [
         IconSlideAction(
           icon: Icons.swap_horiz,
-          caption: 'Card',
+          caption: 'myShopsPage.card'.tr,
           onTap: () {
             Navigator.pushNamed(context, '/cardTransactionsPage',
                 arguments: myShopViewModel);
@@ -134,7 +134,7 @@ class ShopView extends StatelessWidget {
         ),
         IconSlideAction(
           icon: Icons.swap_horiz,
-          caption: 'Cash',
+          caption: 'myShopsPage.cash'.tr,
           onTap: () {
             Navigator.pushNamed(context, '/cashTransactionsPage',
                 arguments: myShopViewModel);

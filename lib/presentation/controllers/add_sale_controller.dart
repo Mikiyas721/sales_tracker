@@ -11,6 +11,7 @@ import 'package:sales_tracker/domain/use_cases/add_sale_transaction.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sale_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class AddSaleController extends BlocViewModelController<AddSaleBloc,
     AddSaleEvent, AddSaleState, SaleViewModel> with ToastMixin {
@@ -52,8 +53,8 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
     bloc.add(AddSaleSubmittedEvent());
     final userResult = getIt.get<SplashBloc>().state.user;
     userResult.fold(() {
-      bloc.add(AddSaleFailedEvent(SimpleFailure('Undefined Salesperson')));
-      toastError("Undefined Salesperson");
+      bloc.add(AddSaleFailedEvent(SimpleFailure('sellingPage.undefinedSalesperson'.tr)));
+      toastError('sellingPage.undefinedSalesperson'.tr);
     }, (user) {
       _ifUser(user);
     });
@@ -96,7 +97,7 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
     }, (r) {
       bloc.add(AddSaleSucceededEvent());
       _clearTextFields();
-      toastSuccess("Successfully Added Sale");
+      toastSuccess('sellingPage.successfulMessage'.tr);
     });
   }
 
@@ -106,7 +107,7 @@ class AddSaleController extends BlocViewModelController<AddSaleBloc,
   }
 
   void _throwInvalidInputs() {
-    AddSaleFailedEvent(SimpleFailure('Invalid Input'));
-    toastError("Invalid Inputs");
+    AddSaleFailedEvent(SimpleFailure('sellingPage.invalidInput'.tr));
+    toastError('sellingPage.invalidInput'.tr);
   }
 }

@@ -28,18 +28,22 @@ class SellingView extends StatelessWidget {
       children: [
         MyTextField(
             icon: Icons.money,
-            labelText: 'total amount',
+            labelText: 'sellingPage.totalAmount'.tr,
             errorText: saleViewModel.totalAmountError,
             controller: controller.totalAmountTextFieldController,
             onChanged: onTotalAmount),
         MyTextField(
             icon: Icons.attach_money,
-            labelText: 'paid amount',
+            labelText: 'sellingPage.paidAmount'.tr,
             errorText: saleViewModel.paidAmountError,
             controller: controller.paidAmountTextFieldController,
             onChanged: onPaidAmount),
         165.vSpace,
-        MyButton(label: 'Register', onSubmit: onRegister, isLoading: saleViewModel.isRegistering,),
+        MyButton(
+          label: 'sellingPage.register'.tr,
+          onSubmit: onRegister,
+          isLoading: saleViewModel.isRegistering,
+        ),
       ],
     );
   }

@@ -26,14 +26,14 @@ class FundingView extends StatelessWidget {
       children: [
         MyTextField(
           icon: Icons.attach_money,
-          labelText: 'amount',
+          labelText: 'fundingPage.amount'.tr,
           errorText: fundViewModel.amountError,
           onChanged: onAmountChanged,
           controller: controller.paidAmountTextFieldController,
         ),
         200.vSpace,
         MyButton(
-          label: 'Fund',
+          label: 'fundingPage.buttonLabel'.tr,
           onSubmit: onFund,
           isLoading: fundViewModel.isFunding
         )

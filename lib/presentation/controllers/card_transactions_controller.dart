@@ -8,6 +8,7 @@ import 'package:sales_tracker/domain/use_cases/fetch_card_transactions.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/card_transactions_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class CardTransactionsController extends BlocViewModelController<
     CardTransactionsBloc,
@@ -38,8 +39,8 @@ class CardTransactionsController extends BlocViewModelController<
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {
       bloc.add(CardTransactionsLoadingFailedEvent(
-          SimpleFailure('Undefined Salesperson')));
-      toastError("Undefined Salesperson");
+          SimpleFailure('cardTransactionsPage.undefinedSalesperson'.tr)));
+      toastError('cardTransactionsPage.undefinedSalesperson'.tr);
     }, (salesperson) async {
       final fetchShopsResult = await getIt
           .get<FetchCardTransactions>()

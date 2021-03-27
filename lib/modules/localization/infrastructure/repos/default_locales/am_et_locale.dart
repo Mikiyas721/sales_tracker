@@ -20,7 +20,8 @@ const _amEtTranslationMap = {
     'codeSentMessage': 'ባለ 6 አሀዝ ማረጋገጫ ልከናል።\nለመቀጠል ቁጥሩን ያስገቡ',
     'verificationCode': 'ማረጋገጫ ቁጥር',
     'wrongNumber': 'የተሳሳተ ቁጥር?',
-    'noUserFound': 'ተጠቃሚ አልተገኘም'
+    'noUserFound': 'ተጠቃሚ አልተገኘም',
+    'logoutErrorMessage': 'ለመውጣት አልተቻለም። እባኮ ደግመው ይምክሩ።'
   },
   'homePage': {
     'today': 'ዛሬ',

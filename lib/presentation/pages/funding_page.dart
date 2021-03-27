@@ -12,7 +12,7 @@ class FundingPage extends StatelessWidget {
     final ShopViewModel shop = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fund'),
+        title: Text('fundingPage.fund'.tr),
       ),
       body: Padding(
         padding: 20.hPadding,
@@ -22,17 +22,16 @@ class FundingPage extends StatelessWidget {
             children: [
               100.vSpace,
               Text(
-                'Enter\namount',
+                'fundingPage.prompt'.tr,
                 style: context.headline3,
               ),
               100.vSpace,
               Text(
-                'Funding for ${shop.phoneNumber}',
+                'fundingPage.transactionInfo'.tr + ' ${shop.phoneNumber}',
                 style: context.headline4,
               ),
               100.vSpace,
-              ViewModelBuilder.withController<FundViewModel,
-                      AddFundController>(
+              ViewModelBuilder.withController<FundViewModel, AddFundController>(
                   create: () => AddFundController(context, shop.id),
                   builder: (context, controller, model) {
                     return FundingView(

@@ -82,15 +82,15 @@ class SalesStatusView extends StatelessWidget {
           onAction: onReload);
     if (salesStatusViewModel.bars.isEmpty)
       return EmptyErrorView.defaultEmpty(
-        description:
-            'You have no transaction ${getTitle(salesStatusViewModel.activeButtonIndex)}',
+        description: 'homePage.emptyMessage'.tr +
+            '${getTitle(salesStatusViewModel.activeButtonIndex)}',
         onAction: onReload,
       );
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Sold',
+          'homePage.sold'.tr,
           style: context.caption,
         ),
         5.vSpace,
@@ -107,7 +107,7 @@ class SalesStatusView extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    'Funded',
+                    'homePage.funded'.tr,
                     style: context.caption,
                   ),
                   5.vSpace,
@@ -120,7 +120,7 @@ class SalesStatusView extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    'Loaned',
+                    'homePage.loaned'.tr,
                     style: context.caption,
                   ),
                   5.vSpace,
@@ -191,11 +191,11 @@ BarChartGroupData getBar(int x, double barHeight, double stackHeight) {
 
 String getTitle(int activeButtonIndex) {
   if (activeButtonIndex == 0)
-    return 'Today';
+    return 'homePage.today'.tr;
   else if (activeButtonIndex == 1)
-    return 'This Week';
+    return 'homePage.thisWeek'.tr;
   else if (activeButtonIndex == 2)
-    return 'This Month';
+    return 'homePage.thisMonth'.tr;
   else
     throw Exception('Unknown active button index. Tried to map to title');
 }

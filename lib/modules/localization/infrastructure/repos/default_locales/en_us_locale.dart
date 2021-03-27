@@ -20,7 +20,8 @@ const _enUsTranslationMap = {
     'codeSentMessage': 'We have sent a 6 digit verification code.\nPlease enter the code to continue.',
     'verificationCode': 'verification code',
     'wrongNumber': 'Wrong number?',
-    'noUserFound': 'No user found'
+    'noUserFound': 'No user found',
+    'logoutErrorMessage':'Unable to logout.Please try again'
   },
   'homePage': {
     'today': 'Today',

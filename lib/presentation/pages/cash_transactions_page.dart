@@ -13,7 +13,7 @@ class CashTransactionsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cash Transactions'),
+        title: Text('cashTransactionsPage.cashTransactions'.tr),
       ),
       body: Padding(
         padding: 20.hPadding,

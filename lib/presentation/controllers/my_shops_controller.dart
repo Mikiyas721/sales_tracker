@@ -10,6 +10,7 @@ import 'package:sales_tracker/domain/use_cases/search_shop.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/my_shops_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class MyShopsController extends BlocViewModelController<MyShopsBloc,
     MyShopsEvent, MyShopsState, MyShopsViewModel> with ToastMixin {
@@ -41,8 +42,8 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {
       bloc.add(
-          MyShopsLoadingFailedEvent(SimpleFailure("Undefined Salesperson")));
-      toastError("Undefined Salesperson");
+          MyShopsLoadingFailedEvent(SimpleFailure("myShopsPage.undefinedSalesperson".tr)));
+      toastError("myShopsPage.undefinedSalesperson".tr);
     }, (salesperson) {
       _loadAllShops(salesperson);
     });
@@ -66,8 +67,8 @@ class MyShopsController extends BlocViewModelController<MyShopsBloc,
         final user = getIt.get<SplashBloc>().state.user;
         user.fold(() {
           bloc.add(MyShopsLoadingFailedEvent(
-              SimpleFailure("Undefined Salesperson")));
-          toastError("Undefined Salesperson");
+              SimpleFailure("myShopsPage.undefinedSalesperson".tr)));
+          toastError("myShopsPage.undefinedSalesperson".tr);
         }, (salesperson) {
           _search(salesperson, value);
         });

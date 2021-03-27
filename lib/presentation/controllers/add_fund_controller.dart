@@ -8,6 +8,7 @@ import 'package:sales_tracker/domain/use_cases/add_cash_transaction.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/fund_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class AddFundController extends BlocViewModelController<AddFundBloc,
     AddFundEvent, AddFundState, FundViewModel> with ToastMixin {
@@ -38,8 +39,8 @@ class AddFundController extends BlocViewModelController<AddFundBloc,
     bloc.add(AddFundSubmittedEvent());
     final user = getIt.get<SplashBloc>().state.user;
     user.fold(() {
-      bloc.add(AddFundFailedEvent(SimpleFailure("Undefined Salesperson")));
-      toastError("Undefined Salesperson");
+      bloc.add(AddFundFailedEvent(SimpleFailure('fundingPage.undefinedSalesperson'.tr)));
+      toastError('fundingPage.undefinedSalesperson'.tr);
     }, (salesperson) {
       bloc.add(AddFundRequestedEvent());
       final cashTransaction = CashTransaction.createFromInputs(
@@ -48,8 +49,8 @@ class AddFundController extends BlocViewModelController<AddFundBloc,
         amount: bloc.state.paidAmount.getOrElse(() => null),
       );
       cashTransaction.fold(() {
-        bloc.add(AddFundFailedEvent(SimpleFailure("Invalid Funding Inputs")));
-        toastError('Invalid Funding Inputs');
+        bloc.add(AddFundFailedEvent(SimpleFailure('fundingPage.invalidInput'.tr)));
+        toastError('fundingPage.invalidInput'.tr);
       }, (a) async {
         final result = await getIt.get<AddCashTransaction>().execute(a);
         result.fold((l) {
@@ -58,7 +59,7 @@ class AddFundController extends BlocViewModelController<AddFundBloc,
         }, (r) {
           bloc.add(AddFundSucceededEvent());
           paidAmountTextFieldController.text = "";
-          toastSuccess('Transaction Added Successfully');
+          toastSuccess('fundingPage.successfulMessage'.tr);
         });
       });
     });

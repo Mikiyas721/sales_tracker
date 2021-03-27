@@ -34,18 +34,18 @@ class LoginView extends StatelessWidget {
           ? [
               200.vSpace,
               Text(
-                'Verify',
+                'loginPage.verify'.tr,
                 style: context.headline3,
               ),
               20.vSpace,
               Text(
-                'We have sent a 6 digit verification code.\nPlease enter the code to continue.',
+                'loginPage.codeSentMessage'.tr,
                 style: context.caption,
               ),
               200.vSpace,
               MyTextField(
                 errorText: loginViewModel.codeError,
-                labelText: 'verification code',
+                labelText: 'loginPage.verificationCode'.tr,
                 icon: Icons.code,
                 onChanged: onVerificationCodeChanged,
                 onSubmitted: (code) => onVerify(),
@@ -54,14 +54,14 @@ class LoginView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: onWrongNumber, child: Text('Wrong number?')),
+                      onPressed: onWrongNumber, child: Text('loginPage.wrongNumber'.tr)),
                 ],
               ),
 
               //TODO change by code input field
               100.vSpace,
               MyButton(
-                label: 'Verify',
+                label: 'loginPage.verify'.tr,
                 onSubmit: onVerify,
                 isLoading: loginViewModel.isVerifyingCode,
               )
@@ -69,13 +69,13 @@ class LoginView extends StatelessWidget {
           : [
               200.vSpace,
               Text(
-                'Welcome',
+                'loginPage.welcome'.tr,
                 style: context.headline3,
               ),
               200.vSpace,
               MyTextField(
                 errorText: loginViewModel.phoneNumberError,
-                labelText: 'Phone Number',
+                labelText: 'loginPage.phoneNumber'.tr,
                 icon: Icons.phone,
                 onChanged: onPhoneNumberChanged,
                 onSubmitted: (s) => onSubmitPhoneNumber(),
@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
               ),
               100.vSpace,
               MyButton(
-                label: 'Submit',
+                label: 'loginPage.submit'.tr,
                 onSubmit: onSubmitPhoneNumber,
                 isLoading: loginViewModel.isRequestingCode,
               )

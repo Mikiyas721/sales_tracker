@@ -12,6 +12,7 @@ import 'package:sales_tracker/domain/use_cases/fetch_today_stats.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/sales_status_view_model.dart';
 import '../../application/splash/splash_bloc.dart';
+import '../../common/common.dart';
 
 class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
     StatsState, SalesStatusViewModel> with DateTimeMixin, ToastMixin {
@@ -134,8 +135,8 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
       final user = getIt.get<SplashBloc>().state.user;
       user.fold(() {
         bloc.add(LoadingStatsFailedStatsEvent(
-            SimpleFailure('Undefined Salesperson')));
-        toastError("Undefined Salesperson");
+            SimpleFailure('homePage.undefinedSalesperson'.tr)));
+        toastError('homePage.undefinedSalesperson'.tr);
       }, (salesperson) async {
         final cardResult =
             await getIt.get<FetchTodayCard>().execute(salesperson.id);
@@ -163,8 +164,8 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
       final user = getIt.get<SplashBloc>().state.user;
       user.fold(() {
         bloc.add(LoadingStatsFailedStatsEvent(
-            SimpleFailure('Undefined Salesperson')));
-        toastError("Undefined Salesperson");
+            SimpleFailure('homePage.undefinedSalesperson'.tr)));
+        toastError('homePage.undefinedSalesperson'.tr);
       }, (salesperson) async {
         final cardResult =
             await getIt.get<FetchThisWeekCard>().execute(salesperson.id);
@@ -192,8 +193,8 @@ class StatsController extends BlocViewModelController<StatsBloc, StatsEvent,
       final user = getIt.get<SplashBloc>().state.user;
       user.fold(() {
         bloc.add(LoadingStatsFailedStatsEvent(
-            SimpleFailure('Undefined Salesperson')));
-        toastError("Undefined Salesperson");
+            SimpleFailure('homePage.undefinedSalesperson'.tr)));
+        toastError('homePage.undefinedSalesperson'.tr);
       }, (salesperson) async {
         final cardResult =
             await getIt.get<FetchThisMonthCard>().execute(salesperson.id);

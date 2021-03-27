@@ -12,7 +12,7 @@ class CardTransactionsPage extends StatelessWidget {
     final ShopViewModel shopViewModel = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Card Transactions'),
+        title: Text('cardTransactionsPage.cardTransactions'.tr),
       ),
       body: Padding(
         padding: 20.hPadding,

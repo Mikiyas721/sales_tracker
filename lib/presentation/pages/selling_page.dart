@@ -12,7 +12,7 @@ class SellingPage extends StatelessWidget {
     final ShopViewModel shop = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sale'),
+        title: Text('sellingPage.sale'.tr),
       ),
       body: Padding(
         padding: 20.hPadding,
@@ -22,12 +22,12 @@ class SellingPage extends StatelessWidget {
             children: [
               100.vSpace,
               Text(
-                'Enter\ndetails',
+                'sellingPage.prompt'.tr,
                 style: context.headline3,
               ),
               100.vSpace,
               Text(
-                'Transaction with ${shop.phoneNumber}',
+                'sellingPage.transactionInfo'.tr+ '${shop.phoneNumber}',
                 style: context.headline4,
               ),
               65.vSpace,

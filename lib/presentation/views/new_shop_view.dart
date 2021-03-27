@@ -30,27 +30,27 @@ class NewShopView extends StatelessWidget {
       children: [
         MyTextField(
             icon: Icons.person_outline,
-            labelText: 'name',
+            labelText: 'newShopPage.name'.tr,
             errorText: newShopViewModel.nameError,
             keyboardType: TextInputType.text,
             controller: newShopController.nameTextFieldController,
             onChanged: onNameChanged),
         MyTextField(
             icon: Icons.location_on,
-            labelText: 'address',
+            labelText: 'newShopPage.address'.tr,
             errorText: newShopViewModel.addressError,
             keyboardType: TextInputType.text,
             controller: newShopController.addressTextFieldController,
             onChanged: onAddressChanged),
         MyTextField(
             icon: Icons.phone,
-            labelText: 'phone number',
+            labelText: 'newShopPage.phoneNumber'.tr,
             errorText: newShopViewModel.phoneNumberError,
             controller: newShopController.phoneTextFieldController,
             onChanged: onPhoneNumberChanged),
         200.vSpace,
         MyButton(
-          label: 'Add',
+          label: 'newShopPage.add'.tr,
           onSubmit: onAdd,
           isLoading: newShopViewModel.isAdding,
         ),
