@@ -8,9 +8,12 @@ class MyShopsLoadingEvent extends MyShopsEvent {
     yield currentState.copyWith(isLoading: true);
   }
 }
+
 class MyShopsSearchWithChangedEvent extends MyShopsEvent {
   final String searchWith;
+
   MyShopsSearchWithChangedEvent(this.searchWith);
+
   @override
   Stream<MyShopsState> handle(MyShopsState currentState) async* {
     yield currentState.copyWith(searchWith: searchWith);

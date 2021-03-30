@@ -6,6 +6,8 @@ import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/user.dart';
 import 'package:sales_tracker/domain/use_cases/clear_loggedin_user.dart';
 import 'package:sales_tracker/domain/use_cases/fetch_sales_person.dart';
+import 'package:sales_tracker/domain/use_cases/get_current_autheticated_user.dart';
+import 'package:sales_tracker/domain/use_cases/load_logged_in_user.dart';
 import 'package:sales_tracker/domain/use_cases/login_into_api.dart';
 import 'package:sales_tracker/domain/use_cases/request_firebase_verification_code.dart';
 import 'package:sales_tracker/domain/use_cases/save_user.dart';
@@ -54,12 +56,12 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     bloc.state.phoneNumber.fold((l) {
       toastError(l.message);
     }, (phoneNumber) async {
+      bloc.add(LoginVerificationCodeRequestedEvent());
       final apiResult =
           await getIt.get<FetchSalesPerson>().execute(phoneNumber);
       apiResult.fold((l) {
         toastError(l.message);
       }, (r) async {
-        bloc.add(LoginVerificationCodeRequestedEvent());
         final phoneAuthResult = await getIt
             .get<RequestFirebaseVerificationCode>()
             .execute(phoneNumber);
@@ -68,8 +70,9 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
           print(phoneAuthResult.token);
           loginIntoApi(phoneAuthResult.token);
         } else if (phoneAuthResult is PhoneAuthFailedResult) {
-          bloc.add(LoginVerificationCodeRequestedEvent());
-          toastError(phoneAuthResult.failure);
+          bloc.add(LoginVerificationCodeRequestFailedEvent(
+              SimpleFailure(phoneAuthResult.failureMessage)));
+          toastError(phoneAuthResult.failureMessage);
         } else if (phoneAuthResult is PhoneAuthCodeSentResult) {
           bloc.add(LoginAutoRetrievalTimedOutEvent());
         }
@@ -85,6 +88,7 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     bloc.add(LoginVerificationCodeSubmittedEvent());
     bloc.state.verificationCode.fold((l) {
       toastError(l.message);
+      bloc.add(LoginVerifyingCodeFailedEvent(l));
     }, (r) async {
       bloc.add(LoginVerifyingCodeEvent());
       final verificationResult =

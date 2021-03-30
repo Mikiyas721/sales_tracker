@@ -17,9 +17,9 @@ class PhoneAuthSuccessResult implements PhoneAuthResult {
 }
 
 class PhoneAuthFailedResult implements PhoneAuthResult {
-  final String failure;
+  final String failureMessage;
 
-  PhoneAuthFailedResult(this.failure);
+  PhoneAuthFailedResult(this.failureMessage);
 }
 
 @LazySingleton(as: IFirebaseRepo)

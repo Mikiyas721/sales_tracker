@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:sales_tracker/presentation/widgets/my_button.dart';
+import 'package:sales_tracker/presentation/widgets/my_text_field.dart';
 import '../../presentation/models/login_view_model.dart';
-import '../../presentation/widgets/my_button.dart';
-import '../../presentation/widgets/my_text_field.dart';
 import '../../common/common.dart';
 
 class LoginView extends StatelessWidget {
@@ -22,9 +24,6 @@ class LoginView extends StatelessWidget {
     @required this.onWrongNumber,
   }) : super(key: key);
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,22 +42,30 @@ class LoginView extends StatelessWidget {
                 style: context.caption,
               ),
               200.vSpace,
+              PinCodeTextField(
+                length: 6,
+                appContext: context,
+                keyboardType: TextInputType.number,
+                onChanged: onVerificationCodeChanged,
+                onCompleted: (code) => onVerify(),
+                backgroundColor: Colors.grey[50],
+              ),
+              /*
               MyTextField(
                 errorText: loginViewModel.codeError,
                 labelText: 'loginPage.verificationCode'.tr,
                 icon: Icons.code,
                 onChanged: onVerificationCodeChanged,
                 onSubmitted: (code) => onVerify(),
-              ),
+              ),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: onWrongNumber, child: Text('loginPage.wrongNumber'.tr)),
+                      onPressed: onWrongNumber,
+                      child: Text('loginPage.wrongNumber'.tr)),
                 ],
               ),
-
-              //TODO change by code input field
               100.vSpace,
               MyButton(
                 label: 'loginPage.verify'.tr,
