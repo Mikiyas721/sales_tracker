@@ -14,7 +14,6 @@ class SalesPersonRepoImpl extends ISalesPersonRepo {
 
   @override
   Future<Either<Failure, SalesPerson>> fetchSalesperson(PhoneNumber phoneNumber) async {
-    print(phoneNumber.value);
     final salesPeople = await salesPeopleCrudDataSource.find(options: {
       "filter": {
         "where": {

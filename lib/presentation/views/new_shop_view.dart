@@ -25,6 +25,7 @@ class NewShopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final newShopController = Provider.of<NewShopController>(context);
+    final size = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -48,7 +49,7 @@ class NewShopView extends StatelessWidget {
             errorText: newShopViewModel.phoneNumberError,
             controller: newShopController.phoneTextFieldController,
             onChanged: onPhoneNumberChanged),
-        200.vSpace,
+        (size.height*0.24).vSpace,
         MyButton(
           label: 'newShopPage.add'.tr,
           onSubmit: onAdd,

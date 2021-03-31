@@ -50,14 +50,6 @@ class LoginView extends StatelessWidget {
                 onCompleted: (code) => onVerify(),
                 backgroundColor: Colors.grey[50],
               ),
-              /*
-              MyTextField(
-                errorText: loginViewModel.codeError,
-                labelText: 'loginPage.verificationCode'.tr,
-                icon: Icons.code,
-                onChanged: onVerificationCodeChanged,
-                onSubmitted: (code) => onVerify(),
-              ),*/
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sales_tracker/application/new_shop/new_shop_bloc.dart';
 import 'package:sales_tracker/common/controller/controller.dart';
+import 'package:sales_tracker/common/failure.dart';
 import 'package:sales_tracker/common/mixins/toast_mixin.dart';
 import 'package:sales_tracker/domain/entities/shop.dart';
 import 'package:sales_tracker/domain/use_cases/add_shop.dart';
@@ -8,6 +9,7 @@ import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/new_shop_model.dart';
 import '../../application/splash/splash_bloc.dart';
 import '../../common/common.dart';
+
 class NewShopController extends BlocViewModelController<NewShopBloc,
     NewShopEvent, NewShopState, NewShopViewModel> with ToastMixin {
   final BuildContext context;
@@ -67,6 +69,8 @@ class NewShopController extends BlocViewModelController<NewShopBloc,
         bloc.add(NewShopAddRequestedEvent());
         final salesperson = getIt.get<SplashBloc>().state.user;
         salesperson.fold(() {
+          bloc.add(NewShopAddFailedEvent(
+              SimpleFailure("newShopPage.undefinedSalesperson".tr)));
           toastError("newShopPage.undefinedSalesperson".tr);
         }, (user) async {
           final result = await getIt.get<AddShop>().execute(shop, user.id);

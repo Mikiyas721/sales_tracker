@@ -8,6 +8,7 @@ import '../../common/common.dart';
 class NewShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('newShopPage.newShop'.tr),
@@ -18,12 +19,12 @@ class NewShopPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              100.vSpace,
+              (size.height*0.12).vSpace,
               Text(
                 'newShopPage.prompt'.tr,
                 style: context.headline3,
               ),
-              40.vSpace,
+              (size.height*0.05).vSpace,
               ViewModelBuilder.withController<NewShopViewModel, NewShopController>(
                 create: () => NewShopController(context),
                 builder: (context, controller, model) {
@@ -36,7 +37,7 @@ class NewShopPage extends StatelessWidget {
                   );
                 },
               ),
-              20.vSpace
+              (size.height*0.025).vSpace
             ],
           ),
         ),

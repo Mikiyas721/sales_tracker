@@ -18,6 +18,7 @@ import 'package:sales_tracker/infrastructure/repos/firebase_repo_impl.dart';
 import 'package:sales_tracker/injection.dart';
 import 'package:sales_tracker/presentation/models/login_view_model.dart';
 import '../../common/common.dart';
+import '../../application/splash/splash_bloc.dart';
 
 class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
     LoginState, LoginViewModel> with ToastMixin {
@@ -61,13 +62,13 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
           await getIt.get<FetchSalesPerson>().execute(phoneNumber);
       apiResult.fold((l) {
         toastError(l.message);
+        bloc.add(LoginVerificationCodeRequestFailedEvent(l));
       }, (r) async {
         final phoneAuthResult = await getIt
             .get<RequestFirebaseVerificationCode>()
             .execute(phoneNumber);
 
         if (phoneAuthResult is PhoneAuthSuccessResult) {
-          print(phoneAuthResult.token);
           loginIntoApi(phoneAuthResult.token);
         } else if (phoneAuthResult is PhoneAuthFailedResult) {
           bloc.add(LoginVerificationCodeRequestFailedEvent(
@@ -103,7 +104,6 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
   }
 
   void loginIntoApi(String idToken) async {
-    print(idToken);
     final result = await getIt.get<LoginIntoApi>().execute(idToken);
     result.fold((l) {
       bloc.add(LoginVerifyingCodeFailedEvent(l));
@@ -124,6 +124,9 @@ class LoginController extends BlocViewModelController<LoginBloc, LoginEvent,
         toastError("loginPage.noUserFound".tr);
       }, (a) async {
         await getIt.get<SaveUser>().execute(a);
+        getIt
+            .get<SplashBloc>()
+            .add(UserChangedSplashEvent(Failure.getOption(a)));
         bloc.add(LoginVerifyingCodeSucceededEvent());
         Navigator.pushNamedAndRemoveUntil(
             context, '/homePage', (route) => false);
